@@ -1,0 +1,664 @@
+{
+  "Header": {
+    "home": "Home",
+    "services": "Services",
+    "packages": "Packages",
+    "gallery": "Gallery",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Log in",
+    "logout": "Log out",
+    "language": "Language"
+  },
+  "HomePage": {
+    "hero": {
+      "subtitle": "Premium care",
+      "title": "Beauty as",
+      "titleAccent": "art",
+      "description": "LumaSkin — professional care studio,",
+      "descriptionLine2": "where aesthetics meets science",
+      "bookButton": "Book now",
+      "servicesButton": "Our services"
+    },
+    "services": {
+      "subtitle": "What we offer",
+      "title": "Popular treatments",
+      "facial": {
+        "title": "Facial cleansing",
+        "description": "Deep cleansing and skin regeneration using professional products",
+        "icon": "✨"
+      },
+      "peeling": {
+        "title": "Peeling",
+        "description": "Skin renewal and texture improvement for natural radiance",
+        "icon": "🌟"
+      },
+      "massage": {
+        "title": "Facial massage",
+        "description": "Lifting, relaxation and skin glow with proven techniques",
+        "icon": "💎"
+      },
+      "learnMore": "Learn more"
+    },
+    "about": {
+      "subtitle": "Professionalism and passion",
+      "title": "Experience and care",
+      "titleLine2": "for your skin",
+      "paragraph1": "Over 5 years of experience in cosmetology. Individual approach, premium products and modern methods to achieve the perfect result.",
+      "paragraph2": "Each treatment is a unique protocol, developed specifically for your skin type and needs.",
+      "learnMore": "Meet me",
+      "imageAlt": "LumaSkin Master"
+    },
+    "stats": {
+      "title": "Why choose us",
+      "experience": {
+        "number": "5+",
+        "label": "Years of experience"
+      },
+      "clients": {
+        "number": "1000+",
+        "label": "Happy clients"
+      },
+      "procedures": {
+        "number": "15+",
+        "label": "Treatment types"
+      },
+      "premium": {
+        "number": "100%",
+        "label": "Premium care"
+      }
+    },
+    "contact": {
+      "subtitle": "We are at your service",
+      "title": "Visit us",
+      "description": "Our studio is located in the heart of the city",
+      "address": "5 Zamkowa Street, Swarzędz",
+      "contactButton": "Contact us",
+      "callButton": "Call now"
+    }
+  },
+  "AboutPage": {
+    "hero": {
+      "subtitle": "Our story",
+      "title": "About",
+      "titleAccent": "LumaSkin"
+    },
+    "mission": {
+      "subtitle": "Our philosophy",
+      "title": "We believe that beauty is not only about appearance, but also inner harmony",
+      "paragraph1": "LumaSkin is a space where modern technology meets individual approach. Each treatment is created especially for you, taking into account your skin's characteristics and your goals.",
+      "paragraph2": "We use only premium products and proven methods so you can trust us with what's most precious — your health and beauty."
+    },
+    "master": {
+      "subtitle": "Studio founder",
+      "name": "Anna Kowalska",
+      "title": "Certified aesthetician",
+      "paragraph1": "For over 5 years I have been helping people gain confidence through skin care. My specialization is deep work with problematic skin and anti-aging programs.",
+      "paragraph2": "I have trained at leading European academies, regularly participate in masterclasses and conferences to stay up to date with the latest advances in cosmetology.",
+      "quote": "For me, every client is a unique story. I don't just perform treatments, I create a path to a better version of yourself.",
+      "certificatesTitle": "Certificates and education:",
+      "certificates": [
+        "Warsaw Academy of Cosmetology, 2018",
+        "Chemical Peels Certificate, 2020",
+        "Mesotherapy and Biorevitalization Course, 2021",
+        "Facial Massage Techniques Masterclass, 2023"
+      ],
+      "imageAlt": "Anna Kowalska — founder of LumaSkin"
+    },
+    "values": {
+      "subtitle": "Our principles",
+      "title": "What matters to us",
+      "items": [
+        {
+          "icon": "🎯",
+          "title": "Individual approach",
+          "desc": "No two clients are alike. Each program is developed individually for your needs and skin type."
+        },
+        {
+          "icon": "💎",
+          "title": "Premium quality",
+          "desc": "We use only trusted brands and luxury products. No compromises on quality."
+        },
+        {
+          "icon": "🔬",
+          "title": "Scientific approach",
+          "desc": "All treatments are based on proven methods and the latest research in cosmetology."
+        },
+        {
+          "icon": "🤝",
+          "title": "Trust and care",
+          "desc": "Your comfort and safety are our priority. We create an atmosphere of trust and care."
+        },
+        {
+          "icon": "📚",
+          "title": "Continuous development",
+          "desc": "We regularly train and master new techniques to offer the best."
+        },
+        {
+          "icon": "✨",
+          "title": "Visible result",
+          "desc": "We work for long-term effect, not temporary results. Your skin will thank you."
+        }
+      ]
+    },
+    "studio": {
+      "subtitle": "Our space",
+      "title": "Studio created",
+      "titleLine2": "for your comfort",
+      "paragraph": "Every detail at LumaSkin is thought through to the smallest detail. From soft lighting to comfortable temperature — everything is created so you can completely relax.",
+      "features": [
+        "Modern equipment of the latest generation",
+        "Sterility and compliance with all safety standards",
+        "Cozy atmosphere and relaxing music",
+        "Individual rooms for complete privacy"
+      ],
+      "linkText": "Visit us",
+      "imageAlt": "LumaSkin studio interior"
+    },
+    "reviews": {
+      "subtitle": "Client reviews",
+      "title": "What they say about us",
+      "items": [
+        {
+          "name": "Maria K.",
+          "text": "Anna is a true professional! After the cleansing course, my skin transformed. Finally found my master!",
+          "service": "Facial cleansing"
+        },
+        {
+          "name": "Katarzyna W.",
+          "text": "Very satisfied with the peeling results. Skin became smooth and radiant. Cozy studio, relaxing atmosphere.",
+          "service": "Chemical peel"
+        },
+        {
+          "name": "Agnieszka N.",
+          "text": "I've been coming for facial massage for half a year. Visible lifting effect! Anna is always attentive and professional.",
+          "service": "Facial massage"
+        },
+        {
+          "name": "Ewa S.",
+          "text": "Wonderful studio and great master. Individual approach, quality products. I recommend to everyone!",
+          "service": "Skin care"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to start your journey",
+      "titleAccent": "to perfect skin",
+      "description": "Book a consultation and we will create an individual care program especially for you",
+      "bookButton": "Book now",
+      "servicesButton": "View services"
+    }
+  },
+  "BookingPage": {
+    "hero": {
+      "subtitle": "Online booking",
+      "title": "Book your",
+      "titleAccent": "appointment"
+    },
+    "form": {
+      "description": "Fill out the form and we will contact you shortly to confirm your booking",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "email": "Email",
+      "service": "Select service",
+      "selectService": "-- Select service --",
+      "services": [
+        "Facial cleansing",
+        "Chemical peel",
+        "Facial massage",
+        "Eye area care",
+        "Mesotherapy",
+        "Biorevitalization",
+        "Algae masks",
+        "Cosmetologist consultation"
+      ],
+      "date": "Preferred date",
+      "time": "Preferred time",
+      "selectTime": "-- Select time --",
+      "timeSlots": [
+        "10:00 - 11:00",
+        "11:00 - 12:00",
+        "12:00 - 13:00",
+        "13:00 - 14:00",
+        "14:00 - 15:00",
+        "15:00 - 16:00",
+        "16:00 - 17:00",
+        "17:00 - 18:00",
+        "18:00 - 19:00",
+        "19:00 - 20:00"
+      ],
+      "comment": "Comment",
+      "commentPlaceholder": "Tell us about your wishes or skin concerns...",
+      "submitButton": "Submit request",
+      "requiredFields": "* Required fields",
+      "callText": "Or call us directly:",
+      "phone": "+48 123 456 789"
+    },
+    "info": {
+      "title": "What to know before your visit",
+      "items": [
+        {
+          "icon": "📋",
+          "title": "Preparation",
+          "desc": "Come without makeup or we'll help you remove it. Avoid harsh products the day before treatment."
+        },
+        {
+          "icon": "⏱️",
+          "title": "Duration",
+          "desc": "Treatments last from 30 to 120 minutes depending on the selected service. Plan your time in advance."
+        },
+        {
+          "icon": "✨",
+          "title": "After treatment",
+          "desc": "We will provide individual care recommendations and schedule your next visit if needed."
+        }
+      ]
+    },
+    "faq": {
+      "subtitle": "Frequently asked questions",
+      "title": "Answers to your questions",
+      "items": [
+        {
+          "q": "Can I cancel or reschedule my booking?",
+          "a": "Yes, but please let us know at least 24 hours in advance. Contact us by phone or WhatsApp."
+        },
+        {
+          "q": "How often should I get treatments?",
+          "a": "It depends on the type of treatment and your skin condition. We will create an individual schedule after consultation."
+        },
+        {
+          "q": "Are there any contraindications?",
+          "a": "Yes, some treatments have contraindications. Be sure to inform us about chronic diseases, pregnancy or allergies."
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We accept cash, Visa/Mastercard cards and BLIK. Payment is made after the treatment."
+        }
+      ]
+    }
+  },
+  "ContactPage": {
+    "hero": {
+      "subtitle": "Contact us",
+      "title": "Get in",
+      "titleAccent": "touch"
+    },
+    "info": {
+      "items": [
+        {
+          "icon": "📍",
+          "title": "Address",
+          "info": "12 Przykładowa Street",
+          "subinfo": "61-809 Poznań, Poland"
+        },
+        {
+          "icon": "📞",
+          "title": "Phone",
+          "info": "+48 123 456 789",
+          "subinfo": "Mon-Fri: 10:00 - 20:00"
+        },
+        {
+          "icon": "✉️",
+          "title": "Email",
+          "info": "info@lumaskin.pl",
+          "subinfo": "We'll reply within 24 hours"
+        }
+      ]
+    },
+    "form": {
+      "subtitle": "Write to us",
+      "title": "Have questions?",
+      "description": "Fill out the form and we will contact you shortly",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "example@mail.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+48 000 000 000",
+      "subject": "Subject",
+      "selectSubject": "-- Select subject --",
+      "subjects": [
+        "Question about services",
+        "Booking an appointment",
+        "Consultation",
+        "Collaboration",
+        "Other"
+      ],
+      "message": "Message",
+      "messagePlaceholder": "Write your message...",
+      "submitButton": "Send message",
+      "requiredFields": "* Required fields"
+    },
+    "location": {
+      "subtitle": "Our location",
+      "title": "Visit our",
+      "titleLine2": "studio",
+      "description": "We are located in the heart of Poznań, in a quiet and cozy place. Convenient access by public transport and parking nearby.",
+      "transport": [
+        {
+          "icon": "🚗",
+          "title": "By car",
+          "desc": "Free parking in front of the building"
+        },
+        {
+          "icon": "🚌",
+          "title": "Public transport",
+          "desc": "'Plac Wolności' stop 3 minutes walk"
+        },
+        {
+          "icon": "🚶",
+          "title": "On foot",
+          "desc": "5 minutes from the main square"
+        }
+      ],
+      "mapButton": "Open in Google Maps"
+    },
+    "hours": {
+      "title": "Opening hours",
+      "weekdays": {
+        "title": "Weekdays",
+        "days": [
+          { "day": "Monday", "hours": "10:00 - 20:00" },
+          { "day": "Tuesday", "hours": "10:00 - 20:00" },
+          { "day": "Wednesday", "hours": "10:00 - 20:00" },
+          { "day": "Thursday", "hours": "10:00 - 20:00" },
+          { "day": "Friday", "hours": "10:00 - 20:00" }
+        ]
+      },
+      "weekend": {
+        "title": "Weekend",
+        "days": [
+          { "day": "Saturday", "hours": "11:00 - 18:00" },
+          { "day": "Sunday", "hours": "Closed" }
+        ],
+        "note": "Booking by prior arrangement. Weekend appointments possible upon agreement."
+      }
+    },
+    "social": {
+      "subtitle": "Follow us",
+      "title": "We're on social media",
+      "description": "Follow our pages to stay updated on news, special offers and useful skin care tips",
+      "platforms": [
+        { "name": "Instagram", "icon": "📷" },
+        { "name": "Facebook", "icon": "📘" },
+        { "name": "WhatsApp", "icon": "💬" }
+      ]
+    },
+    "cta": {
+      "title": "Ready to book",
+      "titleAccent": "your treatment",
+      "description": "Contact us in a convenient way and we'll find the perfect time for your visit",
+      "bookButton": "Book online",
+      "callButton": "Call now"
+    }
+  },
+  "GalleryPage": {
+    "hero": {
+      "subtitle": "Our work",
+      "title": "Portfolio",
+      "titleAccent": "LumaSkin",
+      "description": "Results we are proud of"
+    },
+    "emptyState": "No photos uploaded yet",
+    "categories": {
+      "subtitle": "Our treatments",
+      "title": "What we offer",
+      "items": [
+        { "icon": "✨", "name": "Facial cleansing", "count": "12+ works" },
+        { "icon": "🌟", "name": "Peeling", "count": "8+ works" },
+        { "icon": "💎", "name": "Massage", "count": "15+ works" },
+        { "icon": "💉", "name": "Injections", "count": "10+ works" }
+      ]
+    },
+    "reviews": {
+      "subtitle": "Client reviews",
+      "title": "Results speak for themselves",
+      "items": [
+        {
+          "name": "Anna M.",
+          "text": "Incredible results after the cleansing course! My skin is glowing, pores visibly reduced. Huge thanks!"
+        },
+        {
+          "name": "Katarzyna L.",
+          "text": "Facial massage is something else! The oval tightened, swelling disappeared. I feel 10 years younger."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Want the same",
+      "titleAccent": "result",
+      "description": "Book a consultation and we will create a program especially for you",
+      "bookButton": "Book now",
+      "servicesButton": "Our services"
+    }
+  },
+  "LoginPage": {
+    "hero": {
+      "title": "Login to your",
+      "titleAccent": "account"
+    },
+    "form": {
+      "email": "Email",
+      "emailPlaceholder": "example@mail.com",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "loginButton": "Log in",
+      "or": "or",
+      "googleButton": "Sign in with Google",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Register",
+      "description": "Log in to track your bookings and treatment history"
+    },
+    "benefits": {
+      "title": "Benefits of your account",
+      "items": [
+        {
+          "icon": "📅",
+          "title": "Booking history",
+          "desc": "View all your past and future appointments in one place"
+        },
+        {
+          "icon": "🎁",
+          "title": "Bonuses and discounts",
+          "desc": "Collect points and receive exclusive offers"
+        },
+        {
+          "icon": "⚡",
+          "title": "Quick booking",
+          "desc": "Book treatments with one click without re-entering your data"
+        }
+      ]
+    }
+  },
+  "RegisterPage": {
+    "hero": {
+      "title": "Create",
+      "titleAccent": "account"
+    },
+    "intro": {
+      "description": "Join LumaSkin and get access to exclusive offers"
+    },
+    "form": {
+      "name": "Full name",
+      "namePlaceholder": "Anna Kowalska",
+      "email": "Email",
+      "emailPlaceholder": "example@mail.com",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••",
+      "passwordHint": "Minimum 8 characters",
+      "confirmPassword": "Confirm password",
+      "terms": "I accept the",
+      "termsLink": "terms of use",
+      "and": "and",
+      "privacyLink": "privacy policy",
+      "registerButton": "Register",
+      "or": "or",
+      "googleButton": "Sign up with Google",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Log in"
+    },
+    "benefits": {
+      "title": "What awaits you after registration",
+      "items": [
+        {
+          "icon": "🎉",
+          "title": "Welcome bonus",
+          "desc": "10% discount on your first treatment"
+        },
+        {
+          "icon": "📱",
+          "title": "Personal account",
+          "desc": "Manage bookings online"
+        },
+        {
+          "icon": "💌",
+          "title": "Exclusive offers",
+          "desc": "Special promotions just for you"
+        },
+        {
+          "icon": "🌟",
+          "title": "Loyalty program",
+          "desc": "Collect points for your visits"
+        }
+      ]
+    },
+    "security": {
+      "title": "Your data is protected",
+      "description": "We use modern encryption technologies to protect your personal data. Your information will never be shared with third parties without your consent."
+    }
+  },
+  "ServicesPage": {
+    "hero": {
+      "subtitle": "What we offer",
+      "title": "Our",
+      "titleAccent": "services"
+    }
+  },
+  "PackagesPage": {
+    "hero": {
+      "subtitle": "Special offers",
+      "title": "Treatment",
+      "titleAccent": "packages",
+      "description": "Save up to 20% when purchasing a treatment course"
+    },
+    "packages": {
+      "start": {
+        "badge": "Beginning of the journey",
+        "title": "Start",
+        "sessions": "3 treatments of your choice",
+        "price": "350",
+        "oldPrice": "400",
+        "savings": "Save 50 PLN",
+        "benefits": [
+          "3 any treatments",
+          "Free consultation",
+          "10% discount on products",
+          "Valid for 3 months"
+        ],
+        "button": "Choose package"
+      },
+      "premium": {
+        "badge": "Popular choice",
+        "title": "Premium",
+        "sessions": "5 treatments of your choice",
+        "price": "550",
+        "oldPrice": "700",
+        "savings": "Save 150 PLN",
+        "benefits": [
+          "5 any treatments",
+          "Free consultation",
+          "15% discount on products",
+          "Personal care plan",
+          "Valid for 6 months"
+        ],
+        "button": "Choose package"
+      },
+      "vip": {
+        "badge": "Maximum care",
+        "title": "VIP",
+        "sessions": "8 treatments of your choice",
+        "price": "850",
+        "oldPrice": "1100",
+        "savings": "Save 250 PLN",
+        "benefits": [
+          "8 any treatments",
+          "Unlimited consultations",
+          "20% discount on products",
+          "VIP support",
+          "Priority booking",
+          "Valid for 9 months"
+        ],
+        "button": "Choose package"
+      },
+      "note": "* Packages are valid for the specified period from the date of purchase",
+      "note2": "** Treatments can be combined at your discretion"
+    },
+    "special": {
+      "subtitle": "Thematic courses",
+      "title": "Special programs",
+      "antiAge": {
+        "title": "Anti-Aging Program",
+        "sessions": "6 treatments",
+        "price": "1200 PLN",
+        "oldPrice": "1450 PLN",
+        "desc": "Comprehensive anti-aging care",
+        "includes": [
+          "2 mesotherapy sessions",
+          "2 facial massage sessions",
+          "2 chemical peels",
+          "Home care kit as a gift"
+        ],
+        "button": "Book the course"
+      },
+      "problematic": {
+        "title": "Problematic skin",
+        "sessions": "5 treatments",
+        "price": "950 PLN",
+        "oldPrice": "1150 PLN",
+        "desc": "Intensive program for acne-prone skin",
+        "includes": [
+          "3 deep cleansing treatments",
+          "2 almond peels",
+          "Dermatologist consultation",
+          "Home care plan"
+        ],
+        "button": "Book the course"
+      }
+    },
+    "benefits": {
+      "title": "Why buy packages",
+      "items": [
+        {
+          "icon": "💰",
+          "title": "Savings",
+          "desc": "Save up to 20% compared to individual visits"
+        },
+        {
+          "icon": "📈",
+          "title": "Results",
+          "desc": "Regular care provides stable and long-term effects"
+        },
+        {
+          "icon": "🎁",
+          "title": "Bonuses",
+          "desc": "Consultations and discounts on professional cosmetics"
+        },
+        {
+          "icon": "⏰",
+          "title": "Flexibility",
+          "desc": "Use treatments at your convenience"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Not sure which package",
+      "titleAccent": "to choose",
+      "description": "Book a free consultation and we'll help you choose the optimal program for your skin",
+      "consultButton": "Free consultation",
+      "callButton": "Call now"
+    }
+  }
+}

@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* ------------------------------
+   БАЗОВЫЕ СТИЛИ LumaSkin (v4)
+--------------------------------*/
+
+html, body {
+  background: #FAF7F2;
+  color: #3A3A3A;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #3A3A3A;
+}
+
+/* Gold цвета */
+.border-gold {
+  border-color: #D4AF37;
+}
+
+.border-gold\/20 {
+  border-color: rgba(212, 175, 55, 0.2);
+}
+
+.border-gold\/30 {
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.border-gold\/40 {
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.border-gold\/50 {
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+.text-gold {
+  color: #D4AF37;
+}
+
+.text-gold\/80 {
+  color: rgba(212, 175, 55, 0.8);
+}
+
+.bg-gold {
+  background-color: #D4AF37;
+}
+
+.bg-gold\/5 {
+  background-color: rgba(212, 175, 55, 0.05);
+}
+
+.bg-gold\/10 {
+  background-color: rgba(212, 175, 55, 0.1);
+}
+
+.bg-gold\/20 {
+  background-color: rgba(212, 175, 55, 0.2);
+}
+
+.bg-gold\/30 {
+  background-color: rgba(212, 175, 55, 0.3);
+}
+
+.shadow-gold\/20 {
+  --tw-shadow-color: rgba(212, 175, 55, 0.2);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.shadow-gold\/50 {
+  --tw-shadow-color: rgba(212, 175, 55, 0.5);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.ring-gold {
+  --tw-ring-color: #D4AF37;
+}
+
+/* Milk цвета */
+.bg-milk {
+  background-color: #FAF7F2;
+}
+
+.bg-milk\/95 {
+  background-color: rgba(250, 247, 242, 0.95);
+}
+
+.ring-offset-milk {
+  --tw-ring-offset-color: #FAF7F2;
+}
+
+/* Graphite цвета */
+.text-graphite {
+  color: #3A3A3A;
+}
+
+.text-graphite\/80 {
+  color: rgba(58, 58, 58, 0.8);
+}
+
+/* Кнопки */
+.btn-primary {
+  background-color: #D4AF37;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #c29d2e;
+  transform: translateY(-2px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+a {
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+a:hover {
+  color: #d4af37;
+  opacity: 0.9;
+}
+.font-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+

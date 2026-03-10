@@ -1,71 +1,76 @@
-# Luma Skin Laser Studio
 
-Веб-сайт и административная панель для студии лазерной косметологии.
+⸻
 
-## Возможности
+Luma Skin Laser Studio
 
-- 🎯 Бронирование услуг онлайн
-- 📱 Мультиязычность (UA, EN, etc)
-- 🖼️ Галерея работ
-- 💼 Управление услугами и пакетами
-- 📊 Admin панель для управления контентом
-- 🔐 Аутентификация и авторизация
-- 📧 Email уведомления
-- 🌐 Локализация контента (DeepL)
-- ☁️ Загрузка изображений (Cloudinary)
+Веб-приложение и административная панель для студии лазерной косметологии.
+Позволяет клиентам удобно бронировать процедуры онлайн, а администраторам — управлять услугами, контентом и заказами.
 
-## Технический стек
+⸻
 
-- **Framework:** Next.js 16
-- **БД:** SQLite (Prisma ORM)
-- **Auth:** NextAuth.js
-- **Стили:** Tailwind CSS
-- **API:** REST
+Основные возможности
+	•	🎯 Онлайн-бронирование косметологических услуг
+	•	🌍 Мультиязычный интерфейс (UA, EN и др.)
+	•	🖼️ Галерея работ студии
+	•	💼 Управление услугами и пакетами
+	•	📊 Административная панель для управления сайтом
+	•	🔐 Аутентификация и авторизация пользователей
+	•	📧 Email-уведомления о бронированиях
+	•	🌐 Автоматическая локализация контента (DeepL API)
+	•	☁️ Загрузка и хранение изображений (Cloudinary)
 
-## Установка
+⸻
 
-### Требования
-- Node.js 18+
-- npm / yarn / pnpm
+Технологический стек
 
-### Шаги
+Технология	Назначение
+Next.js 16	Основной фреймворк
+Prisma ORM	Работа с базой данных
+SQLite	База данных
+NextAuth.js	Аутентификация
+Tailwind CSS	Стилизация интерфейса
+REST API	Backend endpoints
+Cloudinary	Хранение изображений
+DeepL API	Перевод контента
 
-1. **Клонируйте репозиторий:**
-```bash
-git clone <your-repo>
-cd project
-```
 
-2. **Установите зависимости:**
-```bash
+⸻
+
+Установка и запуск
+
+Требования
+	•	Node.js 18+
+	•	npm / yarn / pnpm
+
+⸻
+
+1. Клонирование репозитория
+
+git clone https://github.com/Bifyp/lumaskin.git
+cd lumaskin
+
+
+⸻
+
+2. Установка зависимостей
+
 npm install
-```
 
-3. **Создайте файл `.env.local`:**
-```bash
+
+⸻
+
+3. Создание файла окружения
+
 cp .env.example .env.local
-```
 
-4. **Заполните переменные окружения** (см. ниже)
 
-5. **Инициализируйте БД:**
-```bash
-npx prisma migrate dev
-```
+⸻
 
-6. **Запустите dev сервер:**
-```bash
-npm run dev
-```
+4. Настройка переменных окружения
 
-Откройте [http://localhost:3000](http://localhost:3000)
+Заполните .env.local.
 
-## Переменные окружения
-
-Создайте файл `.env.local` с необходимыми переменными:
-
-```env
-# База данных
+# Database
 DATABASE_URL="file:./dev.db"
 
 # NextAuth
@@ -80,64 +85,107 @@ SMTP_PASS=your-app-password
 SMTP_FROM=noreply@example.com
 ADMIN_EMAIL=admin@example.com
 
-# API ключи
+# API Keys
 DEEPL_API_KEY=your-deepl-key
 CLOUDINARY_CLOUD_NAME=your-cloud-name
 CLOUDINARY_API_KEY=your-api-key
 CLOUDINARY_API_SECRET=your-api-secret
-```
 
-## Запуск в production
 
-```bash
+⸻
+
+5. Инициализация базы данных
+
+npx prisma migrate dev
+
+
+⸻
+
+6. Запуск проекта
+
+npm run dev
+
+После запуска откройте:
+
+http://localhost:3000
+
+
+⸻
+
+Production запуск
+
+Сборка и запуск production версии:
+
 npm run build
 npm run start
-```
 
-## Структура проекта
 
-```
+⸻
+
+Структура проекта
+
 app/
-├── [locale]/           # Публичные страницы (с локализацией)
-├── admin/              # Admin панель
-└── api/                # REST API endpoints
+├── [locale]/          # Публичные страницы с локализацией
+├── admin/             # Административная панель
+└── api/               # REST API endpoints
 
 lib/
 ├── prisma.ts          # Prisma клиент
-├── auth.ts            # NextAuth конфиг
+├── auth.ts            # Конфигурация NextAuth
 └── validations.ts     # Zod схемы валидации
 
 prisma/
-└── schema.prisma      # БД схема
-```
+└── schema.prisma      # Схема базы данных
 
-## Основные API endpoints
 
-- `POST /api/auth/register` — Регистрация
-- `POST /api/bookings` — Создание бронирования
-- `GET /api/translations` — Получение переводов
-- `POST /api/admin/services` — Управление услугами (требует auth)
-- `POST /api/admin/gallery` — Управление галереей (требует auth)
+⸻
 
-## Деплой на Hetzner
+Основные API endpoints
 
-1. Скопируйте проект на сервер
-2. Создайте `.env.local` с production переменными
-3. Запустите:
-```bash
+Метод	Endpoint	Описание
+POST	/api/auth/register	Регистрация пользователя
+POST	/api/bookings	Создание бронирования
+GET	/api/translations	Получение переводов
+POST	/api/admin/services	Управление услугами (требует авторизацию)
+POST	/api/admin/gallery	Управление галереей (требует авторизацию)
+
+
+⸻
+
+Деплой на сервер (Hetzner)
+	1.	Скопируйте проект на сервер
+	2.	Создайте .env.local с production настройками
+	3.	Установите зависимости и выполните миграции
+
 npm install
 npx prisma migrate deploy
+
+	4.	Соберите проект
+
 npm run build
+
+	5.	Запустите сервер
+
 npm run start
-```
 
-4. Используйте PM2 или Systemd для управления процессом
+	6.	Рекомендуется использовать:
 
-## Контакты и поддержка
+	•	PM2
+	•	Systemd
+	•	Docker (опционально)
 
-При вопросах по использованию свяжитесь с разработчиком.
+для управления процессом.
 
----
+⸻
 
-**Версия:** 1.0  
-**Дата создания:** 01.03.2026 19:00
+Поддержка
+
+Если у вас возникли вопросы по использованию проекта — свяжитесь с разработчиком.
+
+⸻
+
+Версия: 1.0
+Дата создания: 01.03.2026
+
+⸻
+

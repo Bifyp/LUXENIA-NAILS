@@ -40,7 +40,7 @@ const EMPTY_FORM: FormData = {
 
 function Toast({ msg, ok }: { msg: string; ok: boolean }) {
   return (
-    <div className={`fixed top-5 right-5 z-50 px-5 py-3 rounded-xl shadow-xl text-sm text-white font-medium ${ok ? 'bg-emerald-600' : 'bg-red-500'}`}>
+    <div className={`fixed top-5 right-5 z-50 px-5 py-3 rounded-2xl shadow-xl text-sm text-white font-medium ${ok ? 'bg-gradient-to-r from-emerald-500 to-emerald-600' : 'bg-gradient-to-r from-rose-500 to-pink-500'}`}>
       {msg}
     </div>
   )
@@ -93,7 +93,7 @@ function PackageModal({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 sticky top-0 bg-white z-10">
           <div>
-            <p className="text-[#C6A667] text-xs uppercase tracking-[0.2em] mb-0.5">
+            <p className="text-rose-500 text-xs uppercase tracking-[0.2em] mb-0.5">
               {isEdit ? 'Редагування' : 'Новий пакет'}
             </p>
             <h2 className="text-xl font-serif text-[#1a1a1a]">
@@ -116,7 +116,7 @@ function PackageModal({
               value={form.title}
               onChange={(e) => set('title', e.target.value)}
               placeholder="Наприклад: Стартовий пакет"
-              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-[#C6A667] transition-colors placeholder:text-gray-300"
+              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-rose-200 transition-colors placeholder:text-gray-300"
             />
           </div>
 
@@ -129,7 +129,7 @@ function PackageModal({
                 value={form.badge}
                 onChange={(e) => set('badge', e.target.value)}
                 placeholder="Популярний"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-[#C6A667] transition-colors placeholder:text-gray-300"
+                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-rose-200 transition-colors placeholder:text-gray-300"
               />
             </div>
             <div>
@@ -139,7 +139,7 @@ function PackageModal({
                 value={form.sessions}
                 onChange={(e) => set('sessions', e.target.value)}
                 placeholder="5 сесій"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-[#C6A667] transition-colors placeholder:text-gray-300"
+                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-rose-200 transition-colors placeholder:text-gray-300"
               />
             </div>
           </div>
@@ -153,7 +153,7 @@ function PackageModal({
                 value={form.price}
                 onChange={(e) => set('price', e.target.value)}
                 placeholder="500"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-[#C6A667] transition-colors placeholder:text-gray-300"
+                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-rose-200 transition-colors placeholder:text-gray-300"
               />
             </div>
             <div>
@@ -163,7 +163,7 @@ function PackageModal({
                 value={form.oldPrice}
                 onChange={(e) => set('oldPrice', e.target.value)}
                 placeholder="700"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-[#C6A667] transition-colors placeholder:text-gray-300"
+                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-rose-200 transition-colors placeholder:text-gray-300"
               />
             </div>
             <div>
@@ -173,7 +173,7 @@ function PackageModal({
                 value={form.savings}
                 onChange={(e) => set('savings', e.target.value)}
                 placeholder="200 PLN"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-[#C6A667] transition-colors placeholder:text-gray-300"
+                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-rose-200 transition-colors placeholder:text-gray-300"
               />
             </div>
           </div>
@@ -182,7 +182,7 @@ function PackageModal({
           <div className="flex items-center gap-3">
             <button
               onClick={() => set('popular', !form.popular)}
-              className={`w-10 h-6 rounded-full transition-colors relative ${form.popular ? 'bg-[#C6A667]' : 'bg-gray-200'}`}
+              className={`w-10 h-6 rounded-full transition-colors relative ${form.popular ? 'bg-gradient-to-r from-rose-500 to-pink-500' : 'bg-gray-200'}`}
             >
               <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${form.popular ? 'translate-x-5' : 'translate-x-1'}`} />
             </button>
@@ -200,7 +200,7 @@ function PackageModal({
                     value={b}
                     onChange={(e) => setBenefit(idx, e.target.value)}
                     placeholder={`Перевага ${idx + 1}`}
-                    className="flex-1 border border-gray-200 rounded-xl px-4 py-2 text-sm text-gray-800 focus:outline-none focus:border-[#C6A667] transition-colors placeholder:text-gray-300"
+                    className="flex-1 border border-gray-200 rounded-xl px-4 py-2 text-sm text-gray-800 focus:outline-none focus:border-rose-200 transition-colors placeholder:text-gray-300"
                   />
                   {form.benefits.length > 1 && (
                     <button
@@ -214,7 +214,7 @@ function PackageModal({
               ))}
               <button
                 onClick={addBenefit}
-                className="w-full py-2 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-[#C6A667]/40 hover:text-[#C6A667] transition-colors"
+                className="w-full py-2 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 hover:border-rose-200/40 hover:text-rose-500 transition-colors"
               >
                 + Додати перевагу
               </button>
@@ -222,23 +222,23 @@ function PackageModal({
           </div>
 
           {/* Preview */}
-          <div className="bg-[#FAFAF8] rounded-xl p-4 border border-[#C6A667]/10">
+          <div className="bg-[#FAFAF8] rounded-xl p-4 border border-rose-200/10">
             <p className="text-xs uppercase tracking-wider text-gray-400 mb-3">Попередній перегляд</p>
-            <div className={`rounded-xl p-4 border-2 ${form.popular ? 'border-[#C6A667] bg-[#FDF8F0]' : 'border-gray-100 bg-white'}`}>
+            <div className={`rounded-xl p-4 border-2 ${form.popular ? 'border-rose-200 bg-[#FDF8F0]' : 'border-gray-100 bg-white'}`}>
               <div className="flex items-start justify-between mb-2">
                 <h3 className="font-serif text-[#1a1a1a]">{form.title || 'Назва пакету'}</h3>
-                {form.badge && <span className="text-xs bg-[#C6A667] text-white px-2 py-0.5 rounded-full">{form.badge}</span>}
+                {form.badge && <span className="text-xs bg-gradient-to-r from-rose-500 to-pink-500 text-white px-2 py-0.5 rounded-full">{form.badge}</span>}
               </div>
               {form.sessions && <p className="text-xs text-gray-400 mb-2">{form.sessions}</p>}
               <div className="flex items-baseline gap-2 mb-3">
-                {form.price && <span className="text-xl font-serif text-[#C6A667]">{form.price} PLN</span>}
+                {form.price && <span className="text-xl font-serif text-rose-500">{form.price} PLN</span>}
                 {form.oldPrice && <span className="text-sm text-gray-400 line-through">{form.oldPrice} PLN</span>}
               </div>
               {form.benefits.filter(b => b.trim()).length > 0 && (
                 <ul className="space-y-1">
                   {form.benefits.filter(b => b.trim()).map((b, i) => (
                     <li key={i} className="text-xs text-gray-600 flex items-center gap-1.5">
-                      <span className="text-[#C6A667]">✓</span> {b}
+                      <span className="text-rose-500">✓</span> {b}
                     </li>
                   ))}
                 </ul>
@@ -255,7 +255,7 @@ function PackageModal({
           <button
             onClick={handleSubmit}
             disabled={saving}
-            className="px-6 py-2.5 rounded-xl bg-[#C6A667] text-white text-sm font-medium hover:bg-[#b8955a] disabled:opacity-60 transition-colors flex items-center gap-2"
+            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white text-sm font-medium hover:shadow-lg hover:scale-105 disabled:opacity-60 transition-colors flex items-center gap-2"
           >
             {saving ? (
               <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block" /> Зберігаємо...</>
@@ -373,27 +373,27 @@ export default function AdminPackagesPage() {
   )
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] p-6 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-rose-50/30 p-6 md:p-8">
 
       {toast && <Toast msg={toast.msg} ok={toast.ok} />}
       {modal && <PackageModal initial={modal} onClose={() => setModal(null)} onSave={handleSave} />}
       {deleteTarget && <DeleteConfirm name={deleteTarget.title} onCancel={() => setDeleteTarget(null)} onConfirm={handleDelete} />}
 
       {/* Header */}
-      <header className="border-b border-[#C6A667]/30 pb-7 mb-8">
+      <header className="border-b border-rose-200/50 pb-7 mb-8">
         <div className="flex items-end justify-between flex-wrap gap-4">
           <div>
-            <span className="text-[#C6A667] text-xs uppercase tracking-[0.3em] font-medium mb-2 block">Luma Skin Laser Studio</span>
-            <h1 className="text-4xl font-serif text-[#1a1a1a]">Пакети</h1>
-            <p className="text-[#1a1a1a]/50 text-sm mt-1.5 font-light">
+            <span className="text-rose-500 text-xs uppercase tracking-[0.3em] font-semibold mb-2 block">Luxenia</span>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">Пакети</h1>
+            <p className="text-gray-500 text-sm mt-1.5">
               {packages.length} {packages.length === 1 ? 'пакет' : packages.length < 5 ? 'пакети' : 'пакетів'}
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <a href="/admin" className="text-sm text-[#C6A667]/70 hover:text-[#C6A667] transition-colors">← Адмін-панель</a>
+            <a href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</a>
             <button
               onClick={() => setModal(EMPTY_FORM)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-[#C6A667] text-white rounded-xl text-sm font-medium hover:bg-[#b8955a] transition-colors shadow-sm"
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-2xl text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all"
             >
               <span className="text-base leading-none">+</span> Додати пакет
             </button>
@@ -407,7 +407,7 @@ export default function AdminPackagesPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Пошук..."
-            className="w-full pl-9 pr-4 py-2 border border-[#C6A667]/20 rounded-xl text-sm text-gray-700 focus:outline-none focus:border-[#C6A667]/60 bg-white placeholder:text-gray-300 transition-colors"
+            className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-2xl text-sm text-gray-700 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 bg-white placeholder:text-gray-300 transition-all"
           />
         </div>
       </header>
@@ -415,7 +415,7 @@ export default function AdminPackagesPage() {
       {/* Content */}
       {loading ? (
         <div className="flex items-center justify-center h-64">
-          <div className="w-8 h-8 border-2 border-[#C6A667]/30 border-t-[#C6A667] rounded-full animate-spin" />
+          <div className="w-10 h-10 border-3 border-rose-200 border-t-rose-500 rounded-full animate-spin" />
         </div>
       ) : filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center h-64 text-center">
@@ -424,7 +424,7 @@ export default function AdminPackagesPage() {
             {search ? `Нічого не знайдено за «${search}»` : 'Пакетів ще немає'}
           </p>
           {!search && (
-            <button onClick={() => setModal(EMPTY_FORM)} className="px-5 py-2.5 bg-[#C6A667] text-white rounded-xl text-sm hover:bg-[#b8955a] transition-colors">
+            <button onClick={() => setModal(EMPTY_FORM)} className="px-5 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-xl text-sm hover:shadow-lg hover:scale-105 transition-colors">
               Додати перший пакет
             </button>
           )}
@@ -434,13 +434,13 @@ export default function AdminPackagesPage() {
           {filtered.map((p) => (
             <div
               key={p.id}
-              className={`group bg-white border-2 rounded-2xl p-5 hover:shadow-md transition-all duration-200 flex flex-col gap-3 ${p.popular ? 'border-[#C6A667]/40' : 'border-gray-100'}`}
+              className={`group bg-white border-2 rounded-2xl p-5 hover:shadow-md transition-all duration-200 flex flex-col gap-3 ${p.popular ? 'border-rose-200/40' : 'border-gray-100'}`}
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <h3 className="font-serif text-[#1a1a1a]">{p.title}</h3>
-                    {p.badge && <span className="text-xs bg-[#C6A667] text-white px-2 py-0.5 rounded-full">{p.badge}</span>}
+                    {p.badge && <span className="text-xs bg-gradient-to-r from-rose-500 to-pink-500 text-white px-2 py-0.5 rounded-full">{p.badge}</span>}
                     {p.popular && <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">⭐</span>}
                   </div>
                   {p.sessions && <p className="text-xs text-gray-400">{p.sessions}</p>}
@@ -452,7 +452,7 @@ export default function AdminPackagesPage() {
               </div>
 
               <div className="flex items-baseline gap-2">
-                <span className="text-xl font-serif text-[#C6A667]">{p.price} PLN</span>
+                <span className="text-xl font-serif text-rose-500">{p.price} PLN</span>
                 {p.oldPrice > 0 && <span className="text-sm text-gray-400 line-through">{p.oldPrice} PLN</span>}
                 {p.savings && <span className="text-xs text-emerald-600 font-medium">−{p.savings}</span>}
               </div>
@@ -461,7 +461,7 @@ export default function AdminPackagesPage() {
                 <ul className="space-y-1">
                   {p.benefits.slice(0, 3).map((b) => (
                     <li key={b.id} className="text-xs text-gray-500 flex items-center gap-1.5">
-                      <span className="text-[#C6A667]">✓</span> {b.text}
+                      <span className="text-rose-500">✓</span> {b.text}
                     </li>
                   ))}
                   {p.benefits.length > 3 && (
@@ -472,7 +472,7 @@ export default function AdminPackagesPage() {
 
               <div className="mt-auto pt-3 border-t border-gray-50 flex justify-between items-center">
                 <span className="text-[10px] uppercase tracking-wider text-gray-300">ID: {p.id.slice(-6)}</span>
-                <button onClick={() => setModal(toForm(p))} className="text-xs text-[#C6A667] hover:text-[#b8955a] transition-colors opacity-0 group-hover:opacity-100">
+                <button onClick={() => setModal(toForm(p))} className="text-xs text-rose-500 hover:text-[#b8955a] transition-colors opacity-0 group-hover:opacity-100">
                   Редагувати →
                 </button>
               </div>

@@ -28,7 +28,7 @@ const PAGES = [
 function Toast({ msg, ok }: { msg: string; ok: boolean }) {
   return (
     <div className={`fixed bottom-4 right-4 px-4 py-2 rounded-lg text-white text-sm ${
-      ok ? 'bg-green-500' : 'bg-red-500'
+      ok ? 'bg-gradient-to-r from-emerald-500 to-emerald-600' : 'bg-gradient-to-r from-rose-500 to-pink-500'
     }`}>
       {msg}
     </div>
@@ -64,8 +64,8 @@ function UploadZone({ onUpload, page }: { onUpload: (files: FileList) => void; p
       onDrop={handleDrop}
       className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all ${
         isDragActive
-          ? 'border-[#C6A667] bg-[#C6A667]/5'
-          : 'border-[#C6A667]/30 hover:border-[#C6A667]/50'
+          ? 'border-rose-200 bg-gradient-to-r from-rose-500 to-pink-500/5'
+          : 'border-rose-200/30 hover:border-rose-200/50'
       }`}
     >
       <div className="text-4xl mb-2" suppressHydrationWarning>
@@ -116,20 +116,20 @@ function UploadQueue({
   if (filtered.length === 0) return null
 
   return (
-    <div className="bg-white border border-[#C6A667]/20 rounded-2xl overflow-hidden">
-      <div className="p-4 border-b border-[#C6A667]/10 flex justify-between items-center">
+    <div className="bg-white border border-rose-200/20 rounded-2xl overflow-hidden">
+      <div className="p-4 border-b border-rose-200/10 flex justify-between items-center">
         <h3 className="font-serif text-lg text-[#1a1a1a]">Черга ({filtered.length})</h3>
         <button
           onClick={onUploadAll}
           disabled={uploading}
-          className="px-4 py-2 bg-[#C6A667] text-white rounded-lg hover:bg-[#B39657] disabled:opacity-50 text-sm font-medium"
+          className="px-4 py-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-lg hover:shadow-lg hover:scale-105 disabled:opacity-50 text-sm font-medium"
         >
           {uploading ? 'Завантажується...' : 'Завантажити'}
         </button>
       </div>
       <div className="space-y-3 p-4">
         {filtered.map((item) => (
-          <div key={item.id} className="border border-[#C6A667]/10 rounded-lg p-3 space-y-2">
+          <div key={item.id} className="border border-rose-200/10 rounded-lg p-3 space-y-2">
             <div className="flex gap-3">
               <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 shrink-0">
                 <Image
@@ -146,12 +146,12 @@ function UploadQueue({
                   placeholder="Alt текст"
                   value={item.alt}
                   onChange={(e) => onUpdate(item.id, 'alt', e.target.value)}
-                  className="w-full px-2 py-1 border border-[#C6A667]/20 rounded text-sm"
+                  className="w-full px-2 py-1 border border-rose-200/20 rounded text-sm"
                 />
                 <select
                   value={item.category}
                   onChange={(e) => onUpdate(item.id, 'category', e.target.value)}
-                  className="w-full px-2 py-1 border border-[#C6A667]/20 rounded text-sm"
+                  className="w-full px-2 py-1 border border-rose-200/20 rounded text-sm"
                 >
                   <option value="">Без категорії</option>
                   {CATEGORIES.map((cat) => (
@@ -225,7 +225,7 @@ function EditModal({
                 type="text"
                 value={alt}
                 onChange={(e) => setAlt(e.target.value)}
-                className="w-full px-3 py-2 border border-[#C6A667]/20 rounded-lg focus:outline-none focus:border-[#C6A667]"
+                className="w-full px-3 py-2 border border-rose-200/20 rounded-lg focus:outline-none focus:border-rose-200"
               />
             </div>
             <div>
@@ -233,7 +233,7 @@ function EditModal({
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-3 py-2 border border-[#C6A667]/20 rounded-lg focus:outline-none focus:border-[#C6A667]"
+                className="w-full px-3 py-2 border border-rose-200/20 rounded-lg focus:outline-none focus:border-rose-200"
               >
                 <option value="">Без категорії</option>
                 {CATEGORIES.map((cat) => (
@@ -247,14 +247,14 @@ function EditModal({
           <div className="flex gap-3 pt-4">
             <button
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-[#C6A667]/20 text-[#1a1a1a] rounded-lg hover:bg-gray-50"
+              className="flex-1 px-4 py-2 border border-rose-200/20 text-[#1a1a1a] rounded-lg hover:bg-gray-50"
             >
               Скасувати
             </button>
             <button
               onClick={handleSave}
               disabled={saving}
-              className="flex-1 px-4 py-2 bg-[#C6A667] text-white rounded-lg hover:bg-[#B39657] disabled:opacity-50"
+              className="flex-1 px-4 py-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-lg hover:shadow-lg hover:scale-105 disabled:opacity-50"
             >
               {saving ? 'Збереження...' : 'Зберегти'}
             </button>
@@ -279,7 +279,7 @@ function PhotoCard({
   activePage?: string
 }) {
   return (
-    <div className="group relative bg-white border border-[#C6A667]/20 rounded-2xl overflow-hidden hover:border-[#C6A667]/50 hover:shadow-md transition-all duration-200">
+    <div className="group relative bg-white border border-rose-200/20 rounded-2xl overflow-hidden hover:border-rose-200/50 hover:shadow-md transition-all duration-200">
       <div className="relative aspect-4/3 bg-gray-100">
         <Image src={photo.url} alt={photo.alt || ''} fill className="object-cover" />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-200 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100">
@@ -532,18 +532,22 @@ export default function AdminGalleryPage() {
   const filteredPhotos = photos.filter((p) => p.page === activePage)
 
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-rose-50/30 p-6 md:p-8 space-y-6">
       <div>
-        <h1 className="font-serif text-3xl text-[#1a1a1a] mb-4">Управління фото</h1>
+        <div className="mb-6">
+          <span className="text-rose-500 text-xs uppercase tracking-[0.3em] font-semibold mb-2 block">Luxenia</span>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent mb-2">Управління фото</h1>
+          <a href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</a>
+        </div>
         <div className="flex gap-2 flex-wrap">
           {PAGES.map((pg) => (
             <button
               key={pg.value}
               onClick={() => setActivePage(pg.value)}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-4 py-2.5 rounded-2xl font-semibold transition-all ${
                 activePage === pg.value
-                  ? 'bg-[#C6A667] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
               }`}
             >
               {mounted ? `${pg.emoji} ${pg.label}` : pg.label}
@@ -600,13 +604,13 @@ export default function AdminGalleryPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setDeleteTarget(null)}
-                className="flex-1 px-4 py-2 border border-[#C6A667]/20 text-[#1a1a1a] rounded-lg hover:bg-gray-50"
+                className="flex-1 px-4 py-2 border border-rose-200/20 text-[#1a1a1a] rounded-lg hover:bg-gray-50"
               >
                 Скасувати
               </button>
               <button
                 onClick={() => deleteTarget && handleDelete(deleteTarget.id)}
-                className="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                className="flex-1 px-4 py-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-lg hover:bg-red-600"
               >
                 Видалити
               </button>

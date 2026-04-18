@@ -7,184 +7,164 @@ export default function ContactPage() {
   return (
     <div className="overflow-hidden">
 
-      {/* HERO */}
-      <section className="relative w-full min-h-[60vh] flex items-center justify-center fade-in bg-milk">
-        <div className="container text-center relative z-10 px-6">
-          <span className="text-gold/60 uppercase tracking-[0.3em] text-sm font-sans mb-4 block">
-            {t('hero.subtitle')}
-          </span>
-          <h1 className="text-6xl md:text-7xl font-serif mb-8 text-graphite leading-tight">
-            {t('hero.title')}<br/>
-            <span className="text-gold italic">{t('hero.titleAccent')}</span>
-          </h1>
-          <div className="w-20 h-px bg-gold mx-auto mt-6"></div>
-        </div>
-      </section>
+      {/* HERO - Split Screen */}
+      <section className="relative min-h-screen grid grid-cols-1 lg:grid-cols-2">
+        {/* Left Side - Content */}
+        <div className="flex items-center justify-center p-12 bg-gradient-to-br from-rose-600 via-pink-500 to-rose-500 text-white">
+          <div className="max-w-xl">
+            <span className="inline-block px-4 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
+              {t('hero.subtitle')}
+            </span>
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+              {t('hero.title')}
+            </h1>
+            <p className="text-xl text-white/90 mb-12 leading-relaxed">
+              Зв'яжіться з нами будь-яким зручним способом
+            </p>
 
-      {/* КОНТАКТНАЯ ИНФОРМАЦИЯ */}
-      <section className="py-32 fade-up">
-        <div className="container px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto mb-20">
-            {t.raw('contactInfo.items').map((contact: any, idx: number) => (
-              <div 
-                key={idx}
-                className="text-center group p-8 bg-white border border-gold/20 transition-all duration-500 hover:border-gold hover:shadow-xl hover:-translate-y-2"
-              >
-                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                  {contact.icon}
+            {/* Quick Contact Cards */}
+            <div className="space-y-4">
+              {t.raw('contactInfo.items').slice(0, 3).map((contact: any, idx: number) => (
+                <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300">
+                  <div className="flex items-center gap-4">
+                    <div className="text-4xl">{contact.icon}</div>
+                    <div>
+                      <h3 className="font-bold text-lg mb-1">{contact.title}</h3>
+                      <p className="text-white/90">{contact.info}</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-serif mb-3 text-graphite uppercase tracking-wider">
-                  {contact.title}
-                </h3>
-                <p className="text-gold font-sans text-lg mb-2">
-                  {contact.info}
-                </p>
-                <p className="text-graphite/60 text-sm">
-                  {contact.subinfo}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* ФОРМА КОНТАКТА */}
-      <section className="py-32 bg-milk fade-left">
-        <div className="container px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <span className="text-gold/60 uppercase tracking-[0.3em] text-sm font-sans mb-4 block">
-                {t('form.subtitle')}
-              </span>
-              <h2 className="text-5xl font-serif text-graphite mb-6">{t('form.title')}</h2>
-              <div className="w-20 h-px bg-gold mx-auto mb-6"></div>
-              <p className="text-graphite/70 font-sans text-lg">
-                {t('form.description')}
-              </p>
-            </div>
+        {/* Right Side - Form */}
+        <div className="flex items-center justify-center p-12 bg-white">
+          <div className="w-full max-w-xl">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8">Напишіть нам</h2>
 
-            <div className="bg-white p-10 md:p-12 shadow-2xl border border-gold/20">
-              <form className="space-y-8">
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-graphite/70 font-sans mb-2 text-sm uppercase tracking-wider">
-                      {t('form.fields.name.label')}
-                    </label>
-                    <input
-                      type="text"
-                      placeholder={t('form.fields.name.placeholder')}
-                      required
-                      className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-graphite/70 font-sans mb-2 text-sm uppercase tracking-wider">
-                      {t('form.fields.email.label')}
-                    </label>
-                    <input
-                      type="email"
-                      placeholder={t('form.fields.email.placeholder')}
-                      required
-                      className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none"
-                    />
-                  </div>
-                </div>
-
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-graphite/70 font-sans mb-2 text-sm uppercase tracking-wider">
-                    {t('form.fields.phone.label')}
+                  <label className="block text-gray-700 font-medium mb-2 text-sm">
+                    {t('form.fields.name.label')}
                   </label>
                   <input
-                    type="tel"
-                    placeholder={t('form.fields.phone.placeholder')}
-                    className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none"
+                    type="text"
+                    placeholder={t('form.fields.name.placeholder')}
+                    required
+                    className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-graphite/70 font-sans mb-2 text-sm uppercase tracking-wider">
-                    {t('form.fields.subject.label')}
+                  <label className="block text-gray-700 font-medium mb-2 text-sm">
+                    {t('form.fields.email.label')}
                   </label>
-                  <select 
-                    className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none appearance-none bg-white"
-                  >
-                    <option value="">{t('form.fields.subject.placeholder')}</option>
-                    {t.raw('form.fields.subject.options').map((option: string, idx: number) => (
-                      <option key={idx}>{option}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-graphite/70 font-sans mb-2 text-sm uppercase tracking-wider">
-                    {t('form.fields.message.label')}
-                  </label>
-                  <textarea
-                    rows={6}
-                    placeholder={t('form.fields.message.placeholder')}
+                  <input
+                    type="email"
+                    placeholder={t('form.fields.email.placeholder')}
                     required
-                    className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none resize-none"
-                  ></textarea>
+                    className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none"
+                  />
                 </div>
+              </div>
 
-                <button 
-                  type="submit"
-                  className="group relative w-full py-5 bg-gold text-graphite font-sans uppercase tracking-widest text-sm rounded-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+              <div>
+                <label className="block text-gray-700 font-medium mb-2 text-sm">
+                  {t('form.fields.phone.label')}
+                </label>
+                <input
+                  type="tel"
+                  placeholder={t('form.fields.phone.placeholder')}
+                  className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-2 text-sm">
+                  {t('form.fields.subject.label')}
+                </label>
+                <select
+                  className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none appearance-none bg-white"
                 >
-                  <span className="relative z-10">{t('form.submitButton')}</span>
-                  <div className="absolute inset-0 bg-graphite/20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                </button>
+                  <option value="">{t('form.fields.subject.placeholder')}</option>
+                  {t.raw('form.fields.subject.options').map((option: string, idx: number) => (
+                    <option key={idx}>{option}</option>
+                  ))}
+                </select>
+              </div>
 
-                <p className="text-center text-graphite/50 text-sm">
-                  {t('form.requiredNote')}
-                </p>
-              </form>
-            </div>
+              <div>
+                <label className="block text-gray-700 font-medium mb-2 text-sm">
+                  {t('form.fields.message.label')}
+                </label>
+                <textarea
+                  rows={5}
+                  placeholder={t('form.fields.message.placeholder')}
+                  required
+                  className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none resize-none"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105"
+              >
+                {t('form.submitButton')}
+              </button>
+            </form>
           </div>
         </div>
       </section>
 
-     
-
-      {/* РЕЖИМ РАБОТЫ */}
-      <section className="py-32 bg-graphite text-graphite fade-up">
+      {/* HOURS - Timeline Style */}
+      <section className="py-32 bg-gradient-to-b from-white to-gray-50">
         <div className="container px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-5xl font-serif mb-6 text-gold">{t('hours.title')}</h2>
-              <div className="w-20 h-px bg-gold mx-auto"></div>
-            </div>
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text text-transparent mb-6">
+              {t('hours.title')}
+            </h2>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-graphite/5 p-8 border border-gold/20">
-                <h3 className="text-2xl font-serif mb-6 text-gold">{t('hours.weekdays.title')}</h3>
-                <div className="space-y-3">
-                  {t.raw('hours.weekdays.schedule').map((schedule: any, idx: number) => (
-                    <div key={idx} className="flex justify-between items-center pb-3 border-b border-graphite/20">
-                      <span className="text-graphite">{schedule.day}</span>
-                      <span className="text-gold font-sans">{schedule.hours}</span>
-                    </div>
-                  ))}
+          <div className="max-w-3xl mx-auto">
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-rose-400 to-pink-400 -translate-x-1/2"></div>
+
+              {/* Weekdays */}
+              <div className="mb-12">
+                <div className="relative bg-white rounded-2xl p-8 shadow-lg ml-auto w-[calc(50%-2rem)]">
+                  <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gradient-to-br from-rose-500 to-pink-500 rounded-full"></div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-6">{t('hours.weekdays.title')}</h3>
+                  <div className="space-y-3">
+                    {t.raw('hours.weekdays.schedule').map((schedule: any, idx: number) => (
+                      <div key={idx} className="flex justify-between items-center">
+                        <span className="text-gray-600">{schedule.day}</span>
+                        <span className="font-bold text-rose-600">{schedule.hours}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-graphite/5 p-8 border border-gold/20">
-                <h3 className="text-2xl font-serif mb-6 text-gold">{t('hours.weekend.title')}</h3>
-                <div className="space-y-3">
-                  {t.raw('hours.weekend.schedule').map((schedule: any, idx: number) => (
-                    <div key={idx} className="flex justify-between items-center pb-3 border-b border-graphite/20">
-                      <span className="text-graphite">{schedule.day}</span>
-                      <span className="text-gold font-sans">{schedule.hours}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 pt-6 border-t border-gold/20">
-                  <p className="text-graphite/70 text-sm leading-relaxed">
-                    {t('hours.note')}
-                  </p>
+              {/* Weekend */}
+              <div>
+                <div className="relative bg-white rounded-2xl p-8 shadow-lg mr-auto w-[calc(50%-2rem)]">
+                  <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gradient-to-br from-rose-500 to-pink-500 rounded-full"></div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-6">{t('hours.weekend.title')}</h3>
+                  <div className="space-y-3">
+                    {t.raw('hours.weekend.schedule').map((schedule: any, idx: number) => (
+                      <div key={idx} className="flex justify-between items-center">
+                        <span className="text-gray-600">{schedule.day}</span>
+                        <span className="font-bold text-rose-600">{schedule.hours}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <p className="text-gray-600 text-sm">{t('hours.note')}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -192,93 +172,77 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* СОЦИАЛЬНЫЕ СЕТИ */}
-      <section className="py-32 fade-left bg-milk">
-        <div className="container px-6 text-center">
-          <span className="text-gold/60 uppercase tracking-[0.3em] text-sm font-sans mb-4 block">
-            {t('social.subtitle')}
-          </span>
-          <h2 className="text-5xl font-serif mb-8 text-graphite">
-            {t('social.title')}
-          </h2>
-          <div className="w-20 h-px bg-gold mx-auto mb-12"></div>
+      {/* SOCIAL - Icon Grid */}
+      <section className="py-32 bg-white">
+        <div className="container px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <span className="inline-block px-4 py-1 bg-gradient-to-r from-rose-100 to-pink-100 text-rose-600 rounded-full text-sm font-medium mb-6">
+              {t('social.subtitle')}
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-8">
+              {t('social.title')}
+            </h2>
+            <p className="text-gray-600 mb-12 text-lg">
+              {t('social.description')}
+            </p>
 
-          <p className="text-graphite/70 font-sans mb-12 text-lg max-w-2xl mx-auto">
-            {t('social.description')}
-          </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <a
+                href="https://www.instagram.com/lumaskin_laser_studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden bg-gradient-to-br from-pink-50 to-rose-50 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className="text-6xl mb-4">📷</div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Instagram</h3>
+                <p className="text-gray-600 text-sm">@luxenia.nails</p>
+              </a>
 
-          <div className="flex gap-6 justify-center items-center flex-wrap">
-            <a
-              href="https://www.instagram.com/lumaskin_laser_studio"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              title="Instagram"
-              className="group flex items-center gap-3 px-8 py-4 border-2 border-gold text-gold font-sans uppercase tracking-widest text-sm rounded-sm transition-all duration-300 hover:bg-gold hover:text-white hover:-translate-y-1"
-            >
-              <span className="text-2xl">
-                <img draggable="false" className="ext-emoji" alt="📷" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4f7.svg" />
-              </span>
-              Instagram
-            </a>
+              <a
+                href="https://www.facebook.com/share/1DGrdC9RvF/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden bg-gradient-to-br from-rose-50 to-pink-50 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className="text-6xl mb-4">📘</div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Facebook</h3>
+                <p className="text-gray-600 text-sm">Luxenia Nails</p>
+              </a>
 
-            <a
-              href="https://www.facebook.com/share/1DGrdC9RvF/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              title="Facebook"
-              className="group flex items-center gap-3 px-8 py-4 border-2 border-gold text-gold font-sans uppercase tracking-widest text-sm rounded-sm transition-all duration-300 hover:bg-gold hover:text-white hover:-translate-y-1"
-            >
-              <span className="text-2xl">
-                <img draggable="false" className="ext-emoji" alt="📘" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4d8.svg" />
-              </span>
-              Facebook
-            </a>
-
-            <a
-              href="https://booksy.com/pl-pl/307205_lumaskin-laser-studio_depilacja_16974_swarzedz#ba_s=seo"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Booksy"
-              title="Booksy"
-              className="group flex items-center gap-3 px-8 py-4 border-2 border-gold text-gold font-sans uppercase tracking-widest text-sm rounded-sm transition-all duration-300 hover:bg-gold hover:text-white hover:-translate-y-1"
-            >
-              <span className="text-2xl">
-                <img draggable="false" className="ext-emoji" alt="💆‍♀️" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f486-200d-2640-fe0f.svg" />
-              </span>
-              Booksy
-            </a>
+              <a
+                href="https://booksy.com/pl-pl/307205_lumaskin-laser-studio_depilacja_16974_swarzedz#ba_s=seo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden bg-gradient-to-br from-pink-50 to-rose-50 rounded-3xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className="text-6xl mb-4">💆‍♀️</div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Booksy</h3>
+                <p className="text-gray-600 text-sm">Онлайн запис</p>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-32 fade-up relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gold/20"></div>
-        
+      {/* CTA - Full Width */}
+      <section className="py-24 bg-gradient-to-r from-rose-600 to-pink-500 text-white">
         <div className="container px-6 text-center">
-          <h2 className="text-5xl font-serif mb-8 text-graphite">
-            {t('cta.title')}<br/>
-            {t('cta.titleLine2')} <span className="text-gold italic">{t('cta.titleAccent')}</span>?
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            {t('cta.title')} {t('cta.titleLine2')}
           </h2>
-          
-          <p className="text-graphite/70 font-sans mb-12 text-lg max-w-2xl mx-auto">
+          <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
             {t('cta.description')}
           </p>
-
-          <div className="flex gap-6 justify-center items-center flex-wrap">
-            <a 
-              href="/booking" 
-              className="group relative px-10 py-4 bg-gold text-graphite font-sans uppercase tracking-widest text-sm rounded-sm overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-gold/30 hover:-translate-y-1"
+          <div className="flex gap-4 justify-center items-center flex-wrap">
+            <a
+              href="/booking"
+              className="px-8 py-4 bg-white text-rose-600 rounded-full font-medium shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
-              <span className="relative z-10">{t('cta.bookingButton')}</span>
-              <div className="absolute inset-0 bg-graphite/20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              {t('cta.bookingButton')}
             </a>
-
-            <a 
-              href="tel:+48123456789" 
-              className="px-10 py-4 border-2 border-gold text-gold font-sans uppercase tracking-widest text-sm rounded-sm transition-all duration-300 hover:bg-gold hover:text-white hover:-translate-y-1"
+            <a
+              href="tel:+48123456789"
+              className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-full font-medium hover:bg-white hover:text-rose-600 transition-all duration-300"
             >
               {t('cta.callButton')}
             </a>

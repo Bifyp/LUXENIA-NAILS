@@ -13,76 +13,110 @@ export default function HomePage() {
   return (
     <div className="overflow-hidden">
 
-      {/* HERO */}
-      <section className="relative w-full min-h-[85vh] flex items-center justify-center fade-in">
-        <div className="container text-center relative z-10 px-6">
-          <div className="inline-block mb-8">
-            <span className="text-gold/60 uppercase tracking-[0.3em] text-sm font-sans">
-              {t('hero.subtitle')}
-            </span>
+      {/* HERO - Full Screen Video Style */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-rose-500 via-pink-500 to-rose-600">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')]"></div>
+        </div>
+
+        <div className="container relative z-10 px-6 text-center text-white">
+          <div className="max-w-5xl mx-auto">
+            <div className="inline-block mb-8 px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+              <p className="text-sm font-medium tracking-wide">
+                {t('hero.subtitle')}
+              </p>
+            </div>
+
+            <h1 className="text-7xl md:text-9xl font-bold mb-8 tracking-tight">
+              LUXENIA
+            </h1>
+
+            <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed">
+              {t('hero.description')}
+            </p>
+
+            <div className="flex gap-4 justify-center items-center flex-wrap">
+              <a
+                href={`/${locale}/booking`}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-rose-600 rounded-full font-medium shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
+              >
+                {t('hero.bookButton')}
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+
+              <a
+                href={`/${locale}/services`}
+                className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-full font-medium hover:bg-white hover:text-rose-600 transition-all duration-300"
+              >
+                {t('hero.servicesButton')}
+              </a>
+            </div>
           </div>
+        </div>
 
-          <h1 className="text-6xl md:text-7xl font-serif mb-8 text-graphite leading-tight">
-            {t('hero.title')}<br/>
-            <span className="text-gold italic">{t('hero.titleAccent')}</span>
-          </h1>
-          
-          <p className="text-lg md:text-xl font-sans text-graphite/70 max-w-2xl mx-auto mb-12 leading-relaxed">
-            {t('hero.description')}<br/>
-            {t('hero.descriptionLine2')}
-          </p>
-
-          <div className="flex gap-6 justify-center items-center flex-wrap">
-            <a
-              href={`/${locale}/booking`}
-              className="group relative px-10 py-4 bg-gold text-white font-sans uppercase tracking-widest text-sm rounded-sm overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-gold/30 hover:-translate-y-1"
-            >
-              <span className="relative z-10">{t('hero.bookButton')}</span>
-              <div className="absolute inset-0 bg-graphite transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-            </a>
-
-            <a
-              href={`/${locale}/services`}
-              className="px-10 py-4 border-2 border-gold text-gold font-sans uppercase tracking-widest text-sm rounded-sm transition-all duration-300 hover:bg-gold hover:text-white hover:-translate-y-1"
-            >
-              {t('hero.servicesButton')}
-            </a>
-          </div>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <svg className="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
         </div>
       </section>
 
-      {/* УСЛУГИ */}
-      <section className="py-32 fade-up bg-milk">
+      {/* SERVICES - Bento Grid */}
+      <section className="py-32 bg-white">
         <div className="container px-6">
-          <div className="text-center mb-20">
-            <span className="text-gold/60 uppercase tracking-[0.3em] text-sm font-sans mb-4 block">
-              {t('services.subtitle')}
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-1 bg-gradient-to-r from-rose-100 to-pink-100 text-rose-600 rounded-full text-sm font-medium mb-6">
+              Наші послуги
             </span>
-            <h2 className="text-5xl font-serif text-graphite">{t('services.title')}</h2>
-            <div className="w-20 h-px bg-gold mx-auto mt-6"></div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
+              {t('services.title')}
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {[
-              { title: t('services.facial.title'), desc: t('services.facial.description'), icon: t('services.facial.icon') },
-              { title: t('services.peeling.title'), desc: t('services.peeling.description'), icon: t('services.peeling.icon') },
-              { title: t('services.massage.title'), desc: t('services.massage.description'), icon: t('services.massage.icon') },
+              {
+                title: t('services.facial.title'),
+                desc: t('services.facial.description'),
+                icon: "💅",
+                gradient: "from-rose-500 to-pink-500"
+              },
+              {
+                title: t('services.peeling.title'),
+                desc: t('services.peeling.description'),
+                icon: "✨",
+                gradient: "from-pink-500 to-rose-400"
+              },
+              {
+                title: t('services.massage.title'),
+                desc: t('services.massage.description'),
+                icon: "💆",
+                gradient: "from-rose-400 to-pink-400"
+              },
             ].map((service, idx) => (
               <div
                 key={idx}
-                className="group relative p-8 bg-white border border-gold/20 transition-all duration-500 hover:border-gold hover:shadow-xl hover:-translate-y-2"
+                className="group relative overflow-hidden bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
               >
-                <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-gold/40 transition-all duration-300 group-hover:w-20 group-hover:h-20 group-hover:border-gold"></div>
-                <div className="relative z-10">
-                  <div className="text-4xl mb-6">{service.icon}</div>
-                  <h3 className="text-2xl font-serif mb-4 text-graphite">{service.title}</h3>
-                  <p className="text-graphite/70 mb-6 leading-relaxed">{service.desc}</p>
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.gradient} opacity-10 rounded-bl-full`}></div>
+
+                <div className="relative">
+                  <div className="text-6xl mb-6">{service.icon}</div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-rose-600 transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-6">{service.desc}</p>
                   <a
                     href={`/${locale}/services`}
-                    className="inline-flex items-center gap-2 text-gold font-sans text-sm uppercase tracking-wider group-hover:gap-4 transition-all duration-300"
+                    className="inline-flex items-center gap-2 text-rose-600 font-medium group-hover:gap-4 transition-all duration-300"
                   >
                     {t('services.learnMore')}
-                    <span className="text-lg">→</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </a>
                 </div>
               </div>
@@ -91,67 +125,64 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* О МАСТЕРЕ */}
-      <section className="py-32 fade-left relative">
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-2/3 bg-gold/5 -z-10"></div>
-        
-        <div className="container px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-            <div className="order-2 md:order-1">
-              <span className="text-gold/60 uppercase tracking-[0.3em] text-sm font-sans mb-4 block">
-                {t('about.subtitle')}
+      {/* ABOUT - Split with Image */}
+      <section className="relative overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          {/* Left - Image */}
+          <div className="relative h-[600px] lg:h-auto">
+            <LazyImage
+              src={masterUrl}
+              alt={masterAlt || t('about.imageAlt')}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/50 lg:to-white"></div>
+          </div>
+
+          {/* Right - Content */}
+          <div className="flex items-center p-12 lg:p-24 bg-white">
+            <div className="max-w-xl">
+              <span className="inline-block px-4 py-1 bg-gradient-to-r from-rose-100 to-pink-100 text-rose-600 rounded-full text-sm font-medium mb-6">
+                Про нас
               </span>
-              <h2 className="text-5xl font-serif mb-8 text-graphite leading-tight">
-                {t('about.title')}<br/>
-                {t('about.titleLine2')}
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800 leading-tight">
+                {t('about.title')}
               </h2>
-              <p className="text-graphite/70 font-sans mb-6 leading-relaxed text-lg">
-                {t('about.paragraph1')}
-              </p>
-              <p className="text-graphite/70 font-sans mb-8 leading-relaxed">
-                {t('about.paragraph2')}
-              </p>
+              <div className="space-y-4 text-gray-600 leading-relaxed mb-8">
+                <p className="text-lg">{t('about.paragraph1')}</p>
+                <p>{t('about.paragraph2')}</p>
+              </div>
               <a
                 href={`/${locale}/about`}
-                className="inline-flex items-center gap-3 text-gold font-sans uppercase tracking-wider border-b-2 border-gold/30 pb-2 hover:border-gold transition-all duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
                 {t('about.learnMore')}
-                <span className="text-xl">→</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </a>
-            </div>
-
-            <div className="order-1 md:order-2 relative">
-              <div className="absolute -top-6 -left-6 w-full h-full border-2 border-gold/20 -z-10"></div>
-              <LazyImage
-                src={masterUrl}
-                alt={masterAlt || t('about.imageAlt')}
-                className="w-full h-125 object-cover shadow-2xl"
-              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ПРЕИМУЩЕСТВА */}
-      <section className="py-32 bg-graphite text-white fade-up">
+      {/* STATS - Gradient Cards */}
+      <section className="py-32 bg-gradient-to-b from-white to-gray-50">
         <div className="container px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-serif mb-6">{t('stats.title')}</h2>
-            <div className="w-20 h-px bg-gold mx-auto"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {[
-              { number: t('stats.experience.number'), label: t('stats.experience.label') },
-              { number: t('stats.clients.number'), label: t('stats.clients.label') },
-              { number: t('stats.procedures.number'), label: t('stats.procedures.label') },
-              { number: t('stats.premium.number'), label: t('stats.premium.label') },
+              { number: t('stats.experience.number'), label: t('stats.experience.label'), gradient: "from-rose-500 to-pink-500" },
+              { number: t('stats.clients.number'), label: t('stats.clients.label'), gradient: "from-pink-500 to-rose-400" },
+              { number: t('stats.procedures.number'), label: t('stats.procedures.label'), gradient: "from-rose-400 to-pink-400" },
+              { number: t('stats.premium.number'), label: t('stats.premium.label'), gradient: "from-pink-400 to-rose-500" },
             ].map((stat, idx) => (
-              <div key={idx} className="text-center group">
-                <div className="text-5xl font-serif text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div
+                key={idx}
+                className={`relative group bg-gradient-to-br ${stat.gradient} rounded-3xl p-8 text-center text-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2`}
+              >
+                <div className="text-5xl md:text-6xl font-bold mb-3">
                   {stat.number}
                 </div>
-                <div className="text-sm uppercase tracking-widest text-black/70">
+                <div className="text-sm font-medium uppercase tracking-wide text-white/90">
                   {stat.label}
                 </div>
               </div>
@@ -160,34 +191,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* КОНТАКТЫ */}
-      <section className="py-32 fade-right relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gold/20"></div>
-        
-        <div className="container px-6 text-center">
-          <span className="text-gold/60 uppercase tracking-[0.3em] text-sm font-sans mb-4 block">
-            {t('contact.subtitle')}
-          </span>
-          <h2 className="text-5xl font-serif mb-8 text-graphite">{t('contact.title')}</h2>
-          
-          <p className="text-graphite/70 font-sans mb-4 text-lg max-w-2xl mx-auto">
+      {/* CONTACT - Full Width CTA */}
+      <section className="py-32 bg-gradient-to-br from-rose-600 via-pink-500 to-rose-500 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-white rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="container px-6 text-center relative z-10">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">{t('contact.title')}</h2>
+
+          <p className="text-xl text-white/90 mb-4 max-w-2xl mx-auto">
             {t('contact.description')}
           </p>
-          <p className="text-gold font-sans mb-12 text-xl">
+          <p className="text-2xl font-medium mb-12 text-white">
             {t('contact.address')}
           </p>
 
-          <div className="flex gap-6 justify-center items-center flex-wrap">
+          <div className="flex gap-4 justify-center items-center flex-wrap">
             <a
               href={`/${locale}/contact`}
-              className="px-10 py-4 bg-gold text-white font-sans uppercase tracking-widest text-sm rounded-sm transition-all duration-300 hover:bg-graphite hover:shadow-2xl hover:-translate-y-1"
+              className="px-8 py-4 bg-white text-rose-600 rounded-full font-medium shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               {t('contact.contactButton')}
             </a>
 
             <a
               href="tel:+48123456789"
-              className="px-10 py-4 border-2 border-gold text-gold font-sans uppercase tracking-widest text-sm rounded-sm transition-all duration-300 hover:bg-gold hover:text-white hover:-translate-y-1"
+              className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-full font-medium hover:bg-white hover:text-rose-600 transition-all duration-300"
             >
               {t('contact.callButton')}
             </a>

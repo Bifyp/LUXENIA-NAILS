@@ -311,42 +311,51 @@ export default function BookingPage() {
     <div className="overflow-hidden">
 
       {/* HERO */}
-      <section className="relative w-full min-h-[50vh] flex items-center justify-center fade-in bg-milk">
-        <div className="container text-center relative z-10 px-6">
-          <span className="text-gold/60 uppercase tracking-[0.3em] text-sm font-sans mb-4 block">
-            {t('hero.subtitle')}
-          </span>
-          <h1 className="text-6xl md:text-7xl font-serif mb-8 text-graphite leading-tight">
-            {t('hero.title')}<br/>
-            <span className="text-gold italic">{t('hero.titleAccent')}</span>
-          </h1>
-          <div className="w-20 h-px bg-gold mx-auto mt-6"></div>
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-rose-500 via-pink-500 to-rose-600">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')]"></div>
         </div>
+
+        <div className="container relative z-10 px-6 text-center text-white">
+          <div className="max-w-3xl mx-auto">
+            <span className="inline-block px-4 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
+              {t('hero.subtitle')}
+            </span>
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-tight">
+              {t('hero.title')}
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90">
+              {t('hero.titleAccent')}
+            </p>
+          </div>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
       </section>
 
       {/* ФОРМА */}
-      <section className="py-32 fade-up">
+      <section className="py-32 -mt-16 relative z-10">
         <div className="container px-6">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-16">
-              <p className="text-graphite/70 font-sans text-lg">
+              <p className="text-gray-600 text-lg">
                 {t('form.description')}
               </p>
             </div>
 
-            <div className="p-12 bg-white shadow-2xl rounded-lg border border-gold/20">
+            <div className="p-12 bg-white shadow-2xl rounded-3xl">
 
               {success ? (
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 rounded-full border-2 border-gold flex items-center justify-center mx-auto mb-6">
-                    <svg className="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center mx-auto mb-6">
+                    <svg className="w-7 h-7 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h2 className="text-3xl font-serif text-graphite mb-3">{t('form.successTitle')}</h2>
-                  <p className="text-graphite/60 mb-8">{t('form.successDesc')}</p>
+                  <h2 className="text-3xl font-bold text-gray-800 mb-3">{t('form.successTitle')}</h2>
+                  <p className="text-gray-600 mb-8">{t('form.successDesc')}</p>
 
-                  <div className="text-left border border-gold/20 rounded-md p-6 space-y-3 mb-8">
+                  <div className="text-left bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-6 space-y-3 mb-8">
                     <Row label={t('form.fields.firstName.label')} value={`${form.firstName} ${form.lastName}`} />
                     <Row label={t('form.fields.service.label')} value={form.serviceName} />
                     {selectedService?.price && (
@@ -364,7 +373,7 @@ export default function BookingPage() {
                       setSuccess(false);
                       setForm({ firstName:'',lastName:'',phone:'',email:'',serviceName:'',date:'',time:'',comment:'' });
                     }}
-                    className="text-sm uppercase tracking-widest text-gold border border-gold/40 px-8 py-3 rounded-md hover:bg-gold/5 transition-colors"
+                    className="px-8 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                   >
                     {t('form.newBooking')}
                   </button>
@@ -376,23 +385,23 @@ export default function BookingPage() {
                 {/* Name fields */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-graphite/70 font-sans mb-2 text-sm uppercase tracking-wider">
+                    <label className="block text-gray-700 font-medium mb-2 text-sm">
                       {t('form.fields.firstName.label')}
                     </label>
                     <input
                       name="firstName" type="text" value={form.firstName}
                       onChange={handleChange} placeholder={t('form.fields.firstName.placeholder')}
-                      required className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none"
+                      required className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-graphite/70 font-sans mb-2 text-sm uppercase tracking-wider">
+                    <label className="block text-gray-700 font-medium mb-2 text-sm">
                       {t('form.fields.lastName.label')}
                     </label>
                     <input
                       name="lastName" type="text" value={form.lastName}
                       onChange={handleChange} placeholder={t('form.fields.lastName.placeholder')}
-                      required className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none"
+                      required className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none"
                     />
                   </div>
                 </div>
@@ -400,38 +409,38 @@ export default function BookingPage() {
                 {/* Contact fields */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-graphite/70 font-sans mb-2 text-sm uppercase tracking-wider">
+                    <label className="block text-gray-700 font-medium mb-2 text-sm">
                       {t('form.fields.phone.label')}
                     </label>
                     <input
                       name="phone" type="tel" value={form.phone}
                       onChange={handleChange} placeholder={t('form.fields.phone.placeholder')}
-                      required className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none"
+                      required className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-graphite/70 font-sans mb-2 text-sm uppercase tracking-wider">
+                    <label className="block text-gray-700 font-medium mb-2 text-sm">
                       {t('form.fields.email.label')}
                     </label>
                     <input
                       name="email" type="email" value={form.email}
                       onChange={handleChange} placeholder={t('form.fields.email.placeholder')}
-                      required className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none"
+                      required className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none"
                     />
                   </div>
                 </div>
 
                 {/* SERVICE / PACKAGE TABS */}
                 <div>
-                  <label className="block text-graphite/70 font-sans mb-3 text-sm uppercase tracking-wider">
+                  <label className="block text-gray-700 font-medium mb-3 text-sm">
                     {t('form.fields.service.label')}
                   </label>
-                  <div className="flex gap-0 mb-4 border-2 border-gold/30 rounded-md overflow-hidden">
+                  <div className="flex gap-0 mb-4 border-2 border-gray-200 rounded-xl overflow-hidden">
                     <button
                       type="button"
                       onClick={() => handleTabChange('services')}
-                      className={`flex-1 py-2.5 text-sm font-sans uppercase tracking-wider transition-all duration-200 ${
-                        tab === 'services' ? 'bg-gold text-white' : 'text-graphite/60 hover:bg-gold/5'
+                      className={`flex-1 py-3 text-sm font-medium transition-all duration-200 ${
+                        tab === 'services' ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white' : 'text-gray-600 hover:bg-gray-50'
                       }`}
                     >
                       ✨ {t('form.tabServices')}
@@ -439,8 +448,8 @@ export default function BookingPage() {
                     <button
                       type="button"
                       onClick={() => handleTabChange('packages')}
-                      className={`flex-1 py-2.5 text-sm font-sans uppercase tracking-wider transition-all duration-200 border-l-2 border-gold/30 ${
-                        tab === 'packages' ? 'bg-gold text-white' : 'text-graphite/60 hover:bg-gold/5'
+                      className={`flex-1 py-3 text-sm font-medium transition-all duration-200 border-l-2 border-gray-200 ${
+                        tab === 'packages' ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white' : 'text-gray-600 hover:bg-gray-50'
                       }`}
                     >
                       🎁 {t('form.tabPackages')}
@@ -451,7 +460,7 @@ export default function BookingPage() {
                     <div>
                       <select
                         name="serviceName" value={form.serviceName} onChange={handleChange} required
-                        className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none appearance-none bg-white"
+                        className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none appearance-none bg-white"
                       >
                         <option value="">{t('form.fields.service.placeholder')}</option>
                         {services.map((s) => (
@@ -461,7 +470,7 @@ export default function BookingPage() {
                         ))}
                       </select>
                       {selectedService?.price && (
-                        <p className="mt-1.5 text-sm text-gold/80">
+                        <p className="mt-1.5 text-sm text-rose-600 font-medium">
                           {t('form.fields.price')}: {selectedService.price} PLN
                         </p>
                       )}
@@ -472,7 +481,7 @@ export default function BookingPage() {
                     <div>
                       <select
                         name="serviceName" value={form.serviceName} onChange={handleChange} required
-                        className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none appearance-none bg-white"
+                        className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none appearance-none bg-white"
                       >
                         <option value="">{t('form.packagePlaceholder')}</option>
                         {packages.map((p) => (
@@ -482,7 +491,7 @@ export default function BookingPage() {
                         ))}
                       </select>
                       {selectedPackage && (
-                        <p className="mt-1.5 text-sm text-gold/80">
+                        <p className="mt-1.5 text-sm text-rose-600 font-medium">
                           {t('form.fields.price')}: {selectedPackage.price} PLN · {selectedPackage.sessions}
                         </p>
                       )}
@@ -492,11 +501,11 @@ export default function BookingPage() {
 
                 {/* ─── CALENDAR ──────────────────────────────────────── */}
                 <div>
-                  <label className="block text-graphite/70 font-sans mb-4 text-sm uppercase tracking-wider">
+                  <label className="block text-gray-700 font-medium mb-4 text-sm">
                     {t('form.fields.date.label')}
                   </label>
 
-                  <div className="border-2 border-gold/30 rounded-md p-6 bg-white">
+                  <div className="border-2 border-gray-200 rounded-2xl p-6 bg-white">
                     <Calendar value={form.date} onChange={handleDateChange} labels={{ selectedDate: t('form.selectedDate') }} />
                   </div>
 
@@ -506,13 +515,13 @@ export default function BookingPage() {
 
                 {form.date && (
                   <div>
-                    <label className="block text-graphite/70 font-sans mb-4 text-sm uppercase tracking-wider">
+                    <label className="block text-gray-700 font-medium mb-4 text-sm">
                       {t('form.fields.time.label')}
                     </label>
 
                     {slotsLoading ? (
-                      <div className="flex items-center gap-2 text-graphite/40 text-sm font-sans py-4">
-                        <svg className="w-4 h-4 animate-spin text-gold" fill="none" viewBox="0 0 24 24">
+                      <div className="flex items-center gap-2 text-gray-500 text-sm py-4">
+                        <svg className="w-4 h-4 animate-spin text-rose-500" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
                         </svg>
@@ -534,18 +543,18 @@ export default function BookingPage() {
                                 setError('');
                               }}
                               title={isBooked ? 'Зайнято' : slot}
-                              className={`relative py-2.5 text-sm font-sans rounded-md border-2 transition-all duration-200 ${
+                              className={`relative py-2.5 text-sm font-medium rounded-xl border-2 transition-all duration-200 ${
                                 isBooked
-                                  ? 'border-graphite/10 text-graphite/20 bg-graphite/5 cursor-not-allowed line-through'
+                                  ? 'border-gray-200 text-gray-300 bg-gray-50 cursor-not-allowed line-through'
                                   : isSelected
-                                    ? 'bg-gold text-white border-gold shadow-md shadow-gold/20 scale-105'
-                                    : 'border-gold/30 text-graphite hover:border-gold hover:text-gold cursor-pointer'
+                                    ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white border-transparent shadow-lg scale-105'
+                                    : 'border-gray-200 text-gray-700 hover:border-rose-500 hover:text-rose-600 cursor-pointer'
                               }`}
                             >
                               {slot}
                               {isBooked && (
                                 <span className="absolute inset-0 flex items-center justify-center">
-                                  <span className="w-4 h-px bg-graphite/20 rotate-45 absolute" />
+                                  <span className="w-4 h-px bg-gray-300 rotate-45 absolute" />
                                 </span>
                               )}
                             </button>
@@ -556,7 +565,7 @@ export default function BookingPage() {
 
                     <input type="hidden" name="time" value={form.time} required />
                     {form.date && !form.time && !slotsLoading && (
-                      <p className="mt-2 text-xs text-graphite/40 font-sans">
+                      <p className="mt-2 text-xs text-gray-500">
                         {t('form.timeHint')}
                       </p>
                     )}
@@ -565,13 +574,13 @@ export default function BookingPage() {
 
                 {/* Comment */}
                 <div>
-                  <label className="block text-graphite/70 font-sans mb-2 text-sm uppercase tracking-wider">
+                  <label className="block text-gray-700 font-medium mb-2 text-sm">
                     {t('form.fields.comment.label')}
                   </label>
                   <textarea
                     name="comment" rows={4} value={form.comment}
                     onChange={handleChange} placeholder={t('form.fields.comment.placeholder')}
-                    className="border-2 border-gold/30 focus:border-gold p-4 w-full rounded-md transition-all duration-300 outline-none resize-none"
+                    className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all duration-300 outline-none resize-none"
                   />
                 </div>
 
@@ -579,15 +588,14 @@ export default function BookingPage() {
 
                 <button
                   type="submit" disabled={loading || !form.date || !form.time}
-                  className="group relative bg-gold text-white w-full py-5 rounded-md font-sans uppercase tracking-widest text-sm overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                  className="w-full py-5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
-                  <span className="relative z-10">
+                  <span>
                     {loading ? t('form.submitting') : t('form.submitButton')}
                   </span>
-                  <div className="absolute inset-0 bg-graphite transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 </button>
 
-                <p className="text-center text-graphite/50 text-sm">
+                <p className="text-center text-gray-500 text-sm">
                   {t('form.requiredNote')}
                 </p>
               </form>
@@ -595,10 +603,10 @@ export default function BookingPage() {
             </div>
 
             <div className="mt-16 text-center">
-              <p className="text-graphite/70 font-sans mb-4 text-lg">
+              <p className="text-gray-600 mb-4 text-lg">
                 {t('contact.text')}
               </p>
-              <a href="tel:+48123456789" className="text-4xl font-serif text-gold hover:underline inline-block transition-all duration-300 hover:scale-105">
+              <a href="tel:+48123456789" className="text-4xl font-bold text-rose-600 hover:text-rose-700 inline-block transition-all duration-300 hover:scale-105">
                 {t('contact.phone')}
               </a>
             </div>
@@ -607,19 +615,18 @@ export default function BookingPage() {
       </section>
 
       {/* ИНФОРМАЦИЯ */}
-      <section className="py-32 bg-milk fade-left">
+      <section className="py-32 bg-gradient-to-b from-white to-gray-50">
         <div className="container px-6">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-serif text-graphite mb-6">{t('info.title')}</h2>
-              <div className="w-20 h-px bg-gold mx-auto"></div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">{t('info.title')}</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {t.raw('info.items').map((info: any, idx: number) => (
-                <div key={idx} className="text-center p-8 bg-white border border-gold/20 transition-all duration-500 hover:border-gold hover:shadow-xl hover:-translate-y-2">
+                <div key={idx} className="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                   <div className="text-5xl mb-4">{info.icon}</div>
-                  <h3 className="text-xl font-serif mb-4 text-graphite">{info.title}</h3>
-                  <p className="text-graphite/70 leading-relaxed text-sm">{info.desc}</p>
+                  <h3 className="text-xl font-bold mb-4 text-gray-800">{info.title}</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm">{info.desc}</p>
                 </div>
               ))}
             </div>
@@ -628,19 +635,18 @@ export default function BookingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-32 fade-right">
+      <section className="py-32">
         <div className="container px-6">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
-              <span className="text-gold/60 uppercase tracking-[0.3em] text-sm font-sans mb-4 block">{t('faq.subtitle')}</span>
-              <h2 className="text-4xl font-serif text-graphite mb-6">{t('faq.title')}</h2>
-              <div className="w-20 h-px bg-gold mx-auto"></div>
+              <span className="inline-block px-4 py-1 bg-gradient-to-r from-rose-100 to-pink-100 text-rose-600 rounded-full text-sm font-medium mb-6">{t('faq.subtitle')}</span>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">{t('faq.title')}</h2>
             </div>
             <div className="space-y-6">
               {t.raw('faq.items').map((faq: any, idx: number) => (
-                <div key={idx} className="bg-white p-8 border-l-4 border-gold shadow-md hover:shadow-xl transition-all duration-300">
-                  <h3 className="text-lg font-serif mb-3 text-graphite">{faq.question}</h3>
-                  <p className="text-graphite/70 leading-relaxed">{faq.answer}</p>
+                <div key={idx} className="bg-white p-8 border-l-4 border-rose-500 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                  <h3 className="text-lg font-bold mb-3 text-gray-800">{faq.question}</h3>
+                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
                 </div>
               ))}
             </div>

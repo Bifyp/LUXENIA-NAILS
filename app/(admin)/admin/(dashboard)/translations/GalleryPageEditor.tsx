@@ -13,40 +13,74 @@ export default function GalleryPageEditor() {
       <EditorToolbar savingKey={savingKey} pageTitle="Gallery Page" />
       <Toast toast={toast} />
       <div className="overflow-hidden">
-        <section className="w-full min-h-[60vh] flex items-center justify-center bg-stone-50">
-          <div className="container text-center px-6 max-w-4xl mx-auto">
-            <span className="text-yellow-600/60 uppercase tracking-[0.3em] text-sm mb-4 block">{e('hero.subtitle')}</span>
-            <h1 className="text-6xl font-serif mb-8 text-gray-800 leading-tight">
-              {e('hero.title')}<br />
-              <span className="text-yellow-600 italic">{e('hero.titleAccent')}</span>
-            </h1>
-            <p className="text-lg text-gray-500 mt-8">{e('hero.description', undefined, 'text-gray-500')}</p>
+
+        {/* HERO - Minimal with Pattern */}
+        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-rose-500 to-pink-500">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')]"></div>
           </div>
-        </section>
-        <section className="py-24 bg-stone-50">
-          <div className="container px-6 max-w-6xl mx-auto">
-            <div className="text-center mb-20">
-              <span className="text-yellow-600/60 uppercase tracking-[0.3em] text-sm mb-4 block">{e('categories.subtitle')}</span>
-              <h2 className="text-5xl font-serif text-gray-800">{e('categories.title', undefined, 'text-5xl font-serif text-gray-800')}</h2>
+
+          <div className="container text-center relative z-10 px-6">
+            <div className="max-w-3xl mx-auto">
+              <span className="inline-block px-4 py-1 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium mb-6">
+                {e('hero.subtitle')}
+              </span>
+              <h1 className="text-6xl md:text-8xl font-bold mb-8 text-white leading-tight">
+                {e('hero.title', undefined, 'text-6xl md:text-8xl font-bold text-white')}
+              </h1>
+              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+                {e('hero.description', undefined, 'text-xl text-white/90')}
+              </p>
             </div>
-            <p className="text-center text-gray-400 text-sm py-8 border border-dashed border-gray-200 rounded-xl">
-              🔢 categories.items редактируются в <a href="/admin/translations" className="text-indigo-500 underline">Таблице переводов</a>
+          </div>
+
+          {/* Decorative elements */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+        </section>
+
+        {/* ГАЛЕРЕЯ */}
+        <section className="py-24 bg-white">
+          <div className="container px-6">
+            <p className="text-center text-gray-400 text-sm py-8 border border-dashed border-gray-200 rounded-xl max-w-4xl mx-auto">
+              📷 Галерея зображень керується через <a href="/admin/gallery" className="text-rose-500 underline">Адмін-панель → Галерея</a>
             </p>
           </div>
         </section>
-        <section className="py-24 bg-gray-800 text-white">
-          <div className="container px-6 text-center max-w-4xl mx-auto">
-            <h2 className="text-5xl font-serif mb-8">
-              {e('cta.title')}<br />
-              <span className="text-yellow-600 italic">{e('cta.titleAccent')}</span>?
-            </h2>
-            <p className="text-gray-300 mb-12 text-lg">{e('cta.description', undefined, 'text-gray-300')}</p>
-            <div className="flex gap-6 justify-center flex-wrap">
-              <span className="px-10 py-4 bg-yellow-600 text-white uppercase tracking-widest text-sm rounded-sm">{e('cta.bookingButton')}</span>
-              <span className="px-10 py-4 border-2 border-yellow-600 text-yellow-600 uppercase tracking-widest text-sm rounded-sm">{e('cta.servicesButton')}</span>
+
+        {/* CTA - Split Design */}
+        <section className="relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* Left - Dark */}
+            <div className="bg-gray-900 text-white p-16 lg:p-24 flex items-center">
+              <div className="max-w-xl">
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                  {e('cta.title', undefined, 'text-4xl md:text-5xl font-bold text-white')}
+                </h2>
+                <p className="text-white/80 mb-8 text-lg leading-relaxed">
+                  {e('cta.description', undefined, 'text-white/80 text-lg')}
+                </p>
+                <span className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-full font-medium shadow-lg cursor-pointer">
+                  {e('cta.bookingButton')}
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            {/* Right - Gradient */}
+            <div className="bg-gradient-to-br from-rose-500 to-pink-500 p-16 lg:p-24 flex items-center justify-center">
+              <div className="text-center text-white">
+                <div className="text-8xl mb-6">💅</div>
+                <p className="text-2xl font-bold mb-4">{e('cta.professionalCare', undefined, 'text-2xl font-bold text-white')}</p>
+                <span className="inline-block px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-full font-medium cursor-pointer">
+                  {e('cta.servicesButton')}
+                </span>
+              </div>
             </div>
           </div>
         </section>
+
       </div>
     </div>
   )

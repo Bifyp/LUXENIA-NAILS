@@ -22,62 +22,60 @@ function getCodeEmailTemplate(code: string) {
 <head>
   <meta charset="UTF-8"/>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   </style>
 </head>
-<body style="margin:0;padding:0;background-color:#f5f0e8;font-family:'Montserrat',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f5f0e8;padding:48px 16px;">
+<body style="margin:0;padding:0;background:linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #f43f5e 100%);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #f43f5e 100%);padding:48px 16px;">
     <tr><td align="center">
       <table width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%;">
         <tr><td align="center" style="padding-bottom:32px;">
-          <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:13px;font-weight:600;color:#bfa76f;letter-spacing:0.35em;text-transform:uppercase;">
-            ✦ &nbsp; Luma Skin Laser Studio &nbsp; ✦
+          <div style="font-size:32px;font-weight:700;color:#ffffff;letter-spacing:-0.02em;">
+            LUXENIA
+          </div>
+          <div style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.8);letter-spacing:0.1em;text-transform:uppercase;margin-top:8px;">
+            Nails Studio
           </div>
         </td></tr>
-        <tr><td style="background:#ffffff;border:1px solid #e8e0d0;border-top:3px solid #bfa76f;">
+        <tr><td style="background:#ffffff;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.15);">
           <table width="100%" cellpadding="0" cellspacing="0">
-            <tr><td style="padding:40px 52px 0;">
-              <table width="100%"><tr>
-                <td><div style="width:24px;height:24px;border-left:1px solid #bfa76f;border-top:1px solid #bfa76f;"></div></td>
-                <td align="right"><div style="width:24px;height:24px;border-right:1px solid #bfa76f;border-top:1px solid #bfa76f;margin-left:auto;"></div></td>
-              </tr></table>
+            <tr><td style="padding:48px 40px 32px;">
+              <div style="width:64px;height:64px;background:linear-gradient(135deg, #f43f5e 0%, #ec4899 100%);border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;">
+                <div style="font-size:32px;line-height:1;">💅</div>
+              </div>
             </td></tr>
-            <tr><td align="center" style="padding:28px 52px 4px;">
-              <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#2a2a2a;line-height:1.2;">Potwierdzenie</div>
-              <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;font-style:italic;color:#bfa76f;line-height:1.2;">adresu e-mail</div>
+            <tr><td align="center" style="padding:0 40px 24px;">
+              <div style="font-size:28px;font-weight:700;color:#1f2937;line-height:1.2;margin-bottom:8px;">Potwierdzenie</div>
+              <div style="font-size:28px;font-weight:700;background:linear-gradient(135deg, #f43f5e 0%, #ec4899 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;">adresu e-mail</div>
             </td></tr>
-            <tr><td align="center" style="padding:16px 52px;">
-              <div style="width:48px;height:1px;background:#bfa76f;margin:0 auto;"></div>
-            </td></tr>
-            <tr><td align="center" style="padding:0 52px 28px;">
-              <p style="font-size:14px;font-weight:300;color:#6a6a6a;line-height:1.8;letter-spacing:0.02em;margin:0;text-align:center;">
-                  Dziękujemy za rejestrację.<br/>Wprowadź poniższy kod, aby dokończyć tworzenie konta.
+            <tr><td align="center" style="padding:0 40px 32px;">
+              <p style="font-size:15px;font-weight:400;color:#6b7280;line-height:1.6;margin:0;text-align:center;">
+                Dziękujemy za rejestrację.<br/>Wprowadź poniższy kod, aby dokończyć tworzenie konta.
               </p>
             </td></tr>
-            <tr><td style="padding:0 52px 32px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8f4ec;border:1px solid #e0d5c0;">
-                <tr><td align="center" style="padding:16px 24px 4px;">
-                  <div style="font-size:10px;font-weight:500;color:#bfa76f;letter-spacing:0.3em;text-transform:uppercase;">Twój kod</div>
+            <tr><td style="padding:0 40px 32px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:linear-gradient(135deg, #fef2f2 0%, #fce7f3 100%);border-radius:16px;border:2px solid #fecdd3;">
+                <tr><td align="center" style="padding:20px 24px 8px;">
+                  <div style="font-size:11px;font-weight:600;color:#f43f5e;letter-spacing:0.15em;text-transform:uppercase;">Twój kod</div>
                 </td></tr>
-                <tr><td align="center" style="padding:8px 24px 16px;">
-                  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:52px;font-weight:600;color:#2a2a2a;letter-spacing:0.2em;line-height:1;">${code}</div>
+                <tr><td align="center" style="padding:8px 24px 20px;">
+                  <div style="font-size:48px;font-weight:700;color:#1f2937;letter-spacing:0.15em;line-height:1;">${code}</div>
                 </td></tr>
-                <tr><td align="center" style="padding:0 24px 16px;">
-                  <div style="font-size:11px;font-weight:300;color:#9a9a9a;">Действителен в течение <span style="color:#bfa76f;font-weight:500;">10 минут</span></div>
+                <tr><td align="center" style="padding:0 24px 20px;">
+                  <div style="font-size:12px;font-weight:500;color:#9ca3af;">Ważny przez <span style="color:#f43f5e;font-weight:600;">10 minut</span></div>
                 </td></tr>
               </table>
             </td></tr>
-            <tr><td style="padding:0 52px 40px;">
-              <table width="100%"><tr>
-                <td><div style="width:24px;height:24px;border-left:1px solid #bfa76f;border-bottom:1px solid #bfa76f;"></div></td>
-                <td align="center"><p style="font-size:11px;font-weight:300;color:#b0b0b0;margin:0;letter-spacing:0.03em;">Jeśli nie tworzyłeś konta — po prostu zignoruj tę wiadomość.</p></td>
-                <td align="right"><div style="width:24px;height:24px;border-right:1px solid #bfa76f;border-bottom:1px solid #bfa76f;margin-left:auto;"></div></td>
-              </tr></table>
+            <tr><td align="center" style="padding:0 40px 48px;">
+              <p style="font-size:12px;font-weight:400;color:#9ca3af;margin:0;line-height:1.5;">
+                Jeśli nie tworzyłeś konta — po prostu zignoruj tę wiadomość.
+              </p>
             </td></tr>
           </table>
         </td></tr>
-        <tr><td align="center" style="padding-top:28px;">
-          <div style="font-size:11px;font-weight:300;color:#a0906a;letter-spacing:0.15em;text-transform:uppercase;">Luma Skin Laser Studio</div>
+        <tr><td align="center" style="padding-top:32px;">
+          <div style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.9);letter-spacing:0.05em;">LUXENIA Nails Studio</div>
+          <div style="font-size:11px;font-weight:400;color:rgba(255,255,255,0.7);margin-top:4px;">Swarzędz, Poland</div>
         </td></tr>
       </table>
     </td></tr>

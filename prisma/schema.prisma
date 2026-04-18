@@ -43,24 +43,24 @@ model VerificationToken {
 }
 
 model User {
-  id            String     @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String     @unique
+  email         String    @unique
   emailVerified DateTime?
   password      String?
   image         String?
-  role          String     @default("user")
-  createdAt     DateTime   @default(now())
+  role          String    @default("user")
+  createdAt     DateTime  @default(now())
 
-  accounts      Account[]
-  sessions      Session[]
-  bookings      Booking[]
+  accounts Account[]
+  sessions Session[]
+  bookings Booking[]
 }
 
 model Booking {
-  id        String   @id @default(cuid())
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String  @id @default(cuid())
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   firstName String
   lastName  String
@@ -83,7 +83,7 @@ model Gallery {
   publicId  String   @unique
   alt       String?
   category  String?
-  page      String   @default("gallery")  // Добавьте эту строку если её нет
+  page      String   @default("gallery") // Добавьте эту строку если её нет
   order     Int      @default(0)
   createdAt DateTime @default(now())
 
@@ -92,11 +92,11 @@ model Gallery {
 
 model Translation {
   id        String   @id @default(cuid())
-  lang      String   // "en", "ru", "pl", "uk"
-  section   String   // "Header", "HomePage", etc.
-  key       String   // "hero.title", "form.email.label", etc.
+  lang      String // "en", "ru", "pl", "uk"
+  section   String // "Header", "HomePage", etc.
+  key       String // "hero.title", "form.email.label", etc.
   value     String
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@unique([lang, section, key])
   @@index([lang])
@@ -104,26 +104,26 @@ model Translation {
 }
 
 model Package {
-  id        String     @id @default(cuid())
-  title     String
-  badge     String?
-  sessions  String
-  price     Int
-  oldPrice  Int
-  savings   String
-  popular   Boolean    @default(false)
-  benefits  Benefit[]
+  id       String    @id @default(cuid())
+  title    String
+  badge    String?
+  sessions String
+  price    Int
+  oldPrice Int
+  savings  String
+  popular  Boolean   @default(false)
+  benefits Benefit[]
 }
 
 model Benefit {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   text      String
   packageId String
-  package   Package  @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  package   Package @relation(fields: [packageId], references: [id], onDelete: Cascade)
 }
 
 model Service {
-  id    String @id @default(cuid())
+  id    String  @id @default(cuid())
   icon  String
   title String
   desc  String
@@ -131,7 +131,7 @@ model Service {
 }
 
 model ContactInfo {
-  id      String @id @default(cuid())
+  id      String  @id @default(cuid())
   icon    String
   title   String
   info    String
@@ -146,7 +146,7 @@ model WorkHour {
 }
 
 model CTA {
-  id          String @id @default(cuid())
+  id          String  @id @default(cuid())
   title       String
   titleLine2  String?
   titleAccent String?
@@ -161,4 +161,37 @@ model EmailCode {
   code      String
   expiresAt DateTime
   createdAt DateTime @default(now())
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  oldPrice    Float?
+  image       String?
+  category    String?
+  inStock     Boolean  @default(true)
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([featured])
+}
+
+model EmailTemplate {
+  id          String   @id @default(cuid())
+  type        String   // "welcome", "booking-confirmation", "password-reset", "booking-reminder"
+  lang        String   // "uk", "ru", "pl", "en"
+  subject     String
+  body        String   // HTML content with variables like {{name}}, {{email}}, {{link}}
+  enabled     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([type, lang])
+  @@index([type])
+  @@index([lang])
 }

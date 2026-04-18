@@ -78,14 +78,14 @@ function TranslationField({
           value={value}
           onChange={(e) => onChange(fieldKey, e.target.value)}
           rows={isArray ? 4 : 3}
-          className="w-full resize-y rounded-md border border-gray-200 bg-gray-50 px-3 py-2 font-mono text-sm text-gray-800 outline-none transition focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+          className="w-full resize-y rounded-md border border-gray-200 bg-gray-50 px-3 py-2 font-mono text-sm text-gray-800 outline-none transition focus:border-rose-400 focus:bg-white focus:ring-2 focus:ring-rose-100"
         />
       ) : (
         <input
           type="text"
           value={value}
           onChange={(e) => onChange(fieldKey, e.target.value)}
-          className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-800 outline-none transition focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+          className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-800 outline-none transition focus:border-rose-400 focus:bg-white focus:ring-2 focus:ring-rose-100"
         />
       )}
     </div>
@@ -139,7 +139,7 @@ function SectionBlock({
           <button
             onClick={() => onSave(sectionName)}
             disabled={!isDirty || isSaving}
-            className="flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-1.5 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex items-center gap-2 rounded-lg bg-rose-600 px-4 py-1.5 text-sm font-medium text-white transition hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSaving ? (
               <>
@@ -369,7 +369,7 @@ export default function TranslationEditor() {
     return (
       <div className="flex h-64 items-center justify-center">
         <div className="flex flex-col items-center gap-3 text-gray-400">
-          <svg className="h-8 w-8 animate-spin text-indigo-500" viewBox="0 0 24 24" fill="none">
+          <svg className="h-8 w-8 animate-spin text-rose-500" viewBox="0 0 24 24" fill="none">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
           </svg>
@@ -385,7 +385,7 @@ export default function TranslationEditor() {
         <p className="text-red-500">{fetchError}</p>
         <button
           onClick={fetchTranslations}
-          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700"
+          className="rounded-lg bg-rose-600 px-4 py-2 text-sm text-white hover:bg-rose-700"
         >
           Попробовать снова
         </button>
@@ -464,7 +464,7 @@ export default function TranslationEditor() {
           placeholder="Поиск по секции, ключу или значению..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-xl border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-800 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+          className="w-full rounded-xl border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-800 outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
         />
       </div>
 
@@ -521,7 +521,7 @@ export default function TranslationEditor() {
                   <button
                     onClick={() => handleSave(section)}
                     disabled={!s.isDirty || s.isSaving}
-                    className="flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-1.5 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex items-center gap-2 rounded-lg bg-rose-600 px-4 py-1.5 text-sm font-medium text-white transition hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {s.isSaving ? (
                       <>

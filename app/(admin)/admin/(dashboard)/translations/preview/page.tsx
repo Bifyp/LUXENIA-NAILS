@@ -30,7 +30,7 @@ export default function TranslationsPreviewIndex() {
             href={`/admin/translations/preview/${page.slug}`}
             className="group flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:border-indigo-400 hover:shadow-md"
           >
-            <span className="text-3xl">{page.icon}</span>
+            <span className="text-3xl" suppressHydrationWarning>{page.icon}</span>
             <div>
               <p className="font-semibold text-gray-800 group-hover:text-indigo-600 transition-colors">
                 {page.label}

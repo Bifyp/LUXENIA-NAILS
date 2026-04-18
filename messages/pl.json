@@ -10,7 +10,7 @@
     "hero": {
       "subtitle": "Nasza historia",
       "title": "O studiu",
-      "titleAccent": "LumaSkin"
+      "titleAccent": "Luxenia"
     },
     "master": {
       "certificates": [
@@ -20,7 +20,7 @@
         "Masterclass technik masażu twarzy, 2023"
       ],
       "certificatesTitle": "Certyfikaty i wykształcenie:",
-      "imageAlt": "Nadia Chalakhan - założycielka LumaSkin",
+      "imageAlt": "Nadia Chalakhan - założycielka Luxenia",
       "name": "Nadia Chalakhan",
       "paragraph1": "Od ponad 5 lat pomagam ludziom odzyskać pewność siebie poprzez pielęgnację skóry. Specjalizuję się w głębokiej pracy ze skórą problematyczną i programach anti-age.",
       "paragraph2": "Szkoliłam się w czołowych akademiach europejskich i regularnie biorę udział w warsztatach i konferencjach, by być na bieżąco z najnowszymi osiągnięciami kosmetologii.",
@@ -29,7 +29,7 @@
       "title": "Certyfikowana kosmetolog-estetyk"
     },
     "mission": {
-      "paragraph1": "LumaSkin to przestrzeń, gdzie nowoczesne technologie spotykają się z indywidualnym podejściem. Każdy zabieg tworzony jest specjalnie dla Ciebie, z uwzględnieniem Twojej skóry i celów.",
+      "paragraph1": "Luxenia to przestrzeń, gdzie nowoczesne technologie spotykają się z indywidualnym podejściem. Każdy zabieg tworzony jest specjalnie dla Ciebie, z uwzględnieniem Twojej skóry i celów.",
       "paragraph2": "Używamy wyłącznie produktów premium i sprawdzonych metod, abyś mogła powierzyć nam to, co najcenniejsze — swoje zdrowie i urodę.",
       "subtitle": "Nasza filozofia",
       "title": "Wierzymy, że piękno to nie tylko wygląd, ale i wewnętrzna harmonia"
@@ -67,9 +67,9 @@
         "Przytulna atmosfera i relaksująca muzyka",
         "Indywidualne gabinety dla pełnej prywatności"
       ],
-      "imageAlt": "Wnętrze studia LumaSkin",
+      "imageAlt": "Wnętrze studia Luxenia",
       "linkText": "Odwiedź nas",
-      "paragraph": "Każdy detal w LumaSkin jest przemyślany do perfekcji. Od miękkiego oświetlenia po komfortową temperaturę — wszystko stworzone by móc się całkowicie odprężyć.",
+      "paragraph": "Każdy detal w Luxenia jest przemyślany do perfekcji. Od miękkiego oświetlenia po komfortową temperaturę — wszystko stworzone by móc się całkowicie odprężyć.",
       "subtitle": "Nasza przestrzeń",
       "title": "Studio stworzone",
       "titleLine2": "dla Twojego komfortu"
@@ -463,7 +463,7 @@
       "titleAccent": "efektu"
     },
     "gallery": {
-      "brandName": "LumaSkin",
+      "brandName": "Luxenia",
       "emptyMessage": "Brak zdjęć",
       "photoLabel": "Zdjęcie"
     },
@@ -471,7 +471,7 @@
       "description": "Efekty, z których jesteśmy dumni",
       "subtitle": "Nasze prace",
       "title": "Portfolio",
-      "titleAccent": "LumaSkin"
+      "titleAccent": "Luxenia"
     },
     "reviews": {
       "items": [
@@ -502,11 +502,12 @@
     "packages": "Pakiety",
     "register": "Rejestracja",
     "services": "Usługi",
+    "shop": "Sklep",
     "user": "Użytkownik"
   },
   "HomePage": {
     "about": {
-      "imageAlt": "Mistrz LumaSkin",
+      "imageAlt": "Mistrz Luxenia",
       "learnMore": "Dowiedz się o mnie",
       "paragraph1": "Ponad 5 lat doświadczenia w kosmetologii. Indywidualne podejście, produkty premium i nowoczesne metody dla osiągnięcia idealnego efektu.",
       "paragraph2": "Każdy zabieg to unikalny protokół opracowany specjalnie pod Twój typ skóry i potrzeby.",
@@ -524,7 +525,7 @@
     },
     "hero": {
       "bookButton": "Zarezerwuj teraz",
-      "description": "LumaSkin — studio profesjonalnej pielęgnacji,",
+      "description": "Luxenia — studio profesjonalnej pielęgnacji,",
       "descriptionLine2": "gdzie estetyka spotyka naukę",
       "servicesButton": "Usługi",
       "subtitle": "Pielęgnacja premium",
@@ -698,7 +699,7 @@
       "titleAccent": "konto"
     },
     "intro": {
-      "description": "Dołącz do LumaSkin i uzyskaj dostęp do ekskluzywnych ofert"
+      "description": "Dołącz do Luxenia i uzyskaj dostęp do ekskluzywnych ofert"
     },
     "security": {
       "description": "Używamy nowoczesnych technologii szyfrowania do ochrony Twoich danych osobowych. Twoje informacje nigdy nie zostaną udostępnione osobom trzecim bez Twojej zgody.",
@@ -735,5 +736,25 @@
       "selectButton": "Wybierz"
     },
     "services": []
+  },
+  "ShopPage": {
+    "hero": {
+      "subtitle": "Sklep",
+      "title": "Nasze produkty",
+      "description": "Profesjonalna kosmetyka do pielęgnacji paznokci"
+    },
+    "empty": {
+      "title": "Brak produktów",
+      "subtitle": "Wkrótce pojawią się tutaj nasze produkty"
+    },
+    "filters": {
+      "all": "Wszystkie"
+    },
+    "product": {
+      "order": "Zamów",
+      "inStock": "W magazynie",
+      "outOfStock": "Brak w magazynie",
+      "featured": "Hit"
+    }
   }
 }

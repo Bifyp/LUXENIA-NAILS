@@ -5,12 +5,12 @@ export const aboutTranslations = {
       hero: {
         label: "Наша история",
         title: "О студии",
-        titleAccent: "LumaSkin"
+        titleAccent: "Luxenia"
       },
       mission: {
         label: "Наша философия",
         title: "Мы верим, что красота — это не только внешний вид, но и внутренняя гармония",
-        description1: "LumaSkin — это пространство, где современные технологии встречаются с индивидуальным подходом. Каждая процедура создаётся специально для вас, учитывая особенности вашей кожи и ваши цели.",
+        description1: "Luxenia — это пространство, где современные технологии встречаются с индивидуальным подходом. Каждая процедура создаётся специально для вас, учитывая особенности вашей кожи и ваши цели.",
         description2: "Мы используем только премиальные средства и проверенные методики, чтобы вы могли доверить нам самое ценное — своё здоровье и красоту."
       },
       founder: {
@@ -61,7 +61,7 @@ export const aboutTranslations = {
       studio: {
         label: "Наше пространство",
         title: "Студия, созданная для вашего комфорта",
-        description: "Каждая деталь в LumaSkin продумана до мелочей. От мягкого освещения до комфортной температуры — всё создано для того, чтобы вы могли полностью расслабиться.",
+        description: "Каждая деталь в Luxenia продумана до мелочей. От мягкого освещения до комфортной температуры — всё создано для того, чтобы вы могли полностью расслабиться.",
         features: [
           "Современное оборудование последнего поколения",
           "Стерильность и соблюдение всех норм безопасности",
@@ -111,12 +111,12 @@ export const aboutTranslations = {
       hero: {
         label: "Наша історія",
         title: "Про студію",
-        titleAccent: "LumaSkin"
+        titleAccent: "Luxenia"
       },
       mission: {
         label: "Наша філософія",
         title: "Ми віримо, що краса — це не тільки зовнішній вигляд, а й внутрішня гармонія",
-        description1: "LumaSkin — це простір, де сучасні технології зустрічаються з індивідуальним підходом. Кожна процедура створюється спеціально для вас, враховуючи особливості вашої шкіри та ваші цілі.",
+        description1: "Luxenia — це простір, де сучасні технології зустрічаються з індивідуальним підходом. Кожна процедура створюється спеціально для вас, враховуючи особливості вашої шкіри та ваші цілі.",
         description2: "Ми використовуємо тільки преміальні засоби та перевірені методики, щоб ви могли довірити нам найцінніше — своє здоров'я та красу."
       },
       founder: {
@@ -167,7 +167,7 @@ export const aboutTranslations = {
       studio: {
         label: "Наш простір",
         title: "Студія, створена для вашого комфорту",
-        description: "Кожна деталь у LumaSkin продумана до дрібниць. Від м'якого освітлення до комфортної температури — все створено для того, щоб ви могли повністю розслабитися.",
+        description: "Кожна деталь у Luxenia продумана до дрібниць. Від м'якого освітлення до комфортної температури — все створено для того, щоб ви могли повністю розслабитися.",
         features: [
           "Сучасне обладнання останнього покоління",
           "Стерильність та дотримання всіх норм безпеки",
@@ -217,12 +217,12 @@ export const aboutTranslations = {
       hero: {
         label: "Our Story",
         title: "About",
-        titleAccent: "LumaSkin"
+        titleAccent: "Luxenia"
       },
       mission: {
         label: "Our Philosophy",
         title: "We believe that beauty is not just appearance, but inner harmony",
-        description1: "LumaSkin is a space where modern technologies meet an individual approach. Every procedure is created specifically for you, taking into account your skin's characteristics and your goals.",
+        description1: "Luxenia is a space where modern technologies meet an individual approach. Every procedure is created specifically for you, taking into account your skin's characteristics and your goals.",
         description2: "We use only premium products and proven methodologies so you can trust us with the most precious — your health and beauty."
       },
       founder: {
@@ -273,7 +273,7 @@ export const aboutTranslations = {
       studio: {
         label: "Our Space",
         title: "Studio Created for Your Comfort",
-        description: "Every detail in LumaSkin is thought through. From soft lighting to comfortable temperature — everything is created so you can completely relax.",
+        description: "Every detail in Luxenia is thought through. From soft lighting to comfortable temperature — everything is created so you can completely relax.",
         features: [
           "Latest generation modern equipment",
           "Sterility and compliance with all safety standards",
@@ -323,12 +323,12 @@ export const aboutTranslations = {
       hero: {
         label: "Nasza Historia",
         title: "O studiu",
-        titleAccent: "LumaSkin"
+        titleAccent: "Luxenia"
       },
       mission: {
         label: "Nasza Filozofia",
         title: "Wierzymy, że piękno to nie tylko wygląd zewnętrzny, ale i wewnętrzna harmonia",
-        description1: "LumaSkin to przestrzeń, gdzie nowoczesne technologie spotykają się z indywidualnym podejściem. Każdy zabieg tworzony jest specjalnie dla Ciebie, uwzględniając cechy Twojej skóry i Twoje cele.",
+        description1: "Luxenia to przestrzeń, gdzie nowoczesne technologie spotykają się z indywidualnym podejściem. Każdy zabieg tworzony jest specjalnie dla Ciebie, uwzględniając cechy Twojej skóry i Twoje cele.",
         description2: "Używamy tylko produktów premium i sprawdzonych metod, abyś mogła nam zaufać to, co najcenniejsze — swoje zdrowie i piękno."
       },
       founder: {
@@ -379,7 +379,7 @@ export const aboutTranslations = {
       studio: {
         label: "Nasza Przestrzeń",
         title: "Studio stworzone dla Twojego komfortu",
-        description: "Każdy szczegół w LumaSkin jest przemyślany. Od miękkiego oświetlenia po komfortową temperaturę — wszystko stworzone, abyś mogła się całkowicie zrelaksować.",
+        description: "Każdy szczegół w Luxenia jest przemyślany. Od miękkiego oświetlenia po komfortową temperaturę — wszystko stworzone, abyś mogła się całkowicie zrelaksować.",
         features: [
           "Nowoczesny sprzęt najnowszej generacji",
           "Sterylność i przestrzeganie wszystkich norm bezpieczeństwa",

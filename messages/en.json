@@ -10,7 +10,7 @@
     "hero": {
       "subtitle": "Our Story",
       "title": "About the Studio",
-      "titleAccent": "LumaSkin"
+      "titleAccent": "Luxenia"
     },
     "master": {
       "certificates": [
@@ -20,7 +20,7 @@
         "Facial Massage Techniques Masterclass, 2023"
       ],
       "certificatesTitle": "Certificates and Education:",
-      "imageAlt": "Nadia Khalakhan - founder of LumaSkin",
+      "imageAlt": "Nadia Khalakhan - founder of Luxenia",
       "name": "Nadia Khalakhan",
       "paragraph1": "For over 5 years I have been helping people gain confidence through skin care. My specialization is deep work with problem skin and anti-age programs.",
       "paragraph2": "I have trained at leading European academies and regularly attend masterclasses and conferences to stay up to date with the latest advances in cosmetology.",
@@ -29,7 +29,7 @@
       "title": "Certified Cosmetologist-Aesthetician"
     },
     "mission": {
-      "paragraph1": "LumaSkin is a space where modern technologies meet an individual approach. Each procedure is created especially for you, taking into account the characteristics of your skin and your goals.",
+      "paragraph1": "Luxenia is a space where modern technologies meet an individual approach. Each procedure is created especially for you, taking into account the characteristics of your skin and your goals.",
       "paragraph2": "We use only premium products and proven methods so that you can trust us with the most valuable thing — your health and beauty.",
       "subtitle": "Our Philosophy",
       "title": "We believe that beauty is not only appearance, but inner harmony"
@@ -67,9 +67,9 @@
         "Cozy atmosphere and relaxing music",
         "Individual rooms for complete privacy"
       ],
-      "imageAlt": "LumaSkin Studio Interior",
+      "imageAlt": "Luxenia Studio Interior",
       "linkText": "Visit Us",
-      "paragraph": "Every detail at LumaSkin is carefully thought out. From soft lighting to comfortable temperature — everything is designed so you can completely relax.",
+      "paragraph": "Every detail at Luxenia is carefully thought out. From soft lighting to comfortable temperature — everything is designed so you can completely relax.",
       "subtitle": "Our Space",
       "title": "The Studio is Created",
       "titleLine2": "for Your Comfort"
@@ -437,7 +437,7 @@
       "titleAccent": "Result"
     },
     "gallery": {
-      "brandName": "LumaSkin",
+      "brandName": "Luxenia",
       "emptyMessage": "No photos uploaded yet",
       "photoLabel": "Photo"
     },
@@ -445,7 +445,7 @@
       "description": "Results we are proud of",
       "subtitle": "Our Work",
       "title": "Portfolio",
-      "titleAccent": "LumaSkin"
+      "titleAccent": "Luxenia"
     },
     "reviews": {
       "items": [
@@ -476,11 +476,12 @@
     "packages": "Packages",
     "register": "Register",
     "services": "Services",
+    "shop": "Shop",
     "user": "User"
   },
   "HomePage": {
     "about": {
-      "imageAlt": "LumaSkin Master",
+      "imageAlt": "Luxenia Master",
       "learnMore": "Learn About Me",
       "paragraph1": "Over 5 years of experience in cosmetology. Individual approach, premium products and modern methods to achieve the perfect result.",
       "paragraph2": "Each procedure is a unique protocol developed specifically for your skin type and needs.",
@@ -498,7 +499,7 @@
     },
     "hero": {
       "bookButton": "Book Now",
-      "description": "LumaSkin — a professional care studio",
+      "description": "Luxenia — a professional care studio",
       "descriptionLine2": "where aesthetics meets science",
       "servicesButton": "Services",
       "subtitle": "Premium Care",
@@ -672,7 +673,7 @@
       "titleAccent": "Account"
     },
     "intro": {
-      "description": "Join LumaSkin and get access to exclusive offers"
+      "description": "Join Luxenia and get access to exclusive offers"
     },
     "security": {
       "description": "We use modern encryption technologies to protect your personal data. Your information will never be shared with third parties without your consent.",
@@ -709,5 +710,25 @@
       "selectButton": "Select"
     },
     "services": []
+  },
+  "ShopPage": {
+    "hero": {
+      "subtitle": "Shop",
+      "title": "Our Products",
+      "description": "Professional nail care cosmetics"
+    },
+    "empty": {
+      "title": "No products yet",
+      "subtitle": "Our products will appear here soon"
+    },
+    "filters": {
+      "all": "All"
+    },
+    "product": {
+      "order": "Order",
+      "inStock": "In Stock",
+      "outOfStock": "Out of Stock",
+      "featured": "Hit"
+    }
   }
 }

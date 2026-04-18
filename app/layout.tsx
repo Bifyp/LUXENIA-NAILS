@@ -23,7 +23,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "LumaSkin",
+  title: "Luxenia",
   description: "Premium skincare studio website",
 };
 

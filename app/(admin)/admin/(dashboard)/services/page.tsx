@@ -22,7 +22,7 @@ const ICONS = ['✨', '💎', '🌿', '🔬', '💧', '🌸', '⚡', '🌙', '�
 
 function Toast({ msg, ok }: { msg: string; ok: boolean }) {
   return (
-    <div className={`fixed top-5 right-5 z-50 px-5 py-3 rounded-xl shadow-xl text-sm text-white font-medium ${ok ? 'bg-emerald-600' : 'bg-red-500'}`}>
+    <div className={`fixed top-5 right-5 z-50 px-5 py-3 rounded-2xl shadow-xl text-sm text-white font-medium ${ok ? 'bg-gradient-to-r from-emerald-500 to-emerald-600' : 'bg-gradient-to-r from-rose-500 to-pink-500'}`}>
       {msg}
     </div>
   )
@@ -70,21 +70,21 @@ function ServiceModal({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
       onClick={handleBackdrop}
     >
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg">
 
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
           <div>
-            <p className="text-[#C6A667] text-xs uppercase tracking-[0.2em] mb-0.5">
+            <p className="text-rose-500 text-xs uppercase tracking-[0.2em] mb-0.5 font-semibold">
               {isEdit ? 'Редагування' : 'Нова послуга'}
             </p>
-            <h2 className="text-xl font-serif text-[#1a1a1a]">
+            <h2 className="text-xl font-bold text-gray-900">
               {isEdit ? form.title || 'Послуга' : 'Додати послугу'}
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-rose-50 text-gray-400 hover:text-rose-500 transition-colors"
           >
             ✕
           </button>
@@ -94,7 +94,7 @@ function ServiceModal({
 
           {/* Icon picker */}
           <div>
-            <label className="text-xs uppercase tracking-wider text-gray-400 mb-2 block">Іконка</label>
+            <label className="text-xs uppercase tracking-wider text-gray-400 mb-2 block font-semibold">Іконка</label>
             <div className="flex flex-wrap gap-2">
               {ICONS.map((ic) => (
                 <button
@@ -102,8 +102,8 @@ function ServiceModal({
                   onClick={() => set('icon', ic)}
                   className={`w-10 h-10 text-xl rounded-xl border-2 transition-all ${
                     form.icon === ic
-                      ? 'border-[#C6A667] bg-[#FDF8F0] scale-110 shadow-sm'
-                      : 'border-gray-200 hover:border-[#C6A667]/40 hover:bg-[#FDF8F0]/50'
+                      ? 'border-rose-400 bg-gradient-to-br from-rose-50 to-pink-50 scale-110 shadow-md'
+                      : 'border-gray-200 hover:border-rose-300 hover:bg-rose-50/50'
                   }`}
                 >
                   {ic}
@@ -117,15 +117,15 @@ function ServiceModal({
                   if (val) set('icon', val)
                 }}
                 placeholder="або своя"
-                className="w-24 px-2 text-sm border-2 border-dashed border-gray-200 rounded-xl text-center text-gray-500 focus:outline-none focus:border-[#C6A667]/60 placeholder:text-gray-300"
+                className="w-24 px-2 text-sm border-2 border-dashed border-gray-200 rounded-xl text-center text-gray-500 focus:outline-none focus:border-rose-300 placeholder:text-gray-300"
               />
             </div>
           </div>
 
           {/* Title */}
           <div>
-            <label className="text-xs uppercase tracking-wider text-gray-400 mb-1.5 block">
-              Назва <span className="text-red-400">*</span>
+            <label className="text-xs uppercase tracking-wider text-gray-400 mb-1.5 block font-semibold">
+              Назва <span className="text-rose-400">*</span>
             </label>
             <input
               type="text"
@@ -134,51 +134,51 @@ function ServiceModal({
               onChange={(e) => set('title', e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
               placeholder="Наприклад: Ліфтинг обличчя"
-              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-[#C6A667] transition-colors placeholder:text-gray-300"
+              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all placeholder:text-gray-300"
             />
           </div>
 
           {/* Desc */}
           <div>
-            <label className="text-xs uppercase tracking-wider text-gray-400 mb-1.5 block">Опис</label>
+            <label className="text-xs uppercase tracking-wider text-gray-400 mb-1.5 block font-semibold">Опис</label>
             <textarea
               value={form.desc}
               onChange={(e) => set('desc', e.target.value)}
               rows={3}
               placeholder="Короткий опис процедури..."
-              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-[#C6A667] transition-colors placeholder:text-gray-300 resize-none leading-relaxed"
+              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all placeholder:text-gray-300 resize-none leading-relaxed"
             />
           </div>
 
           {/* Price */}
           <div>
-            <label className="text-xs uppercase tracking-wider text-gray-400 mb-1.5 block">Ціна</label>
+            <label className="text-xs uppercase tracking-wider text-gray-400 mb-1.5 block font-semibold">Ціна</label>
             <div className="relative">
               <input
                 type="text"
                 value={form.price}
                 onChange={(e) => set('price', e.target.value)}
                 placeholder="Наприклад: від 500 грн"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-[#C6A667] transition-colors placeholder:text-gray-300"
+                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all placeholder:text-gray-300"
               />
             </div>
           </div>
 
           {/* Preview */}
-          <div className="bg-[#FAFAF8] rounded-xl p-4 border border-[#C6A667]/10">
-            <p className="text-xs uppercase tracking-wider text-gray-400 mb-3">Попередній перегляд</p>
+          <div className="bg-gradient-to-br from-gray-50 to-rose-50/30 rounded-2xl p-4 border border-rose-100/50">
+            <p className="text-xs uppercase tracking-wider text-gray-400 mb-3 font-semibold">Попередній перегляд</p>
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 bg-white rounded-xl border border-[#C6A667]/20 flex items-center justify-center text-xl shrink-0 shadow-sm">
+              <div className="w-10 h-10 bg-white rounded-xl border border-rose-200 flex items-center justify-center text-xl shrink-0 shadow-sm">
                 {form.icon}
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <p className="font-medium text-[#1a1a1a] text-sm">{form.title || 'Назва послуги'}</p>
+                  <p className="font-semibold text-gray-900 text-sm">{form.title || 'Назва послуги'}</p>
                   {form.price && (
-                    <span className="text-xs text-[#C6A667] font-medium">{form.price} PLN</span>
+                    <span className="text-xs text-rose-500 font-semibold">{form.price} PLN</span>
                   )}
                 </div>
-                <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">
+                <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
                   {form.desc || "Опис процедури з'явиться тут..."}
                 </p>
               </div>
@@ -190,14 +190,14 @@ function ServiceModal({
         <div className="px-6 py-4 border-t border-gray-100 flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
+            className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-600 hover:bg-gray-50 transition-colors font-medium"
           >
             Скасувати
           </button>
           <button
             onClick={handleSubmit}
             disabled={saving}
-            className="px-6 py-2.5 rounded-xl bg-[#C6A667] text-white text-sm font-medium hover:bg-[#b8955a] disabled:opacity-60 transition-colors flex items-center gap-2"
+            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white text-sm font-semibold hover:shadow-lg hover:scale-105 disabled:opacity-60 transition-all flex items-center gap-2"
           >
             {saving ? (
               <>
@@ -227,22 +227,22 @@ function DeleteConfirm({
 }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 text-center">
-        <div className="w-14 h-14 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🗑</div>
-        <h3 className="text-lg font-serif text-[#1a1a1a] mb-2">Видалити послугу?</h3>
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-6 text-center">
+        <div className="w-14 h-14 bg-gradient-to-br from-rose-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🗑</div>
+        <h3 className="text-lg font-bold text-gray-900 mb-2">Видалити послугу?</h3>
         <p className="text-sm text-gray-500 mb-6">
           «{name}» буде видалено назавжди. Це не можна скасувати.
         </p>
         <div className="flex gap-3">
           <button
             onClick={onCancel}
-            className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
+            className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-600 hover:bg-gray-50 transition-colors font-medium"
           >
             Скасувати
           </button>
           <button
             onClick={onConfirm}
-            className="flex-1 py-2.5 rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors"
+            className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white text-sm font-semibold hover:shadow-lg transition-all"
           >
             Видалити
           </button>
@@ -331,7 +331,7 @@ export default function AdminServicesPage() {
   )
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] p-6 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-rose-50/30 p-6 md:p-8">
 
       {toast && <Toast msg={toast.msg} ok={toast.ok} />}
 
@@ -352,27 +352,27 @@ export default function AdminServicesPage() {
       )}
 
       {/* Header */}
-      <header className="border-b border-[#C6A667]/30 pb-7 mb-8">
+      <header className="border-b border-rose-200/50 pb-7 mb-8">
         <div className="flex items-end justify-between flex-wrap gap-4">
           <div>
-            <span className="text-[#C6A667] text-xs uppercase tracking-[0.3em] font-medium mb-2 block">
-              Luma Skin Laser Studio
+            <span className="text-rose-500 text-xs uppercase tracking-[0.3em] font-semibold mb-2 block">
+              Luxenia
             </span>
-            <h1 className="text-4xl font-serif text-[#1a1a1a]">Послуги</h1>
-            <p className="text-[#1a1a1a]/50 text-sm mt-1.5 font-light">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">Послуги</h1>
+            <p className="text-gray-500 text-sm mt-1.5">
               {services.length} {services.length === 1 ? 'послуга' : services.length < 5 ? 'послуги' : 'послуг'}
             </p>
           </div>
           <div className="flex items-center gap-3">
             <a
               href="/admin"
-              className="text-sm text-[#C6A667]/70 hover:text-[#C6A667] transition-colors flex items-center gap-1"
+              className="text-sm text-rose-500 hover:text-rose-600 transition-colors flex items-center gap-1 font-medium"
             >
               ← Адмін-панель
             </a>
             <button
               onClick={() => setModal(EMPTY_FORM)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-[#C6A667] text-white rounded-xl text-sm font-medium hover:bg-[#b8955a] transition-colors shadow-sm"
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-2xl text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all"
             >
               <span className="text-base leading-none">+</span> Додати послугу
             </button>
@@ -387,7 +387,7 @@ export default function AdminServicesPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Пошук..."
-            className="w-full pl-9 pr-4 py-2 border border-[#C6A667]/20 rounded-xl text-sm text-gray-700 focus:outline-none focus:border-[#C6A667]/60 bg-white placeholder:text-gray-300 transition-colors"
+            className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-2xl text-sm text-gray-700 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 bg-white placeholder:text-gray-300 transition-all"
           />
         </div>
       </header>
@@ -396,21 +396,21 @@ export default function AdminServicesPage() {
       {loading ? (
         <div className="flex items-center justify-center h-64">
           <div className="flex flex-col items-center gap-3">
-            <div className="w-8 h-8 border-2 border-[#C6A667]/30 border-t-[#C6A667] rounded-full animate-spin" />
-            <p className="text-gray-300 text-sm">Завантаження...</p>
+            <div className="w-10 h-10 border-3 border-rose-200 border-t-rose-500 rounded-full animate-spin" />
+            <p className="text-gray-400 text-sm font-medium">Завантаження...</p>
           </div>
         </div>
 
       ) : filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center h-64 text-center">
           <div className="text-5xl mb-4">{search ? '🔍' : '✨'}</div>
-          <p className="text-[#1a1a1a]/40 text-sm mb-5">
+          <p className="text-gray-400 text-sm mb-5 font-medium">
             {search ? `Нічого не знайдено за «${search}»` : 'Послуг ще немає'}
           </p>
           {!search && (
             <button
               onClick={() => setModal(EMPTY_FORM)}
-              className="px-5 py-2.5 bg-[#C6A667] text-white rounded-xl text-sm hover:bg-[#b8955a] transition-colors"
+              className="px-5 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-2xl text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all"
             >
               Додати першу послугу
             </button>
@@ -422,25 +422,25 @@ export default function AdminServicesPage() {
           {filtered.map((s) => (
             <div
               key={s.id}
-              className="group bg-white border border-[#C6A667]/20 rounded-2xl p-5 hover:border-[#C6A667]/50 hover:shadow-md transition-all duration-200 flex flex-col gap-3"
+              className="group bg-white border border-gray-100 rounded-3xl p-5 hover:border-rose-200 hover:shadow-lg transition-all duration-200 flex flex-col gap-3"
             >
               {/* Card header */}
               <div className="flex items-start justify-between gap-2">
-                <div className="w-11 h-11 bg-[#FDF8F0] rounded-xl flex items-center justify-center text-2xl shrink-0 border border-[#C6A667]/10">
+                <div className="w-11 h-11 bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl flex items-center justify-center text-2xl shrink-0 border border-rose-100">
                   {s.icon}
                 </div>
                 <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button
                     onClick={() => setModal({ ...s })}
                     title="Редагувати"
-                    className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-500 hover:bg-indigo-100 flex items-center justify-center text-sm transition-colors"
+                    className="w-8 h-8 rounded-xl bg-blue-50 text-blue-500 hover:bg-blue-100 flex items-center justify-center text-sm transition-colors"
                   >
                     ✏️
                   </button>
                   <button
                     onClick={() => setDeleteTarget(s)}
                     title="Видалити"
-                    className="w-8 h-8 rounded-lg bg-red-50 text-red-400 hover:bg-red-100 flex items-center justify-center text-sm transition-colors"
+                    className="w-8 h-8 rounded-xl bg-rose-50 text-rose-400 hover:bg-rose-100 flex items-center justify-center text-sm transition-colors"
                   >
                     🗑
                   </button>
@@ -450,22 +450,22 @@ export default function AdminServicesPage() {
               {/* Card body */}
               <div>
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-medium text-[#1a1a1a] text-sm leading-snug">{s.title}</h3>
+                  <h3 className="font-semibold text-gray-900 text-sm leading-snug">{s.title}</h3>
                   {s.price && (
-                    <span className="text-xs text-[#C6A667] font-medium shrink-0">{s.price} PLN</span>
+                    <span className="text-xs text-rose-500 font-semibold shrink-0">{s.price} PLN</span>
                   )}
                 </div>
                 {s.desc && (
-                  <p className="text-xs text-gray-400 mt-1.5 leading-relaxed line-clamp-3">{s.desc}</p>
+                  <p className="text-xs text-gray-500 mt-1.5 leading-relaxed line-clamp-3">{s.desc}</p>
                 )}
               </div>
 
               {/* Card footer */}
               <div className="mt-auto pt-3 border-t border-gray-50 flex justify-between items-center">
-                <span className="text-[10px] uppercase tracking-wider text-gray-300">ID: {s.id.slice(-6)}</span>
+                <span className="text-[10px] uppercase tracking-wider text-gray-300 font-medium">ID: {s.id.slice(-6)}</span>
                 <button
                   onClick={() => setModal({ ...s })}
-                  className="text-xs text-[#C6A667] hover:text-[#b8955a] transition-colors opacity-0 group-hover:opacity-100"
+                  className="text-xs text-rose-500 hover:text-rose-600 transition-colors opacity-0 group-hover:opacity-100 font-medium"
                 >
                   Редагувати →
                 </button>

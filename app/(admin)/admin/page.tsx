@@ -23,9 +23,9 @@ type Stats = {
 }
 
 const STATUS_CONFIG = {
-  pending:   { label: 'Очікує',       color: 'bg-amber-50 text-amber-700 border-amber-200' },
-  confirmed: { label: 'Підтверджено', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-  cancelled: { label: 'Скасовано',    color: 'bg-red-50 text-red-500 border-red-200' },
+  pending:   { label: 'Очікує',       color: 'bg-orange-50 text-orange-600 border-orange-200' },
+  confirmed: { label: 'Підтверджено', color: 'bg-emerald-50 text-emerald-600 border-emerald-200' },
+  cancelled: { label: 'Скасовано',    color: 'bg-gray-50 text-gray-500 border-gray-200' },
 }
 
 function formatDate(dateStr: string) {
@@ -40,40 +40,56 @@ const NAV_SECTIONS = [
     icon: '📅',
     title: 'Бронювання',
     desc: 'Перегляд та управління записами клієнтів',
-    accent: 'from-amber-50 to-orange-50 border-amber-200/60',
-    iconBg: 'bg-amber-100',
+    accent: 'from-rose-50 to-pink-50',
+    iconBg: 'bg-gradient-to-br from-rose-100 to-pink-100',
   },
   {
     href: '/admin/gallery',
     icon: '🖼️',
     title: 'Галерея',
     desc: 'Завантаження та організація фотографій',
-    accent: 'from-sky-50 to-blue-50 border-sky-200/60',
-    iconBg: 'bg-sky-100',
+    accent: 'from-purple-50 to-pink-50',
+    iconBg: 'bg-gradient-to-br from-purple-100 to-pink-100',
   },
   {
     href: '/admin/packages',
-    icon: '📦',
+    icon: '🎁',
     title: 'Пакети',
     desc: 'Налаштування пакетів та цін',
-    accent: 'from-violet-50 to-purple-50 border-violet-200/60',
-    iconBg: 'bg-violet-100',
+    accent: 'from-pink-50 to-rose-50',
+    iconBg: 'bg-gradient-to-br from-pink-100 to-rose-100',
   },
   {
     href: '/admin/services',
     icon: '✨',
     title: 'Послуги',
     desc: 'Управління переліком послуг студії',
-    accent: 'from-emerald-50 to-teal-50 border-emerald-200/60',
-    iconBg: 'bg-emerald-100',
+    accent: 'from-rose-50 to-orange-50',
+    iconBg: 'bg-gradient-to-br from-rose-100 to-orange-100',
+  },
+  {
+    href: '/admin/products',
+    icon: '🛍️',
+    title: 'Магазин',
+    desc: 'Управління товарами та продуктами',
+    accent: 'from-pink-50 to-purple-50',
+    iconBg: 'bg-gradient-to-br from-pink-100 to-purple-100',
+  },
+  {
+    href: '/admin/email-templates',
+    icon: '📧',
+    title: 'Email шаблони',
+    desc: 'Конструктор листів для клієнтів',
+    accent: 'from-blue-50 to-rose-50',
+    iconBg: 'bg-gradient-to-br from-blue-100 to-rose-100',
   },
   {
     href: '/admin/translations',
     icon: '🌐',
     title: 'Переклади',
     desc: 'Редагування текстів сайту (uk/ru/pl/en)',
-    accent: 'from-rose-50 to-pink-50 border-rose-200/60',
-    iconBg: 'bg-rose-100',
+    accent: 'from-orange-50 to-rose-50',
+    iconBg: 'bg-gradient-to-br from-orange-100 to-rose-100',
   },
 ]
 
@@ -106,38 +122,38 @@ export default function AdminDashboardPage() {
     now.getHours() < 17 ? 'Доброго дня' : 'Доброго вечора'
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] p-6 md:p-10 space-y-10">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-rose-50/30 p-6 md:p-10 space-y-10">
 
       {/* ── Header ───────────────────────────────────────────────── */}
-      <header className="border-b border-[#C6A667]/30 pb-7">
-        <span className="text-[#C6A667] text-xs uppercase tracking-[0.3em] font-medium mb-2 block">
-          Luma Skin Laser Studio
+      <header className="border-b border-rose-200/50 pb-7">
+        <span className="text-rose-500 text-xs uppercase tracking-[0.3em] font-medium mb-2 block">
+          Luxenia
         </span>
-        <h1 className="text-4xl font-serif text-[#1a1a1a]">{greeting} 👋</h1>
-        <p className="text-[#1a1a1a]/40 text-sm mt-1.5 font-light">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">{greeting} 👋</h1>
+        <p className="text-gray-500 text-sm mt-1.5">
           {now.toLocaleDateString('uk-UA', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
         </p>
       </header>
 
       {/* ── Stats ────────────────────────────────────────────────── */}
       <section>
-        <h2 className="text-xs uppercase tracking-[0.25em] text-[#1a1a1a]/40 font-medium mb-4">
+        <h2 className="text-xs uppercase tracking-[0.25em] text-gray-400 font-medium mb-4">
           Статистика бронювань
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { key: 'total',     label: 'Всього',        icon: '📋', bg: 'bg-[#F8F4EE]',   text: 'text-[#1a1a1a]' },
-            { key: 'pending',   label: 'Очікують',      icon: '⏳', bg: 'bg-amber-50',    text: 'text-amber-700' },
-            { key: 'confirmed', label: 'Підтверджено',  icon: '✅', bg: 'bg-emerald-50',  text: 'text-emerald-700' },
-            { key: 'cancelled', label: 'Скасовано',     icon: '❌', bg: 'bg-red-50',      text: 'text-red-500' },
-          ].map(({ key, label, icon, bg, text }) => (
+            { key: 'total',     label: 'Всього',        icon: '📋', bg: 'bg-white',   text: 'text-gray-900', border: 'border-gray-100' },
+            { key: 'pending',   label: 'Очікують',      icon: '⏳', bg: 'bg-orange-50',    text: 'text-orange-600', border: 'border-orange-100' },
+            { key: 'confirmed', label: 'Підтверджено',  icon: '✅', bg: 'bg-emerald-50',  text: 'text-emerald-600', border: 'border-emerald-100' },
+            { key: 'cancelled', label: 'Скасовано',     icon: '❌', bg: 'bg-gray-50',      text: 'text-gray-500', border: 'border-gray-100' },
+          ].map(({ key, label, icon, bg, text, border }) => (
             <Link
               key={key}
               href={key === 'total' ? '/admin/bookings' : `/admin/bookings?filter=${key}`}
-              className={`${bg} rounded-2xl p-5 border border-[#C6A667]/10 hover:border-[#C6A667]/40 transition-all group`}
+              className={`${bg} rounded-2xl p-5 border ${border} hover:shadow-lg hover:scale-105 transition-all group`}
             >
               <div className="text-2xl mb-3">{icon}</div>
-              <p className={`text-3xl font-serif ${text}`}>
+              <p className={`text-3xl font-bold ${text}`}>
                 {loading ? <span className="inline-block w-8 h-7 bg-current/10 rounded animate-pulse" /> : stats[key as keyof Stats]}
               </p>
               <p className="text-xs text-gray-400 mt-1">{label}</p>
@@ -149,16 +165,16 @@ export default function AdminDashboardPage() {
       {/* ── Recent bookings ──────────────────────────────────────── */}
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xs uppercase tracking-[0.25em] text-[#1a1a1a]/40 font-medium">
+          <h2 className="text-xs uppercase tracking-[0.25em] text-gray-400 font-medium">
             Останні бронювання
           </h2>
-          <Link href="/admin/bookings" className="text-xs text-[#C6A667] hover:underline">
+          <Link href="/admin/bookings" className="text-xs text-rose-500 hover:text-rose-600 font-medium">
             Всі →
           </Link>
         </div>
 
         {loading ? (
-          <div className="bg-white rounded-2xl border border-[#C6A667]/20 divide-y divide-gray-50">
+          <div className="bg-white rounded-2xl border border-gray-100 divide-y divide-gray-50 shadow-sm">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="px-5 py-4 flex items-center gap-4 animate-pulse">
                 <div className="w-8 h-8 rounded-full bg-gray-100" />
@@ -170,18 +186,18 @@ export default function AdminDashboardPage() {
             ))}
           </div>
         ) : recent.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-[#C6A667]/20 flex items-center justify-center h-32 text-sm text-[#1a1a1a]/30">
+          <div className="bg-white rounded-2xl border border-gray-100 flex items-center justify-center h-32 text-sm text-gray-400 shadow-sm">
             Бронювань ще немає
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-[#C6A667]/20 overflow-hidden shadow-sm">
+          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-[#F8F4EE] border-b border-[#C6A667]/20">
-                  <th className="text-left py-3 px-5 text-[#1a1a1a]/40 text-xs uppercase tracking-wider font-medium">Клієнт</th>
-                  <th className="text-left py-3 px-5 text-[#1a1a1a]/40 text-xs uppercase tracking-wider font-medium hidden md:table-cell">Послуга</th>
-                  <th className="text-left py-3 px-5 text-[#1a1a1a]/40 text-xs uppercase tracking-wider font-medium">Дата</th>
-                  <th className="text-left py-3 px-5 text-[#1a1a1a]/40 text-xs uppercase tracking-wider font-medium">Статус</th>
+                <tr className="bg-gradient-to-r from-rose-50 to-pink-50 border-b border-rose-100">
+                  <th className="text-left py-3 px-5 text-gray-600 text-xs uppercase tracking-wider font-semibold">Клієнт</th>
+                  <th className="text-left py-3 px-5 text-gray-600 text-xs uppercase tracking-wider font-semibold hidden md:table-cell">Послуга</th>
+                  <th className="text-left py-3 px-5 text-gray-600 text-xs uppercase tracking-wider font-semibold">Дата</th>
+                  <th className="text-left py-3 px-5 text-gray-600 text-xs uppercase tracking-wider font-semibold">Статус</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
@@ -190,16 +206,16 @@ export default function AdminDashboardPage() {
                   return (
                     <tr
                       key={b.id}
-                      className="hover:bg-[#FAFAF8] transition-colors cursor-pointer"
+                      className="hover:bg-rose-50/30 transition-colors cursor-pointer"
                       onClick={() => window.location.href = '/admin/bookings'}
                     >
-                      <td className="py-3.5 px-5 font-medium text-[#1a1a1a]">
+                      <td className="py-3.5 px-5 font-semibold text-gray-900">
                         {b.firstName} {b.lastName}
                       </td>
-                      <td className="py-3.5 px-5 text-[#1a1a1a]/70 hidden md:table-cell">
+                      <td className="py-3.5 px-5 text-gray-600 hidden md:table-cell">
                         {b.serviceName}
                       </td>
-                      <td className="py-3.5 px-5 text-[#1a1a1a]/70">
+                      <td className="py-3.5 px-5 text-gray-600">
                         {formatDate(b.date)}
                         <span className="ml-1.5 text-xs text-gray-400">{b.time}</span>
                       </td>
@@ -220,7 +236,7 @@ export default function AdminDashboardPage() {
 
       {/* ── Navigation cards ─────────────────────────────────────── */}
       <section>
-        <h2 className="text-xs uppercase tracking-[0.25em] text-[#1a1a1a]/40 font-medium mb-4">
+        <h2 className="text-xs uppercase tracking-[0.25em] text-gray-400 font-medium mb-4">
           Розділи адмін-панелі
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -228,16 +244,16 @@ export default function AdminDashboardPage() {
             <Link
               key={href}
               href={href}
-              className={`bg-linear-to-br ${accent} border rounded-2xl p-5 hover:shadow-md transition-all group flex items-start gap-4`}
+              className={`bg-gradient-to-br ${accent} border border-rose-100/50 rounded-2xl p-5 hover:shadow-lg hover:scale-105 transition-all group flex items-start gap-4`}
             >
-              <div className={`${iconBg} w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform`}>
+              <div className={`${iconBg} w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform shadow-sm`}>
                 {icon}
               </div>
               <div>
-                <p className="font-semibold text-[#1a1a1a] text-sm">{title}</p>
-                <p className="text-xs text-[#1a1a1a]/50 mt-1 leading-relaxed">{desc}</p>
+                <p className="font-semibold text-gray-900 text-sm">{title}</p>
+                <p className="text-xs text-gray-500 mt-1 leading-relaxed">{desc}</p>
               </div>
-              <span className="ml-auto text-[#C6A667]/40 group-hover:text-[#C6A667] transition-colors text-lg self-center">→</span>
+              <span className="ml-auto text-rose-400 group-hover:text-rose-500 transition-colors text-lg self-center">→</span>
             </Link>
           ))}
         </div>

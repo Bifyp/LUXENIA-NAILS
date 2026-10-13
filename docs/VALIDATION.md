@@ -7,7 +7,7 @@ Validated locally on Node.js 24, using the repository lockfile. CI targets Node.
 | Clean `npm ci` | Passed, including the explicit Nodemailer override |
 | Migrations into empty isolated SQLite database | All migrations applied |
 | TypeScript `npm run typecheck` | Passed |
-| `npm test` | 22 tests passed across four test files; 2 additional Python backup/restore tests passed |
+| `npm test` | 23 tests passed across four test files; 2 additional Python backup/restore tests passed |
 | `npm run build` | Production build passed |
 | `npm run lint` | 0 errors, 0 warnings, strict `--max-warnings=0`, no legacy rule downgrades |
 | Runtime `npm audit --omit=dev --audit-level=high` | 0 reported vulnerabilities |

@@ -36,7 +36,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build production image
-        run: docker build -t luxenia-ci .
+        run: |
+          set +e
+          docker build --progress=plain -t luxenia-ci . > /tmp/luxenia-container-build.log 2>&1
+          result=$?
+          cat /tmp/luxenia-container-build.log
+          if [ "$result" -ne 0 ]; then
+            python3 -c 'from pathlib import Path; message=Path("/tmp/luxenia-container-build.log").read_text()[-6000:]; print("::error title=Container build details::"+message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A"))'
+          fi
+          exit "$result"
       - name: Verify secrets and runtime database excluded from image
         run: docker run --rm --network none luxenia-ci sh -c 'test ! -e /app/prisma/dev.db && test ! -e /app/.env && test ! -e /app/auth.ts.backup'
       - name: Migrate isolated container database

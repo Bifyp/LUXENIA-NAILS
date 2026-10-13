@@ -1,4 +1,5 @@
 'use client'
+import { packageFormFields, type PackageFormFields as FormData } from '@/lib/package-form';
 import Link from "next/link";
 
 import { useState, useEffect, useCallback } from 'react'
@@ -17,16 +18,7 @@ type Package = {
   benefits: Benefit[]
 }
 
-type FormData = {
-  title: string
-  badge: string
-  sessions: string
-  price: string
-  oldPrice: string
-  savings: string
-  popular: boolean
-  benefits: string[]
-}
+
 
 const EMPTY_FORM: FormData = {
   title: '',
@@ -58,7 +50,7 @@ function PackageModal({
   onClose: () => void
   onSave: (data: FormData, id?: string) => Promise<void>
 }) {
-  const [form, setForm] = useState<FormData>({ ...initial })
+  const [form, setForm] = useState<FormData>(() => packageFormFields(initial))
   const [saving, setSaving] = useState(false)
   const isEdit = !!initial.id
 

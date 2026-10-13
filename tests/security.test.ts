@@ -59,3 +59,11 @@ it('fails closed without shared rate-limit storage in production', async () => {
   try { expect((await checkRateLimit('prod-check', { max: 5, windowMs: 60000 })).allowed).toBe(false); }
   finally { vi.unstubAllEnvs(); }
 });
+
+it('does not submit a package editor id as an editable field', async () => {
+  const { packageFormFields } = await import('@/lib/package-form');
+  const { editablePackageSchema } = await import('@/lib/content-validations');
+  const fields = packageFormFields({ id: 'existing-record', title: 'Package', badge: '', sessions: '3', price: '100', oldPrice: '120', savings: '', popular: false, benefits: ['Benefit'] });
+  expect('id' in fields).toBe(false);
+  expect(editablePackageSchema.safeParse(fields).success).toBe(true);
+});

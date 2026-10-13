@@ -3,7 +3,6 @@ import { adminAccessError } from '@/lib/admin-access';
 // app/api/admin/bookings/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { sendNewBookingEmails, formatBookingDate } from "@/lib/booking-mail";
 
 export async function GET(req: NextRequest) {
   const accessError = await adminAccessError();

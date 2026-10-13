@@ -120,7 +120,7 @@ export default function LoginPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {t.raw('benefits.items').map((benefit: any, idx: number) => (
+            {t.raw('benefits.items').map((benefit: { icon: string; title: string; desc: string }, idx: number) => (
               <div
                 key={idx}
                 className="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"

@@ -28,9 +28,6 @@ function EditableText({
   const [saved, setSaved] = useState(false)
   const ref = useRef<HTMLElement>(null)
 
-  useEffect(() => {
-    setCurrent(value)
-  }, [value])
 
   const handleSave = async () => {
     if (current === value) { setEditing(false); return }
@@ -83,10 +80,10 @@ function EditableText({
     <Tag
       ref={ref as React.RefObject<HTMLElement & HTMLHeadingElement & HTMLParagraphElement>}
       className={`${className} relative group cursor-pointer`}
-      onClick={() => setEditing(true)}
+      onClick={() => { setCurrent(value); setEditing(true) }}
       title="Нажмите чтобы редактировать"
     >
-      {italic ? <em>{current}</em> : current}
+      {italic ? <em>{value}</em> : value}
       {saved && (
         <span className="absolute -top-8 left-0 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs px-3 py-1.5 rounded-xl shadow-lg">
           ✓ Сохранено

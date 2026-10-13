@@ -5,7 +5,7 @@ import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast
 
 export default function LoginPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('LoginPage')
-  const e = (key: string, tag: any = 'span', className = '') => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '') => (
     <EditableText value={get(key)} tKey={`LoginPage.${key}`} tag={tag} className={className} onSave={handleSave} />
   )
   if (loading) return <EditorLoading />

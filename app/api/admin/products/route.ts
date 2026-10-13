@@ -11,7 +11,7 @@ export async function GET() {
       orderBy: [{ order: 'asc' }, { createdAt: 'desc' }],
     });
     return NextResponse.json({ products });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
   }
 }
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     const product = await prisma.product.create({ data: parsed.data });
 
     return NextResponse.json({ success: true, product });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to create product' }, { status: 500 });
   }
 }
@@ -50,7 +50,7 @@ export async function PATCH(req: Request) {
     const product = await prisma.product.update({ where: { id }, data });
 
     return NextResponse.json({ success: true, product });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to update product' }, { status: 500 });
   }
 }
@@ -74,7 +74,7 @@ export async function DELETE(req: Request) {
     await prisma.product.delete({ where: { id } });
 
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to delete product' }, { status: 500 });
   }
 }

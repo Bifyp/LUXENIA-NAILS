@@ -62,7 +62,7 @@ function PackageModal({
   const [saving, setSaving] = useState(false)
   const isEdit = !!initial.id
 
-  const set = (field: keyof FormData, value: any) =>
+  const set = <K extends keyof FormData,>(field: K, value: FormData[K]) =>
     setForm((p) => ({ ...p, [field]: value }))
 
   const setBenefit = (idx: number, value: string) => {
@@ -304,7 +304,6 @@ export default function AdminPackagesPage() {
   }
 
   const load = useCallback(async () => {
-    setLoading(true)
     try {
       const res = await fetch('/api/admin/packages')
       const data = await res.json()
@@ -315,7 +314,19 @@ export default function AdminPackagesPage() {
     setLoading(false)
   }, [])
 
-  useEffect(() => { load() }, [load])
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch('/api/admin/packages', { signal: controller.signal })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Load failed')
+        const data = await res.json()
+        setPackages(data.packages || [])
+
+      })
+      .catch(() => { if (!controller.signal.aborted) setToast({ msg: '❌ Помилка завантаження', ok: false }) })
+      .finally(() => { if (!controller.signal.aborted) setLoading(false) })
+    return () => controller.abort()
+  }, [])
 
   const handleSave = async (form: FormData, id?: string) => {
     try {

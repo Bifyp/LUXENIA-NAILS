@@ -33,14 +33,14 @@ export default async function AccountPage() {
 
   if (!user) notFound();
 
-  const bookings: Booking[] = user.bookings.map((b: any) => ({
+  const bookings: Booking[] = user.bookings.map((b) => ({
     id: b.id,
     date: b.date,
     time: b.time,
     serviceName: b.serviceName,
-    specialistName: b.specialistName ?? null,
+    specialistName: null,
     status: b.status,
-    price: b.price ?? null,
+    price: null,
     createdAt: b.createdAt,
   }));
 

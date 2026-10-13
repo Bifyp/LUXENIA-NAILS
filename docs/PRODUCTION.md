@@ -48,7 +48,7 @@ The application reads translations as a database overlay on bundled defaults. Ed
 - `prisma/dev.db`, its journal and `auth.ts.backup` are removed from the proposed branch, **not from Git history**. The repository is public. Treat any previously stored credentials/PII as potentially exposed: rotate applicable credentials, reset affected passwords (especially any old default admin), assess notification/deletion obligations. Coordinate history cleanup with all collaborators; this PR does not rewrite history.
 - Auth.js remains a beta dependency. Nodemailer 10 is explicitly overridden to resolve Auth.js's older optional mail-provider peer constraint; this application uses credentials authentication and its own SMTP transport, not an Auth.js email provider. Run staging authentication/mail tests when upgrading either package.
 - Runtime dependency audit is clean at validation time. Five high-severity development-only audit findings trace to the `braces`/`micromatch`/`fast-glob` chain under `eslint-config-next`. The current registry exposes no patched `braces` version; do not downgrade Next/ESLint blindly or claim the full audit is clean. Follow upstream remediation.
-- Existing explicit `any` and synchronous-effect lint debt is warning-only on specifically enumerated legacy files; other errors remain blocking and new source files retain strict rules. The lint check is **not warning-free**.
+- ESLint uses strict rules with `--max-warnings=0`. Legacy warning downgrades have been removed after typed contracts, URL-driven locale state, event-driven drafts, abortable loading and dead-code cleanup.
 - CSP currently still permits inline Next hydration scripts and inline styles. `unsafe-eval` is development-only; a nonce-based CSP requires a separate tested rollout. Do not claim full XSS elimination.
 - Changing an account email is intentionally blocked until a verified email-change flow exists. Name updates still work. Signed-in bookings attach only to the matching verified account email.
 - Terms/privacy links currently have no policy pages. Obtain actual business identity, data-retention/consent and GDPR policy text before public launch; do not publish invented legal terms.
@@ -57,3 +57,18 @@ The application reads translations as a database overlay on bundled defaults. Ed
 ## Rollback
 
 Keep the previous build and a verified pre-migration backup. Stop writes first. Do not blindly roll back code against a changed database: the old plaintext-code flow is incompatible with hashed purpose-bound codes. Restore database+code together only after reviewing reservations received since backup, or roll forward with a compatible fix. Test recovery in staging before launch.
+
+## Container release path
+
+`Dockerfile` is a multi-stage Node 22 image. Runtime runs as the non-root `node` user and validates configuration before serving. `.dockerignore` excludes environment files, Git history, runtime databases/journals and authentication backups. Docker/Podman is not installed on the local validation computer; the GitHub workflow builds the image and runs migration/health/non-root checks with an isolated volume and disabled runtime network.
+
+1. Provision the actual `.env.production` from `.env.example` using a secret manager. Set the canonical HTTPS domain, service credentials and `TRUST_PROXY=1` only with a correctly configured proxy.
+2. `docker compose build` creates the image without production secrets.
+3. For an existing installation, stop writes, take/verify a backup and reconcile reservations/schema drift before migrations. For a fresh installation: `docker compose run --rm app migrate`.
+4. `docker compose up -d`. Port 3000 binds **loopback only**, SQLite lives in `luxenia-data`, the root filesystem is read-only, temporary/cache mounts are separate, capabilities are dropped.
+5. Add the actual HTTPS reverse proxy and certificate using the loopback-safe sample in `deploy/nginx.conf`. It does not automatically expose a public HTTP endpoint or request a certificate for an invented domain.
+6. Run staging integration tests and monitor health before routing customers. Do not horizontally scale independent SQLite app replicas.
+
+The container contains the Prisma migration CLI but not developer seed tools. Bootstrap an administrator once with the source checkout and securely provided `ADMIN_EMAIL`/`ADMIN_PASSWORD`; remove the password from persistent runtime configuration afterward. No default account is created by the image.
+
+For host-managed SQLite backups, `python3 scripts/backup_database.py SOURCE_PATH NEW_BACKUP_PATH` uses the SQLite online backup API, refuses overwrite, creates the backup with mode 0600, and runs integrity/foreign-key checks. The included restore test verifies a WAL-backed synthetic database and leaves its source unchanged. For Docker named volumes, use a maintenance host/container with Python and explicit volume mounts; do not copy a live database file by itself.

@@ -22,6 +22,7 @@ import { PATCH as translations } from '@/app/api/translations/route';
 import { POST as upload } from '@/app/api/admin/gallery/upload/route';
 import { POST as createTemplate } from '@/app/api/admin/email-templates/route';
 import { GET as getTemplates } from '@/app/api/admin/email-templates/route';
+import { POST as saveBulkTranslations } from '@/app/api/admin/translations/bulk/route';
 import { PATCH as updateProduct } from '@/app/api/admin/products/route';
 
 function req(path: string, body: unknown = {}, ip = path) {
@@ -115,4 +116,16 @@ it('associates authenticated bookings only with the verified account email', asy
   expect((await book(req('/api/bookings', booking, 'linked-booking'))).status).toBe(201);
   const saved = await prisma.booking.findFirstOrThrow();
   expect(saved.userId).toBe(user.id);
+});
+
+it('guards and atomically saves the shop translation bulk endpoint', async () => {
+  const body = { lang: 'pl', section: 'ShopPage', translations: [{ key: 'hero.title', value: 'Sklep' }, { key: 'product.order', value: 'Zamów' }] };
+  expect((await saveBulkTranslations(req('/api/admin/translations/bulk', body))).status).toBe(401);
+  const user = await prisma.user.create({ data: { email: 'bulk-admin@example.com', role: 'admin' } });
+  state.session = { user: { id: user.id, role: 'admin' } };
+  expect((await saveBulkTranslations(req('/api/admin/translations/bulk', body))).status).toBe(200);
+  const saved = await prisma.translation.findUniqueOrThrow({ where: { lang_section_key: { lang: 'pl', section: 'ShopPage', key: 'hero.title' } } });
+  expect(saved.value).toBe('Sklep');
+  expect((await saveBulkTranslations(req('/api/admin/translations/bulk', { ...body, translations: [{ key: '__proto__.polluted', value: 'true' }] }))).status).toBe(400);
+  expect((await saveBulkTranslations(req('/api/admin/translations/bulk', { ...body, translations: [body.translations[0], body.translations[0]] }))).status).toBe(400);
 });

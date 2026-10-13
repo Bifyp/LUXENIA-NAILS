@@ -269,7 +269,6 @@ export default function AdminServicesPage() {
   }
 
   const load = useCallback(async () => {
-    setLoading(true)
     try {
       const res = await fetch('/api/admin/services')
       const data = await res.json()
@@ -280,7 +279,19 @@ export default function AdminServicesPage() {
     setLoading(false)
   }, [])
 
-  useEffect(() => { load() }, [load])
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch('/api/admin/services', { signal: controller.signal })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Load failed')
+        const data = await res.json()
+        setServices(data.services || [])
+
+      })
+      .catch(() => { if (!controller.signal.aborted) setToast({ msg: '❌ Помилка завантаження', ok: false }) })
+      .finally(() => { if (!controller.signal.aborted) setLoading(false) })
+    return () => controller.abort()
+  }, [])
 
   const handleSave = async (form: FormData, id?: string) => {
     try {

@@ -5,8 +5,8 @@ import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast
 
 export default function GalleryPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('GalleryPage')
-  const e = (key: string, _tag: any = 'span', className = '') => (
-    <EditableText value={get(key)} tKey={`GalleryPage.${key}`} className={className} onSave={handleSave} />
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '') => (
+    <EditableText value={get(key)} tKey={`GalleryPage.${key}`} tag={tag} className={className} onSave={handleSave} />
   )
   if (loading) return <EditorLoading />
   return (

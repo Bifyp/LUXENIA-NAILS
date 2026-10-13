@@ -16,7 +16,7 @@ export function usePagePhoto(page: string, fallback: string) {
 
     fetch(`/api/page-photos?page=${encodeURIComponent(page)}`)
       .then((r) => r.json())
-      .then((photos: any[]) => {
+      .then((photos: Photo[]) => {
         if (cancelled) return
         if (Array.isArray(photos) && photos.length > 0) {
           setUrl(photos[0].url)

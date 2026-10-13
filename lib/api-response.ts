@@ -4,11 +4,11 @@ import { ZodError } from 'zod'
 
 const logger = createLogger('api-response')
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean
   data?: T
   error?: string
-  details?: any
+  details?: unknown
 }
 
 export function apiSuccess<T>(data: T, status = 200): NextResponse<ApiResponse<T>> {
@@ -18,11 +18,11 @@ export function apiSuccess<T>(data: T, status = 200): NextResponse<ApiResponse<T
 export function apiError(
   message: string,
   status = 400,
-  details?: any
+  details?: unknown
 ): NextResponse<ApiResponse> {
   logger.error({ message, status, details }, 'API Error')
   return NextResponse.json(
-    { success: false, error: message, ...(details && { details }) },
+    { success: false, error: message, ...(details !== undefined ? { details } : {}) },
     { status }
   )
 }

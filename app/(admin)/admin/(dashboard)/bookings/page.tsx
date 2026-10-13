@@ -2,7 +2,7 @@
 import Link from "next/link";
 //app/(admin)/admin/(dashboard)/bookings/page.tsx
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 type Booking = {
   id: string
@@ -170,11 +170,6 @@ export default function AdminBookingsPage() {
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null)
   const toastTimerRef = useRef<number | null>(null)
 
-  const showToast = (msg: string, ok: boolean) => {
-    setToast({ msg, ok })
-    setTimeout(() => setToast(null), 3000)
-  }
-
   const safeShowToast = (msg: string, ok: boolean) => {
     setToast({ msg, ok })
     if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current)
@@ -183,21 +178,20 @@ export default function AdminBookingsPage() {
 
   useEffect(() => () => { if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current) }, [])
 
-  const load = useCallback(async () => {
-    setLoading(true)
-    try {
-      const res = await fetch('/api/admin/bookings')
-      const data = await res.json()
-      if (!res.ok) throw new Error(data?.error || 'Помилка завантаження')
-      setBookings(data.bookings || [])
-      setStats(data.stats || { total: 0, pending: 0, confirmed: 0, cancelled: 0 })
-    } catch {
-      safeShowToast('❌ Помилка завантаження', false)
-    }
-    setLoading(false)
-  }, [])
 
-  useEffect(() => { load() }, [load])
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch('/api/admin/bookings', { signal: controller.signal })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Load failed')
+        const data = await res.json()
+        setBookings(data.bookings || [])
+      setStats(data.stats || { total: 0, pending: 0, confirmed: 0, cancelled: 0 })
+      })
+      .catch(() => { if (!controller.signal.aborted) safeShowToast('❌ Помилка завантаження', false) })
+      .finally(() => { if (!controller.signal.aborted) setLoading(false) })
+    return () => controller.abort()
+  }, [])
 
   const handleStatusChange = async (id: string, status: string) => {
     const res = await fetch(`/api/admin/bookings/${id}`, {

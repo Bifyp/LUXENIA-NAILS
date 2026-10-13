@@ -6,7 +6,7 @@ import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast
 export default function ContactPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('ContactPage')
 
-  const e = (key: string, tag: any = 'span', className = '', multiline = false) => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '', multiline = false) => (
     <EditableText value={get(key)} tKey={`ContactPage.${key}`} tag={tag} className={className} onSave={handleSave} multiline={multiline} />
   )
 

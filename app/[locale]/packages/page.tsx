@@ -81,7 +81,7 @@ export default function PackagesPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {packages.map((pkg, idx) => (
+            {packages.map((pkg) => (
               <div
                 key={pkg.id}
                 className={`relative rounded-3xl overflow-hidden transition-all duration-500 ${

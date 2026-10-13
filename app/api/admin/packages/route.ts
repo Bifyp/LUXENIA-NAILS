@@ -38,7 +38,6 @@ export async function POST(req: NextRequest) {
     console.error('[POST /api/admin/packages] ERROR MESSAGE:', (error as Error)?.message)
     console.error('[POST /api/admin/packages] ERROR STACK:', (error as Error)?.stack)
 
-    const message = (error as Error)?.message || 'Невідома помилка'
     return NextResponse.json({ error: 'Помилка створення' }, { status: 500 })
   }
 }

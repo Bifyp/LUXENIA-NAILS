@@ -22,9 +22,8 @@ export function appendSecurityLog(entry: Omit<SecurityLogEntry, "id">): void {
   if (logBuffer.length > MAX_BUFFER) logBuffer.pop();
 
   const line = `[${log.level}] ${log.timestamp} ${log.method} ${log.path} | IP: ${log.ip}${log.reason ? ` | ${log.reason}` : ""}`;
-  log.level === "SECURITY" || log.level === "ERROR"
-    ? console.error(line)
-    : console.log(line);
+  if (log.level === "SECURITY" || log.level === "ERROR") console.error(line);
+  else console.log(line);
 }
 
 // ── Утилиты ───────────────────────────────────────────────────

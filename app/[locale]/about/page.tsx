@@ -144,7 +144,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {t.raw('values.items').map((value: any, idx: number) => (
+            {t.raw('values.items').map((value: { icon: string; title: string; desc: string }, idx: number) => (
               <div
                 key={idx}
                 className="relative group"

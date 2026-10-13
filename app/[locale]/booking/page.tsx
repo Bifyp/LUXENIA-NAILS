@@ -1,5 +1,5 @@
 'use client';
-import { SLOTS_BY_DAY } from '@/lib/booking-rules';
+import { SLOTS_BY_DAY, availableBookingSlot } from '@/lib/booking-rules';
 import { useTranslations, useLocale } from 'next-intl';
 import { useState, useEffect } from 'react';
 
@@ -270,7 +270,7 @@ export default function BookingPage() {
     if (!form.date) return [];
     const d = new Date(form.date + 'T00:00:00');
     const dow = d.getDay(); // 0=Sun
-    return SLOTS_BY_DAY[dow] ?? [];
+    return (SLOTS_BY_DAY[dow] ?? []).filter((time) => availableBookingSlot(form.date, time));
   })();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -290,8 +290,8 @@ export default function BookingPage() {
       }
       if (!data.success) throw new Error(data.error ?? 'Error');
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message ?? t('form.errorGeneric'));
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : t('form.errorGeneric'));
     } finally {
       setLoading(false);
     }
@@ -615,7 +615,7 @@ export default function BookingPage() {
               <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">{t('info.title')}</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {t.raw('info.items').map((info: any, idx: number) => (
+              {t.raw('info.items').map((info: { icon: string; title: string; desc: string }, idx: number) => (
                 <div key={idx} className="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                   <div className="text-5xl mb-4">{info.icon}</div>
                   <h3 className="text-xl font-bold mb-4 text-gray-800">{info.title}</h3>
@@ -636,7 +636,7 @@ export default function BookingPage() {
               <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">{t('faq.title')}</h2>
             </div>
             <div className="space-y-6">
-              {t.raw('faq.items').map((faq: any, idx: number) => (
+              {t.raw('faq.items').map((faq: { question: string; answer: string }, idx: number) => (
                 <div key={idx} className="bg-white p-8 border-l-4 border-rose-500 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
                   <h3 className="text-lg font-bold mb-3 text-gray-800">{faq.question}</h3>
                   <p className="text-gray-600 leading-relaxed">{faq.answer}</p>

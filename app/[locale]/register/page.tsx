@@ -2,11 +2,13 @@
 import Link from "next/link";
 
 import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from 'next/navigation';
 import { useState } from "react";
 
 export default function RegisterPage() {
   const t = useTranslations("RegisterPage");
   const locale = useLocale();
+  const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -37,7 +39,7 @@ export default function RegisterPage() {
     try {
       const res = await fetch('/api/verify-code', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, password, code }) });
       if (!res.ok) { setError(t('verificationError')); return; }
-      window.location.href = `/${locale}/login`;
+      router.replace(`/${locale}/login`);
     } catch { setError(t('requestError')); }
     finally { setBusy(false); }
   }
@@ -143,7 +145,7 @@ export default function RegisterPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">{t("benefits.title")}</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {t.raw("benefits.items").map((benefit: any, idx: number) => (
+            {t.raw("benefits.items").map((benefit: { icon: string; title: string; desc: string }, idx: number) => (
               <div key={idx} className="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 duration-300">
                 <div className="text-5xl mb-4">{benefit.icon}</div>
                 <h3 className="text-lg font-bold mb-3 text-gray-800">{benefit.title}</h3>

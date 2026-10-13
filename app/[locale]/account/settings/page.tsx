@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { useTranslations } from 'next-intl'
 
 function Toast({ msg, ok }: { msg: string; ok: boolean }) {
   return (
@@ -16,7 +15,7 @@ export default function AccountSettingsPage() {
   const { data: session, update } = useSession()
 
   const [name, setName] = useState(session?.user?.name || '')
-  const [email, setEmail] = useState(session?.user?.email || '')
+  const [email] = useState(session?.user?.email || '')
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')

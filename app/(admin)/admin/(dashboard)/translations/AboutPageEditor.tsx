@@ -6,7 +6,7 @@ import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast
 export default function AboutPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('AboutPage')
 
-  const e = (key: string, tag: any = 'span', className = '', italic = false, multiline = false) => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '', italic = false, multiline = false) => (
     <EditableText value={get(key)} tKey={`AboutPage.${key}`} tag={tag} className={className} onSave={handleSave} italic={italic} multiline={multiline} />
   )
 

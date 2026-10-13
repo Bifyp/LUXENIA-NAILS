@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
 
@@ -124,7 +125,7 @@ export default function ShopPage() {
 
                 {product.image && (
                   <div className="relative h-64 bg-gradient-to-br from-rose-50 to-pink-50 overflow-hidden">
-                    <img
+                    <Image unoptimized width={1000} height={800}
                       src={product.image}
                       alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"

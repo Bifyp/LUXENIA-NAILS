@@ -25,7 +25,7 @@ export default function ContactPage() {
 
             {/* Quick Contact Cards */}
             <div className="space-y-4">
-              {t.raw('contactInfo.items').slice(0, 3).map((contact: any, idx: number) => (
+              {t.raw('contactInfo.items').slice(0, 3).map((contact: { icon: string; title: string; info: string }, idx: number) => (
                 <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300">
                   <div className="flex items-center gap-4">
                     <div className="text-4xl">{contact.icon}</div>
@@ -140,7 +140,7 @@ export default function ContactPage() {
                   <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gradient-to-br from-rose-500 to-pink-500 rounded-full"></div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-6">{t('hours.weekdays.title')}</h3>
                   <div className="space-y-3">
-                    {t.raw('hours.weekdays.schedule').map((schedule: any, idx: number) => (
+                    {t.raw('hours.weekdays.schedule').map((schedule: { day: string; hours: string }, idx: number) => (
                       <div key={idx} className="flex justify-between items-center">
                         <span className="text-gray-600">{schedule.day}</span>
                         <span className="font-bold text-rose-600">{schedule.hours}</span>
@@ -156,7 +156,7 @@ export default function ContactPage() {
                   <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gradient-to-br from-rose-500 to-pink-500 rounded-full"></div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-6">{t('hours.weekend.title')}</h3>
                   <div className="space-y-3">
-                    {t.raw('hours.weekend.schedule').map((schedule: any, idx: number) => (
+                    {t.raw('hours.weekend.schedule').map((schedule: { day: string; hours: string }, idx: number) => (
                       <div key={idx} className="flex justify-between items-center">
                         <span className="text-gray-600">{schedule.day}</span>
                         <span className="font-bold text-rose-600">{schedule.hours}</span>

@@ -5,7 +5,7 @@ import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast
 
 export default function RegisterPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('RegisterPage')
-  const e = (key: string, tag: any = 'span', className = '', multiline = false) => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '', multiline = false) => (
     <EditableText value={get(key)} tKey={`RegisterPage.${key}`} tag={tag} className={className} onSave={handleSave} multiline={multiline} />
   )
   if (loading) return <EditorLoading />

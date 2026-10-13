@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 
 import { useState, useEffect } from 'react';
 
@@ -110,7 +111,7 @@ export default function AdminProductsPage() {
       if (data.url) {
         setFormData(prev => ({ ...prev, image: data.url }));
       }
-    } catch (error) {
+    } catch {
       alert('Помилка завантаження');
     }
     setUploading(false);
@@ -234,7 +235,7 @@ export default function AdminProductsPage() {
                   </div>
                 ) : formData.image ? (
                   <div className="text-center">
-                    <img src={formData.image} alt="Preview" className="max-h-48 mx-auto rounded-lg mb-4" />
+                    <Image unoptimized width={1000} height={800} src={formData.image} alt="Preview" className="max-h-48 mx-auto rounded-lg mb-4" />
                     <button
                       type="button"
                       onClick={() => setFormData({ ...formData, image: '' })}
@@ -327,7 +328,7 @@ export default function AdminProductsPage() {
             <div key={product.id} className="bg-white rounded-3xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
               {product.image && (
                 <div className="relative h-48 bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl overflow-hidden mb-4">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                  <Image unoptimized width={1000} height={800} src={product.image} alt={product.name} className="w-full h-full object-cover" />
                 </div>
               )}
 

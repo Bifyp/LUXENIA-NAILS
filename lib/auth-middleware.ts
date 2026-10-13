@@ -1,6 +1,6 @@
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import { createLogger } from './logger'
 
 const logger = createLogger('auth-middleware')
@@ -34,7 +34,7 @@ export async function requireAdminAuth(req: NextRequest) {
   return session
 }
 
-export function checkAdminAuth(session: any): boolean {
+export function checkAdminAuth(session: { user?: { role?: string } } | null | undefined): boolean {
   const role = session?.user?.role ?? 'user'
   return role === 'admin'
 }

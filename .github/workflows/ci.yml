@@ -27,5 +27,45 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+      - run: python3 tests/test_backup_database.py
       - run: npm audit --omit=dev --audit-level=high
       - run: npm run build
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build production image
+        run: docker build -t luxenia-ci .
+      - name: Verify secrets and runtime database excluded from image
+        run: docker run --rm --network none luxenia-ci sh -c 'test ! -e /app/prisma/dev.db && test ! -e /app/.env && test ! -e /app/auth.ts.backup'
+      - name: Migrate isolated container database
+        run: |
+          docker volume create luxenia-ci-data
+          docker run --rm --network none -e DATABASE_URL=file:/var/lib/luxenia/app.db -v luxenia-ci-data:/var/lib/luxenia luxenia-ci migrate
+      - name: Verify non-root runtime and health without external network
+        run: |
+          docker run -d --name luxenia-smoke --network none \
+            -v luxenia-ci-data:/var/lib/luxenia \
+            -e DATABASE_URL=file:/var/lib/luxenia/app.db \
+            -e AUTH_SECRET=ci-container-validation-not-a-production-secret-0123456789 \
+            -e AUTH_URL=https://studio.invalid \
+            -e SMTP_HOST=smtp.invalid -e SMTP_USER=ci -e SMTP_PASS=ci-not-a-secret \
+            -e SMTP_FROM=ci@studio.invalid -e ADMIN_EMAIL=ci@studio.invalid \
+            -e UPSTASH_REDIS_REST_URL=https://redis.invalid -e UPSTASH_REDIS_REST_TOKEN=ci-not-a-secret \
+            -e TRUST_PROXY=1 -e CLOUDINARY_URL=cloudinary://ci:ci@ci \
+            luxenia-ci
+          for attempt in $(seq 1 30); do
+            if docker exec luxenia-smoke node -e "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"; then
+              test "$(docker exec luxenia-smoke id -u)" != "0"
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs luxenia-smoke
+          exit 1
+      - name: Cleanup
+        if: always()
+        run: |
+          docker rm -f luxenia-smoke || true
+          docker volume rm luxenia-ci-data || true

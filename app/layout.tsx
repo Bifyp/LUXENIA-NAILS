@@ -9,7 +9,7 @@ import SessionWrapper from "@/components/SessionWrapper";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getLocale } from "next-intl/server";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,15 +23,17 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.AUTH_URL || process.env.NEXTAUTH_URL || "http://localhost:3000"),
   title: "Luxenia",
-  description: "Premium skincare studio website",
+  description: "Luxenia Nails — studio manicure i pedicure w Swarzędzu. Rezerwacja wizyt online.",
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const messages = await getMessages();
+  const locale = await getLocale();
 
   return (
-    <html lang="ru">
+    <html lang={locale}>
       <body className={`${inter.variable} ${cormorant.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <LanguageProvider>

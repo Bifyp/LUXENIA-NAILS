@@ -1,3 +1,5 @@
+> **Production hardening:** see [deployment and launch checklist](docs/PRODUCTION.md). This project is not declared ready for public launch until the staging and operational gates there are completed. Node.js 22 LTS is required. Never use old example credentials.
+
 <div align="center">
 
 ```
@@ -46,7 +48,7 @@
   ║   [ UA | RU | PL | EN ]  ║    🔒 Безопасность                        ║
   ║                          ║                                           ║
   ║  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ║
-  ║   STATUS: // ONLINE   ▌  DB: SQLite   ▌  NODE: 18+   ▌  v1.0         ║
+  ║   STATUS: // ONLINE   ▌  DB: SQLite   ▌  NODE: 22+   ▌  v1.0         ║
   ╚══════════════════════════════════════════════════════════════════════╝
 ```
 

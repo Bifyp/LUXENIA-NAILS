@@ -1,6 +1,7 @@
+import { z } from 'zod'
+import { adminAccessError } from '@/lib/admin-access';
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { generateTranslationFiles } from '@/lib/generateTranslationFiles'
 
 export async function GET(request: NextRequest) {
   try {
@@ -38,6 +39,7 @@ async function translateWithDeepL(text: string, sourceLang: string, targetLang: 
 
   const response = await fetch('https://api-free.deepl.com/v2/translate', {
     method: 'POST',
+    signal: AbortSignal.timeout(10000),
     headers: {
       Authorization: `DeepL-Auth-Key ${apiKey}`,
       'Content-Type': 'application/json',
@@ -56,9 +58,15 @@ async function translateWithDeepL(text: string, sourceLang: string, targetLang: 
 
 // ─── PATCH ────────────────────────────────────────────────────────────────────
 
+const editSchema = z.object({ section: z.string().min(1).max(100).refine((v) => !['__proto__', 'prototype', 'constructor'].includes(v)), key: z.string().min(1).max(300).refine((v) => !v.split('.').some((k) => ['__proto__', 'prototype', 'constructor'].includes(k))), value: z.string().max(100000), sourceLang: z.enum(['en', 'ru', 'pl', 'uk']).default('en') })
+
 export async function PATCH(request: NextRequest) {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
   try {
-    const { section, key, value, sourceLang = 'en' } = await request.json()
+    const input = editSchema.safeParse(await request.json().catch(() => null))
+    if (!input.success) return NextResponse.json({ error: 'Invalid translation' }, { status: 400 })
+    const { section, key, value, sourceLang } = input.data
 
     if (!section || !key || value === undefined || value === null)
       return NextResponse.json({ error: 'Обов\'язкові поля: section, key, value' }, { status: 400 })
@@ -110,17 +118,6 @@ export async function PATCH(request: NextRequest) {
       }
     }
 
-    try {
-      await generateTranslationFiles()
-    } catch (err) {
-      console.error('[generate-translations]', err)
-      return NextResponse.json({
-        success: true,
-        warning: 'Збережено в DB, але JSON не оновлено',
-        translations: translationResults,
-        errors,
-      })
-    }
 
     return NextResponse.json({
       success: true,

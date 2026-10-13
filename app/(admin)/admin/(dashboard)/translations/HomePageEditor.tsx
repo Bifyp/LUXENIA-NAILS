@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 import { useState, useEffect, useRef } from 'react'
 
@@ -190,12 +191,12 @@ export default function HomePageEditor() {
               Переводим на RU/PL/UK...
             </span>
           )}
-          <a
+          <Link
             href="/admin/translations"
             className="text-xs bg-white/20 hover:bg-white/30 px-4 py-2 rounded-xl transition font-medium"
           >
             ← Таблица переводов
-          </a>
+          </Link>
         </div>
       </div>
 

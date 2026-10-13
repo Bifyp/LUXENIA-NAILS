@@ -1,3 +1,5 @@
+import { emailSchema } from '@/lib/validations'
+import { z } from 'zod'
 // app/api/account/profile/route.ts
 import { NextResponse } from 'next/server'
 import { auth } from '@/auth'
@@ -10,11 +12,18 @@ export async function PATCH(req: Request) {
       return NextResponse.json({ error: 'Не авторизовано' }, { status: 401 })
     }
 
-    const { name, email } = await req.json()
+    const parsed = z.object({ name: z.string().trim().max(100), email: emailSchema }).safeParse(await req.json().catch(() => null))
+    if (!parsed.success) return NextResponse.json({ error: 'Invalid input' }, { status: 400 })
+    const { name, email } = parsed.data
 
     if (!email) {
       return NextResponse.json({ error: 'Email обовʼязковий' }, { status: 400 })
     }
+
+    const current = await prisma.user.findUnique({ where: { id: session.user.id }, select: { email: true } })
+    if (!current) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // An unverified email change would bypass signup verification.
+    if (current.email !== email) return NextResponse.json({ error: 'Email change requires verification; contact the studio' }, { status: 400 })
 
     // Перевірка чи email вже зайнятий іншим користувачем
     const existing = await prisma.user.findFirst({

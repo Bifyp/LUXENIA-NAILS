@@ -1,3 +1,5 @@
+import { editablePackageSchema } from '@/lib/content-validations'
+import { adminAccessError } from '@/lib/admin-access';
 // app/api/admin/packages/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
@@ -16,30 +18,13 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
   try {
-    const body = await req.json()
-    console.log('[POST /api/admin/packages] body:', JSON.stringify(body, null, 2))
-
-    const { title, badge, sessions, price, oldPrice, savings, popular, benefits } = body
-
-    if (!title?.trim()) {
-      return NextResponse.json({ error: "Назва обов'язкова" }, { status: 400 })
-    }
-
-    const data = {
-      title: title.trim(),
-      badge: badge?.trim() || null,
-      sessions: sessions?.trim() || '',
-      price: Number(price) || 0,
-      oldPrice: Number(oldPrice) || 0,
-      savings: savings?.trim() || '',
-      popular: !!popular,
-      benefits: {
-        create: (benefits || []).filter((b: string) => b.trim()).map((text: string) => ({ text: text.trim() })),
-      },
-    }
-
-    console.log('[POST /api/admin/packages] data to create:', JSON.stringify(data, null, 2))
+    const parsed = editablePackageSchema.safeParse(await req.json().catch(() => null))
+    if (!parsed.success) return NextResponse.json({ error: 'Invalid package' }, { status: 400 })
+    const { benefits, ...fields } = parsed.data
+    const data = { ...fields, benefits: { create: benefits.filter(Boolean).map((text) => ({ text })) } }
 
     const pkg = await prisma.package.create({
       data,
@@ -54,6 +39,6 @@ export async function POST(req: NextRequest) {
     console.error('[POST /api/admin/packages] ERROR STACK:', (error as Error)?.stack)
 
     const message = (error as Error)?.message || 'Невідома помилка'
-    return NextResponse.json({ error: 'Помилка створення', details: message }, { status: 500 })
+    return NextResponse.json({ error: 'Помилка створення' }, { status: 500 })
   }
 }

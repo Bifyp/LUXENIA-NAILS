@@ -1,4 +1,5 @@
 import { auth } from '@/auth'
+import { prisma } from '@/lib/prisma'
 import { NextRequest, NextResponse } from 'next/server'
 import { createLogger } from './logger'
 
@@ -23,7 +24,8 @@ export async function requireAdminAuth(req: NextRequest) {
     return null
   }
 
-  const role = (session.user as any).role ?? 'user'
+  const user = await prisma.user.findUnique({ where: { id: session.user.id }, select: { role: true } })
+  const role = user?.role ?? 'user'
   if (role !== 'admin') {
     logger.warn({ email: session.user.email }, 'Non-admin access attempt')
     return null

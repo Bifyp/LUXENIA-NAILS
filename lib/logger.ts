@@ -25,7 +25,7 @@ export const logger = pino(
     base: { service: 'app' },
     // Redact чувствительных полей
     redact: {
-      paths: ['*.password', '*.token', '*.secret', '*.authorization', 'req.headers.cookie'],
+      paths: ['password', 'token', 'secret', 'authorization', 'email', 'phone', '*.password', '*.token', '*.secret', '*.authorization', '*.email', '*.phone', 'req.headers.cookie'],
       censor: '[REDACTED]',
     },
     serializers: {

@@ -1,3 +1,4 @@
+import { adminAccessError } from '@/lib/admin-access';
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
@@ -6,6 +7,8 @@ export async function PATCH(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
   const { id } = await params
   try {
     const body = await req.json().catch(() => ({}))
@@ -61,6 +64,8 @@ export async function DELETE(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
   try {
     const resolvedParams = await params; // Разворачиваем промис
     const photo = await prisma.gallery.findUnique({ where: { id: resolvedParams.id } });

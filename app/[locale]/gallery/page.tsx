@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getTranslations } from 'next-intl/server';
 import { prisma } from "@/lib/prisma";
 import GalleryClient from "./GalleryClient";
@@ -62,7 +63,7 @@ export default async function GalleryPage() {
               <p className="text-white/80 mb-8 text-lg leading-relaxed">
                 {t('cta.description')}
               </p>
-              <a
+              <Link
                 href="/booking"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-full font-medium shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
               >
@@ -70,7 +71,7 @@ export default async function GalleryPage() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -79,12 +80,12 @@ export default async function GalleryPage() {
             <div className="text-center text-white">
               <div className="text-8xl mb-6">💅</div>
               <p className="text-2xl font-bold mb-4">Професійний догляд</p>
-              <a
+              <Link
                 href="/services"
                 className="inline-block px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-full font-medium hover:bg-white hover:text-rose-600 transition-all duration-300"
               >
                 {t('cta.servicesButton')}
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -75,6 +75,8 @@ model Booking {
   status    String   @default("pending")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([date, status])
 }
 
 model Gallery {
@@ -159,8 +161,12 @@ model EmailCode {
   id        String   @id @default(cuid())
   email     String
   code      String
+  purpose   String   @default("registration")
   expiresAt DateTime
   createdAt DateTime @default(now())
+
+  @@unique([email, purpose])
+  @@index([expiresAt])
 }
 
 model Product {

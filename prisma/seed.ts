@@ -16,10 +16,15 @@ async function main() {
   }
 
   // Створити першого адміна
-  const adminPassword = await hash('Admin@12345', 10)
+  const email = process.env.ADMIN_EMAIL?.trim().toLowerCase()
+  const password = process.env.ADMIN_PASSWORD
+  if (!email || !password || Buffer.byteLength(password) < 12 || Buffer.byteLength(password) > 72) {
+    throw new Error('Set ADMIN_EMAIL and a unique ADMIN_PASSWORD (12–72 bytes) before seeding')
+  }
+  const adminPassword = await hash(password, 12)
   const admin = await prisma.user.create({
     data: {
-      email: 'admin@salon.local',
+      email,
       name: 'Administrator',
       password: adminPassword,
       role: 'admin',
@@ -28,7 +33,7 @@ async function main() {
   })
 
   logger.info({ adminId: admin.id }, 'Admin user created')
-  console.log(`\n✅ Admin created:\nEmail: ${admin.email}\nPassword: Admin@12345\n⚠️  CHANGE THIS PASSWORD IMMEDIATELY!\n`)
+  console.log('Administrator created. Store credentials securely.')
 }
 
 main()

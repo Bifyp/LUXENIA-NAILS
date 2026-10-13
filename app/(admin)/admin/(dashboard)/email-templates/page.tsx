@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 import { useState, useEffect } from 'react'
 
@@ -48,9 +49,9 @@ const DEFAULT_TEMPLATE = `
       <p style="margin-bottom: 20px;">Ваш текст тут...</p>
 
       <div style="text-align: center; margin: 30px 0;">
-        <a href="{{link}}" style="display: inline-block; background: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%); color: white; padding: 16px 32px; text-decoration: none; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);">
+        <Link href="{{link}}" style="display: inline-block; background: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%); color: white; padding: 16px 32px; text-decoration: none; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);">
           Перейти
-        </a>
+        </Link>
       </div>
 
       <p style="color: #6b7280; font-size: 14px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
@@ -151,7 +152,7 @@ export default function EmailTemplatesPage() {
             <p className="text-gray-500 text-sm mt-1.5">Конструктор листів для клієнтів</p>
           </div>
           <div className="flex items-center gap-3">
-            <a href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</a>
+            <Link href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</Link>
             <button
               onClick={() => {
                 setIsEditing(true)
@@ -323,7 +324,7 @@ export default function EmailTemplatesPage() {
                   <div className="mt-6 p-6 bg-gray-50 rounded-2xl">
                     <h3 className="text-sm font-bold text-gray-700 mb-4">Попередній перегляд:</h3>
                     <div className="bg-white rounded-xl p-4 shadow-inner">
-                      <div dangerouslySetInnerHTML={{ __html: form.body }} />
+                      <iframe title="Email preview" sandbox="" srcDoc={form.body} className="w-full min-h-[500px] border-0" />
                     </div>
                   </div>
                 )}

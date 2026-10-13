@@ -138,11 +138,13 @@ export default function AccountSettingsPage() {
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  readOnly
+                  aria-describedby="email-change-note"
                   required
                   className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all outline-none"
                 />
               </div>
+              <p id="email-change-note" className="text-sm text-gray-500">Зміна email потребує підтвердження. Зверніться до студії.</p>
               <button
                 type="submit"
                 disabled={savingProfile}

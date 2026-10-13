@@ -1,10 +1,14 @@
 "use client";
+import Link from "next/link";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
 export default function RegisterPage() {
   const t = useTranslations("RegisterPage");
+  const locale = useLocale();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
 
   const [step, setStep] = useState<"register" | "verify">("register");
   const [name, setName] = useState("");
@@ -15,28 +19,27 @@ export default function RegisterPage() {
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert(t("form.passwordsDontMatch"));
-      return;
-    }
-    const res = await fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
-    });
-    const data = await res.json();
-    if (data.ok) setStep("verify");
+    if (busy) return;
+    setError('');
+    if (password !== confirmPassword) { setError(t('form.passwordsDontMatch')); return; }
+    setBusy(true);
+    try {
+      const res = await fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, password }) });
+      if (!res.ok) { setError(t('requestError')); return; }
+      setStep('verify');
+    } catch { setError(t('requestError')); }
+    finally { setBusy(false); }
   }
-
   async function handleVerify(e: React.FormEvent) {
     e.preventDefault();
-    const res = await fetch("/api/verify-code", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password, code }),
-    });
-    const data = await res.json();
-    if (data.success) window.location.href = "/login";
+    if (busy) return;
+    setError(''); setBusy(true);
+    try {
+      const res = await fetch('/api/verify-code', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, password, code }) });
+      if (!res.ok) { setError(t('verificationError')); return; }
+      window.location.href = `/${locale}/login`;
+    } catch { setError(t('requestError')); }
+    finally { setBusy(false); }
   }
 
   return (
@@ -73,6 +76,7 @@ export default function RegisterPage() {
               <p className="text-gray-600 text-lg">{t("intro.description")}</p>
             </div>
 
+            {error && <p role="alert" className="mb-6 rounded-xl bg-red-50 p-4 text-red-700">{error}</p>}
             {/* STEP 1 — REGISTER */}
             {step === "register" && (
               <form onSubmit={handleRegister} className="p-10 bg-white shadow-2xl rounded-3xl space-y-6">
@@ -86,28 +90,28 @@ export default function RegisterPage() {
                 </div>
                 <div>
                   <label className="block text-gray-700 font-medium mb-2 text-sm">{t("form.password.label")} *</label>
-                  <input type="password" placeholder={t("form.password.placeholder")} required className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all outline-none" value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <input type="password" minLength={8} autoComplete="new-password" placeholder={t("form.password.placeholder")} required className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all outline-none" value={password} onChange={(e) => setPassword(e.target.value)} />
                   <p className="text-gray-500 text-xs mt-2">{t("form.password.hint")}</p>
                 </div>
                 <div>
                   <label className="block text-gray-700 font-medium mb-2 text-sm">{t("form.confirmPassword.label")} *</label>
-                  <input type="password" placeholder={t("form.confirmPassword.placeholder")} required className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all outline-none" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                  <input type="password" minLength={8} autoComplete="new-password" placeholder={t("form.confirmPassword.placeholder")} required className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all outline-none" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 </div>
                 <div className="flex items-start gap-3">
                   <input type="checkbox" required className="w-4 h-4 mt-1 accent-rose-500 rounded" />
                   <label className="text-gray-600 text-sm">
                     {t("form.terms")}{" "}
-                    <a href="/terms" className="text-rose-600 hover:text-rose-700 font-medium">{t("form.termsLink")}</a>{" "}
+                    <Link href="/terms" className="text-rose-600 hover:text-rose-700 font-medium">{t("form.termsLink")}</Link>{" "}
                     {t("form.and")}{" "}
-                    <a href="/privacy" className="text-rose-600 hover:text-rose-700 font-medium">{t("form.privacyLink")}</a>
+                    <Link href="/privacy" className="text-rose-600 hover:text-rose-700 font-medium">{t("form.privacyLink")}</Link>
                   </label>
                 </div>
-                <button type="submit" className="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                <button type="submit" disabled={busy} className="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
                   {t("form.registerButton")}
                 </button>
                 <p className="text-center text-gray-500 text-sm mt-6">
                   {t("form.haveAccount")}{" "}
-                  <a href="/login" className="text-rose-600 hover:text-rose-700 font-semibold">{t("form.loginLink")}</a>
+                  <Link href={`/${locale}/login`} className="text-rose-600 hover:text-rose-700 font-semibold">{t("form.loginLink")}</Link>
                 </p>
               </form>
             )}
@@ -121,9 +125,9 @@ export default function RegisterPage() {
                 </p>
                 <div>
                   <label className="block text-gray-700 font-medium mb-2 text-sm">{t("form.code.label")} *</label>
-                  <input type="text" placeholder={t("form.code.placeholder")} required className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all outline-none text-center text-2xl tracking-widest" value={code} onChange={(e) => setCode(e.target.value)} />
+                  <input type="text" inputMode="numeric" pattern="[0-9]{6}" maxLength={6} autoComplete="one-time-code" placeholder={t("form.code.placeholder")} required className="border-2 border-gray-200 focus:border-rose-500 p-4 w-full rounded-xl transition-all outline-none text-center text-2xl tracking-widest" value={code} onChange={(e) => setCode(e.target.value)} />
                 </div>
-                <button type="submit" className="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                <button type="submit" disabled={busy} className="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
                   {t("form.verifyButton")}
                 </button>
               </form>

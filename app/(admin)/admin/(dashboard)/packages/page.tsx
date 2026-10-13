@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 import { useState, useEffect, useCallback } from 'react'
 
@@ -390,7 +391,7 @@ export default function AdminPackagesPage() {
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <a href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</a>
+            <Link href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</Link>
             <button
               onClick={() => setModal(EMPTY_FORM)}
               className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-2xl text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all"

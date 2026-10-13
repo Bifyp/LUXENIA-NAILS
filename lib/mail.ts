@@ -1,22 +1,5 @@
-import nodemailer from "nodemailer";
-
-function getTransporter() {
-  return nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    requireTLS: true,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-  });
-}
-
-function getCodeEmailTemplate(code: string) {
+import { getTransporter } from './smtp';
+function getCodeEmailTemplate(code: string, purpose: string) {
   return `<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -50,7 +33,7 @@ function getCodeEmailTemplate(code: string) {
             </td></tr>
             <tr><td align="center" style="padding:0 40px 32px;">
               <p style="font-size:15px;font-weight:400;color:#6b7280;line-height:1.6;margin:0;text-align:center;">
-                Dziękujemy za rejestrację.<br/>Wprowadź poniższy kod, aby dokończyć tworzenie konta.
+                ${purpose === 'password-reset' ? 'Wprowadź poniższy kod, aby zresetować hasło.' : 'Wprowadź poniższy kod, aby dokończyć tworzenie konta.'}
               </p>
             </td></tr>
             <tr><td style="padding:0 40px 32px;">
@@ -68,7 +51,7 @@ function getCodeEmailTemplate(code: string) {
             </td></tr>
             <tr><td align="center" style="padding:0 40px 48px;">
               <p style="font-size:12px;font-weight:400;color:#9ca3af;margin:0;line-height:1.5;">
-                Jeśli nie tworzyłeś konta — po prostu zignoruj tę wiadomość.
+                Jeśli nie wysłałeś tej prośby — zignoruj tę wiadomość.
               </p>
             </td></tr>
           </table>
@@ -84,7 +67,7 @@ function getCodeEmailTemplate(code: string) {
 </html>`;
 }
 
-export async function sendEmailCode(email: string, code: string) {
+export async function sendEmailCode(email: string, code: string, purpose = 'registration') {
   const transporter = getTransporter();
   
   // Проверяем соединение перед отправкой
@@ -92,9 +75,9 @@ export async function sendEmailCode(email: string, code: string) {
   console.log("📡 SMTP соединение OK");
   
   await transporter.sendMail({
-    from: `"Beauty Studio" <${process.env.SMTP_USER}>`,
+    from: process.env.SMTP_FROM || process.env.SMTP_USER,
     to: email,
-    subject: "Ваш код подтверждения",
-    html: getCodeEmailTemplate(code)
+    subject: purpose === 'password-reset' ? 'Luxenia — reset hasła' : 'Luxenia — kod potwierdzenia',
+    html: getCodeEmailTemplate(code, purpose)
   });
 }

@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
 
@@ -92,7 +93,7 @@ export default function ServicesPage() {
                     </div>
                   )}
 
-                  <a
+                  <Link
                     href="/booking"
                     className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105"
                   >
@@ -100,7 +101,7 @@ export default function ServicesPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}

@@ -12,9 +12,7 @@ export default function ShopPageEditor() {
   })
   const [saving, setSaving] = useState(false)
 
-  useEffect(() => {
-    loadTranslations()
-  }, [lang])
+
 
   async function loadTranslations() {
     const res = await fetch(`/api/admin/translations?lang=${lang}&section=ShopPage`)
@@ -30,6 +28,10 @@ export default function ShopPageEditor() {
       setData(obj)
     }
   }
+
+  useEffect(() => {
+    loadTranslations()
+  }, [lang])
 
   async function handleSave() {
     setSaving(true)
@@ -174,7 +176,7 @@ export default function ShopPageEditor() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Кнопка "Замовити"</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Кнопка &quot;Замовити&quot;</label>
           <input
             type="text"
             value={data.product.order}

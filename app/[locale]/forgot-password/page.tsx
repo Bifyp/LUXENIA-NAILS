@@ -1,26 +1,40 @@
 "use client";
+import Link from "next/link";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function ForgotPasswordPage() {
   const t = useTranslations("ForgotPasswordPage");
 
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [done, setDone] = useState(false);
+  const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
+  const locale = useLocale();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
-    const res = await fetch("/api/auth/forgot-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email })
-    });
-
-    if (res.ok) {
-      setSent(true);
-    }
+    if (busy) return;
+    setBusy(true); setError('');
+    try {
+      const res = await fetch('/api/auth/forgot-password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
+      if (res.ok) setSent(true); else setError(t('requestError'));
+    } catch { setError(t('requestError')); }
+    finally { setBusy(false); }
+  }
+  async function handleReset(e: React.FormEvent) {
+    e.preventDefault();
+    if (busy) return;
+    setBusy(true); setError('');
+    try {
+      const res = await fetch('/api/auth/reset-password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, code, password }) });
+      if (res.ok) { setDone(true); setPassword(''); setCode(''); } else setError(t('verificationError'));
+    } catch { setError(t('requestError')); }
+    finally { setBusy(false); }
   }
 
   return (
@@ -50,6 +64,7 @@ export default function ForgotPasswordPage() {
         <div className="container px-6">
           <div className="max-w-md mx-auto bg-white p-10 shadow-2xl rounded-3xl">
 
+            {error && <p role="alert" className="mb-6 rounded-xl bg-red-50 p-4 text-red-700">{error}</p>}
             {!sent ? (
               <>
                 <div className="text-center mb-8">
@@ -80,15 +95,16 @@ export default function ForgotPasswordPage() {
 
                   <button
                     type="submit"
+                    disabled={busy}
                     className="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                   >
                     {t("submit")}
                   </button>
 
                   <div className="text-center">
-                    <a href="/login" className="text-rose-600 hover:text-rose-700 text-sm font-medium">
+                    <Link href={`/${locale}/login`} className="text-rose-600 hover:text-rose-700 text-sm font-medium">
                       ← Назад до входу
-                    </a>
+                    </Link>
                   </div>
                 </form>
               </>
@@ -100,13 +116,22 @@ export default function ForgotPasswordPage() {
                   </svg>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">{t("sentTitle")}</h2>
-                <p className="text-gray-600 mb-8">{t("sentDescription")}</p>
-                <a href="/login" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                <p role="status" className="text-gray-600 mb-8">{done ? t('resetDone') : t('codeDescription')}</p>
+                {!done && <form onSubmit={handleReset} className="space-y-4 text-left mb-8">
+                  <label className="block">{t('codeLabel')}
+                    <input required inputMode="numeric" pattern="[0-9]{6}" maxLength={6} autoComplete="one-time-code" value={code} onChange={(e) => setCode(e.target.value)} className="border-2 p-4 w-full rounded-xl" />
+                  </label>
+                  <label className="block">{t('newPasswordLabel')}
+                    <input required type="password" minLength={8} autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} className="border-2 p-4 w-full rounded-xl" />
+                  </label>
+                  <button disabled={busy} className="w-full py-4 bg-rose-500 text-white rounded-full">{t('resetButton')}</button>
+                </form>}
+                <Link href={`/${locale}/login`} className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
                   Повернутися до входу
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
-                </a>
+                </Link>
               </div>
             )}
 

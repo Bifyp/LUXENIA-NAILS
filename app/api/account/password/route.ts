@@ -1,3 +1,6 @@
+import { passwordSchema } from '@/lib/validations'
+import { z } from 'zod'
+import { withRateLimit, LIMITS } from '@/lib/rate-limiter'
 // app/api/account/password/route.ts
 import { NextResponse } from 'next/server'
 import { auth } from '@/auth'
@@ -11,7 +14,11 @@ export async function PATCH(req: Request) {
       return NextResponse.json({ error: 'Не авторизовано' }, { status: 401 })
     }
 
-    const { currentPassword, newPassword } = await req.json()
+    const limited = await withRateLimit(req, LIMITS.auth)
+    if (limited) return limited
+    const parsed = z.object({ currentPassword: z.string().min(1).max(1000), newPassword: passwordSchema }).safeParse(await req.json().catch(() => null))
+    if (!parsed.success) return NextResponse.json({ error: 'Invalid input' }, { status: 400 })
+    const { currentPassword, newPassword } = parsed.data
 
     if (!currentPassword || !newPassword) {
       return NextResponse.json({ error: 'Заповніть всі поля' }, { status: 400 })
@@ -31,7 +38,7 @@ export async function PATCH(req: Request) {
       return NextResponse.json({ error: 'Невірний поточний пароль' }, { status: 400 })
     }
 
-    const hashed = await hash(newPassword, 10)
+    const hashed = await hash(newPassword, 12)
     await prisma.user.update({
       where: { id: session.user.id },
       data: { password: hashed },

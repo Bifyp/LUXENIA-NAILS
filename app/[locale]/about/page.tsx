@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 import { useTranslations } from 'next-intl';
 import LazyImage from "../../../components/LazyImage";
 import { usePagePhoto } from '../../../components/hooks/usePagePhoto';
@@ -194,7 +195,7 @@ export default function AboutPage() {
                   ))}
                 </div>
 
-                <a
+                <Link
                   href="/contact"
                   className="inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-900 rounded-full font-medium shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
                 >
@@ -202,7 +203,7 @@ export default function AboutPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </a>
+                </Link>
               </div>
 
               <div className="relative">
@@ -231,7 +232,7 @@ export default function AboutPage() {
               {t('cta.description')}
             </p>
             <div className="flex gap-4 justify-center items-center flex-wrap">
-              <a
+              <Link
                 href="/booking"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
@@ -239,13 +240,13 @@ export default function AboutPage() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/services"
                 className="px-8 py-4 bg-white border-2 border-gray-200 text-gray-800 rounded-full font-medium hover:border-rose-500 hover:text-rose-600 transition-all duration-300"
               >
                 {t('cta.servicesButton')}
-              </a>
+              </Link>
             </div>
           </div>
         </div>

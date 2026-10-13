@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
@@ -537,7 +538,7 @@ export default function AdminGalleryPage() {
         <div className="mb-6">
           <span className="text-rose-500 text-xs uppercase tracking-[0.3em] font-semibold mb-2 block">Luxenia</span>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent mb-2">Управління фото</h1>
-          <a href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</a>
+          <Link href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</Link>
         </div>
         <div className="flex gap-2 flex-wrap">
           {PAGES.map((pg) => (

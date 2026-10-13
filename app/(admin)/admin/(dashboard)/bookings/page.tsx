@@ -1,5 +1,6 @@
-//app/(admin)/admin/(dashboard)/bookings/page.tsx
 'use client'
+import Link from "next/link";
+//app/(admin)/admin/(dashboard)/bookings/page.tsx
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 
@@ -177,7 +178,6 @@ export default function AdminBookingsPage() {
   const safeShowToast = (msg: string, ok: boolean) => {
     setToast({ msg, ok })
     if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current)
-    // @ts-ignore
     toastTimerRef.current = window.setTimeout(() => setToast(null), 3000)
   }
 
@@ -259,7 +259,7 @@ export default function AdminBookingsPage() {
             <h1 className="text-4xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">Бронювання</h1>
             <p className="text-gray-500 text-sm mt-1.5">{stats.total} всього</p>
           </div>
-          <a href="/admin" className="text-sm text-rose-500 hover:text-rose-600 font-medium transition-colors">← Адмін-панель</a>
+          <Link href="/admin" className="text-sm text-rose-500 hover:text-rose-600 font-medium transition-colors">← Адмін-панель</Link>
         </div>
 
         {/* Stats row */}

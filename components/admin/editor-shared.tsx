@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 import { useState, useEffect } from 'react'
 
@@ -71,12 +72,12 @@ export function EditorToolbar({ savingKey, pageTitle }: { savingKey: string | nu
         {savingKey && (
           <span className="text-indigo-200 text-xs animate-pulse">Перекладаємо RU/PL/EN...</span>
         )}
-        <a
+        <Link
           href="/admin/translations/preview"
           className="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded transition"
         >
           ← Всі сторінки
-        </a>
+        </Link>
       </div>
     </div>
   )

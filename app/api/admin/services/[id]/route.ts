@@ -1,3 +1,5 @@
+import { editableServiceSchema } from '@/lib/content-validations'
+import { adminAccessError } from '@/lib/admin-access';
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
@@ -5,23 +7,13 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
   try {
     const { id } = await params
-    const { icon, title, desc, price } = await req.json()
-
-    if (title !== undefined && !title?.trim()) {
-      return NextResponse.json({ error: "Назва обов'язкова" }, { status: 400 })
-    }
-
-    const service = await prisma.service.update({
-      where: { id },
-      data: {
-        ...(icon !== undefined && { icon }),
-        ...(title !== undefined && { title: title.trim() }),
-        ...(desc !== undefined && { desc: desc.trim() }),
-        ...(price !== undefined && { price: price.trim() }),
-      },
-    })
+    const parsed = editableServiceSchema.partial().safeParse(await req.json().catch(() => null))
+    if (!parsed.success) return NextResponse.json({ error: 'Invalid service' }, { status: 400 })
+    const service = await prisma.service.update({ where: { id }, data: parsed.data })
 
     return NextResponse.json({ success: true, service })
   } catch (error) {
@@ -34,6 +26,8 @@ export async function DELETE(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
   try {
     const { id } = await params
     await prisma.service.delete({ where: { id } })

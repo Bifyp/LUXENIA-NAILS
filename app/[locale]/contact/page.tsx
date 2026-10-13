@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 import { useTranslations } from 'next-intl';
 
 export default function ContactPage() {
@@ -19,7 +20,7 @@ export default function ContactPage() {
               {t('hero.title')}
             </h1>
             <p className="text-xl text-white/90 mb-12 leading-relaxed">
-              Зв'яжіться з нами будь-яким зручним способом
+              Зв&apos;яжіться з нами будь-яким зручним способом
             </p>
 
             {/* Quick Contact Cards */}
@@ -187,7 +188,7 @@ export default function ContactPage() {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <a
+              <Link
                 href="https://www.instagram.com/lumaskin_laser_studio"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -196,9 +197,9 @@ export default function ContactPage() {
                 <div className="text-6xl mb-4">📷</div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Instagram</h3>
                 <p className="text-gray-600 text-sm">@luxenia.nails</p>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="https://www.facebook.com/share/1DGrdC9RvF/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -207,9 +208,9 @@ export default function ContactPage() {
                 <div className="text-6xl mb-4">📘</div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Facebook</h3>
                 <p className="text-gray-600 text-sm">Luxenia Nails</p>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="https://booksy.com/pl-pl/307205_lumaskin-laser-studio_depilacja_16974_swarzedz#ba_s=seo"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -218,7 +219,7 @@ export default function ContactPage() {
                 <div className="text-6xl mb-4">💆‍♀️</div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Booksy</h3>
                 <p className="text-gray-600 text-sm">Онлайн запис</p>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -234,18 +235,18 @@ export default function ContactPage() {
             {t('cta.description')}
           </p>
           <div className="flex gap-4 justify-center items-center flex-wrap">
-            <a
+            <Link
               href="/booking"
               className="px-8 py-4 bg-white text-rose-600 rounded-full font-medium shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               {t('cta.bookingButton')}
-            </a>
-            <a
+            </Link>
+            <Link
               href="tel:+48123456789"
               className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-full font-medium hover:bg-white hover:text-rose-600 transition-all duration-300"
             >
               {t('cta.callButton')}
-            </a>
+            </Link>
           </div>
         </div>
       </section>

@@ -2,22 +2,21 @@ import { z } from 'zod'
 
 // ─── Auth ──────────────────────────────────────────────────────────────────
 
+// bcrypt only distinguishes the first 72 bytes; enforce bytes, not JS character count.
+export const passwordSchema = z.string().min(8, 'Мінімум 8 символів').refine(
+  (value) => new TextEncoder().encode(value).length <= 72,
+  'Password must not exceed 72 UTF-8 bytes',
+)
+export const emailSchema = z.string().trim().email().max(254).toLowerCase()
 export const registerSchema = z.object({
-  email: z.string().email('Невірна email адреса').toLowerCase(),
-  password: z
-    .string()
-    .min(8, 'Мінімум 8 символів')
-    .max(100)
-    .regex(/[A-Z]/, 'Має містити велику літеру (A-Z)')
-    .regex(/[a-z]/, 'Має містити малу літеру (a-z)')
-    .regex(/[0-9]/, 'Має містити цифру (0-9)')
-    .regex(/[!@#$%^&*]/, 'Має містити спецсимвол (!@#$%^&*)'),
-  name: z.string().min(2, 'Мінімум 2 символи').max(100),
+  email: emailSchema,
+  password: passwordSchema,
+  name: z.string().trim().min(2).max(100),
 })
 
 export const loginSchema = z.object({
-  email: z.string().email('Невірна email адреса').toLowerCase(),
-  password: z.string().min(1, 'Пароль обов\'язковий'),
+  email: emailSchema,
+  password: z.string().min(1).max(1000),
 })
 
 export const updatePasswordSchema = z.object({

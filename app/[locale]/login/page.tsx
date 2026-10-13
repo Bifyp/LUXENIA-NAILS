@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useTranslations } from 'next-intl';
 import { signIn } from "next-auth/react";
 import { useState } from "react";
@@ -80,9 +81,9 @@ export default function LoginPage() {
                   <input type="checkbox" className="w-4 h-4 accent-rose-500 rounded" />
                   <span className="text-gray-600 text-sm">{t('form.rememberMe')}</span>
                 </label>
-                <a href="/forgot-password" className="text-rose-600 text-sm hover:text-rose-700 font-medium">
+                <Link href="/forgot-password" className="text-rose-600 text-sm hover:text-rose-700 font-medium">
                   {t('form.forgotPassword')}
-                </a>
+                </Link>
               </div>
 
               <button
@@ -94,9 +95,9 @@ export default function LoginPage() {
 
               <p className="text-center text-gray-500 text-sm mt-6">
                 {t('form.noAccount')}{" "}
-                <a href="/register" className="text-rose-600 hover:text-rose-700 font-semibold">
+                <Link href="/register" className="text-rose-600 hover:text-rose-700 font-semibold">
                   {t('form.registerLink')}
-                </a>
+                </Link>
               </p>
             </form>
 

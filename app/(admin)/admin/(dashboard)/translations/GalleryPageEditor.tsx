@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast } from '@/components/admin/editor-shared'
 
@@ -42,7 +43,7 @@ export default function GalleryPageEditor() {
         <section className="py-24 bg-white">
           <div className="container px-6">
             <p className="text-center text-gray-400 text-sm py-8 border border-dashed border-gray-200 rounded-xl max-w-4xl mx-auto">
-              📷 Галерея зображень керується через <a href="/admin/gallery" className="text-rose-500 underline">Адмін-панель → Галерея</a>
+              📷 Галерея зображень керується через <Link href="/admin/gallery" className="text-rose-500 underline">Адмін-панель → Галерея</Link>
             </p>
           </div>
         </section>

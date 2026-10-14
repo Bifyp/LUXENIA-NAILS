@@ -33,6 +33,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
       <SessionWrapper session={session}>
+        <div className="salon-site">
         <Header />
 
         <main className={`${inter.variable} ${cormorant.variable} min-h-screen antialiased`}>
@@ -40,6 +41,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         </main>
 
         <Footer />
+        </div>
       </SessionWrapper>
     </NextIntlClientProvider>
   );

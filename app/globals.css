@@ -265,3 +265,309 @@ a:hover {
     @apply bg-background text-foreground;
   }
 }
+/* LUXENIA / independent nail atelier. Public theme only; not admin UI. */
+.salon-site {
+  --salon-ink: #181819;
+  --salon-muted: #5e5b64;
+  --salon-accent: #4431b5;
+  --salon-border: #c7c3cc;
+  --atelier-paper: #f7f7f2;
+  --atelier-lilac: #d9d2ef;
+  --atelier-lime: #e0f581;
+  background: var(--atelier-paper); color: var(--salon-ink);
+  font: 16px/1.6 var(--font-inter), Arial, sans-serif;
+}
+.salon-site h1, .salon-site h2, .salon-site h3, .salon-site h4 { color: var(--salon-ink); font-family: var(--font-inter), Arial, sans-serif; text-transform: none; letter-spacing: -.055em; font-weight: 700; }
+.salon-site h1, .salon-site h2 { line-height: 1; }
+.salon-site em { font-style: normal; color: inherit; }
+.salon-site a:hover { opacity: 1; }
+.salon-site :focus-visible { outline: 3px solid var(--salon-accent); outline-offset: 4px; }
+.salon-site ::selection { background: var(--atelier-lime); color: var(--salon-ink); }
+.salon-shell { width: min(1280px, calc(100% - 80px)); margin-inline: auto; }
+.eyebrow { font: 13px/1.5 'Courier New', monospace; letter-spacing: .015em; text-transform: uppercase; color: var(--salon-muted); margin-bottom: 24px; }
+.salon-header { position: sticky; top: 0; z-index: 50; background: var(--atelier-paper); border-bottom: 1px solid #181819; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 80px; }
+.brand-mark { display: inline-flex; flex-direction: column; flex-shrink: 0; color: var(--salon-ink); line-height: 1; }
+.brand-mark > span { display: flex; align-items: center; gap: 6px; font-size: 24px; font-weight: 800; letter-spacing: -.06em; }
+.brand-mark small { font: 10px/1.2 'Courier New', monospace; letter-spacing: .1em; margin-top: 5px; }
+.brand-dot { width: 25px; height: 25px; color: var(--salon-accent); }
+.desktop-nav { display: flex; gap: 28px; align-items: center; }
+.desktop-nav a { font-size: 14px; padding-block: 16px; color: var(--salon-ink); }
+.desktop-nav a:hover, .desktop-nav a[aria-current] { text-decoration: underline; text-underline-offset: 7px; }
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.quiet-button { display: inline-flex; gap: 6px; min-width: 44px; height: 44px; align-items: center; justify-content: center; font: 14px/1 'Courier New', monospace; cursor: pointer; }
+.quiet-button:hover { background: var(--atelier-lilac); }
+.header-dropdown { position: relative; }
+.dropdown-panel { position: absolute; top: calc(100% + 12px); right: 0; min-width: 190px; background: var(--atelier-paper); padding: 6px; border: 1px solid #181819; box-shadow: 5px 5px 0 #181819; }
+.dropdown-panel button, .dropdown-panel a { display: block; width: 100%; text-align: left; padding: 12px; min-height: 44px; font-size: 14px; cursor: pointer; }
+.dropdown-panel button:hover, .dropdown-panel a:hover, .dropdown-panel [aria-current] { background: var(--atelier-lilac); }
+.salon-button { display: inline-flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 56px; padding: 16px 24px; border: 1px solid #181819; border-radius: 0; background: #181819; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; transition: background .15s, color .15s; }
+.salon-button:hover { background: var(--atelier-lime); color: #181819; }
+.header-booking { min-height: 44px; padding: 12px 16px; font-size: 13px; gap: 16px; }
+.salon-link { display: inline-flex; align-items: center; gap: 16px; min-height: 44px; font-size: 14px; color: var(--salon-ink); text-decoration: underline; text-underline-offset: 5px; }
+.salon-link:hover { color: var(--salon-accent); }
+.menu-toggle, .mobile-nav { display: none; }
+/* Campaign poster, not a two-column spa template. */
+.atelier-hero { padding-block: 24px 36px; background: var(--atelier-lilac); }
+.poster-meta { display: flex; align-items: center; justify-content: space-between; font: 12px/1.5 'Courier New', monospace; letter-spacing: .035em; }
+.poster-meta > span:last-child { display: inline-flex; align-items: center; gap: 12px; }
+.live-square { width: 8px; height: 8px; background: #181819; }
+.poster-masthead { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 28px 24px; border-bottom: 1px solid #181819; margin-bottom: 28px; }
+.poster-masthead h1 { font-size: clamp(110px, 18.5vw, 266px); font-weight: 900; letter-spacing: -.087em; line-height: .8; margin-left: -.013em; }
+.atelier-asterisk { width: clamp(80px, 10.5vw, 150px); height: clamp(80px, 10.5vw, 150px); flex-shrink: 0; align-self: center; color: var(--salon-accent); transform: rotate(-18deg); }
+.poster-composition { display: grid; grid-template-columns: 1fr 1.05fr; gap: 64px; align-items: start; }
+.poster-copy { display: flex; flex-direction: column; align-items: flex-start; padding-top: 12px; }
+.poster-copy .eyebrow { margin-bottom: 28px; color: #34313d; }
+.poster-copy h2 { font-size: clamp(38px, 4.15vw, 60px); line-height: .99; font-weight: 750; letter-spacing: -.06em; max-width: 590px; }
+.poster-copy h2 > span { color: var(--salon-accent); }
+.hero-description { max-width: 360px; font-size: 16px; line-height: 1.7; margin-block: 24px 32px; color: #34313d; }
+.hero-actions { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.hero-actions .salon-button { min-width: 200px; }
+.shade-study { display: flex; gap: 16px; align-items: center; margin-top: 48px; }
+.shade-bars { display: flex; width: 96px; height: 42px; }
+.shade-bars span { width: 32px; border: 1px solid #181819; }
+.shade-bars span:first-child { background: #440d22; }
+.shade-bars span:nth-child(2) { background: #b7a4dc; border-inline: 0; }
+.shade-bars span:last-child { background: #181819; }
+.shade-study p { font: 12px/1.5 'Courier New', monospace; }
+.shade-study p span { color: #51495f; }
+.campaign-frame { margin: 0; }
+.campaign-photo { position: relative; background: #b7a4dc; border: 1px solid #181819; }
+.campaign-photo img { width: 100%; height: 460px; object-fit: cover; object-position: 50% 72%; }
+.photo-index { position: absolute; right: 12px; top: 12px; background: var(--atelier-lime); border: 1px solid #181819; color: #181819; font: 12px/1 'Courier New', monospace; padding: 10px; }
+.campaign-frame figcaption { display: flex; justify-content: space-between; gap: 16px; margin-top: 12px; font: 11px/1.5 'Courier New', monospace; }
+.atelier-strip { display: flex; justify-content: space-evenly; align-items: center; gap: 36px; white-space: nowrap; overflow: hidden; background: #181819; color: var(--atelier-lime); padding-block: 15px; font-size: clamp(24px, 2.5vw, 36px); font-weight: 750; letter-spacing: -.035em; }
+.strip-star { color: #d9d2ef; width: 32px; height: 32px; flex-shrink: 0; }
+.salon-section { padding-block: 72px; }
+.section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 40px; }
+.section-heading .eyebrow { margin-bottom: 20px; }
+.salon-home h2:not(.poster-copy h2), .booking-banner h2 { font-size: clamp(36px, 4.5vw, 64px); line-height: 1.01; }
+/* Price list: an actual menu rather than repeated marketing cards. */
+.service-editorial-grid { display: grid; grid-template-columns: 1fr; border-top: 1px solid #181819; }
+.editorial-service { display: grid; grid-template-columns: 40px minmax(0, 1.1fr) minmax(0, 1fr) 160px; align-items: start; gap: 24px; padding: 28px 12px; border-bottom: 1px solid #181819; background: transparent; transition: background .15s; min-width: 0; }
+.editorial-service:hover { background: var(--atelier-lilac); }
+.service-top { display: flex; align-items: center; justify-content: space-between; padding-top: 5px; }
+.service-top .eyebrow { margin: 0; color: var(--salon-muted); }
+.service-top svg { display: none; }
+.editorial-service h3 { font-size: 27px; line-height: 1.1; font-weight: 600; letter-spacing: -.05em; overflow-wrap: anywhere; }
+.editorial-service > p { font-size: 14px; color: var(--salon-muted); line-height: 1.6; max-width: 350px; }
+.service-bottom { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+.service-bottom span:first-child { font: 18px/1.4 'Courier New', monospace; color: #181819; }
+.service-bottom span:last-child { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; text-decoration: underline; text-underline-offset: 5px; color: #181819; }
+.catalog-placeholder { display: flex; align-items: center; gap: 32px; padding: 32px 0; border-block: 1px solid #181819; }
+.empty-index { font: 32px/1 'Courier New', monospace; flex-shrink: 0; }
+.catalog-placeholder h3 { font-size: 24px; line-height: 1.2; margin-block: 12px; }
+.catalog-placeholder p { font-size: 14px; color: var(--salon-muted); max-width: 600px; }
+.catalog-placeholder .salon-link { flex-shrink: 0; margin-left: auto; }
+.catalog-content { padding-bottom: 72px; }
+/* A manifesto with its own rhythm and one sharp, recognisable mark. */
+.atelier-manifesto { background: #181819; color: var(--atelier-paper); padding-block: 72px; }
+.manifesto-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 72px; }
+.atelier-manifesto .eyebrow { color: #bdbbc5; }
+.salon-home .atelier-manifesto h2 { font-size: clamp(40px, 5.5vw, 80px); color: var(--atelier-paper); font-weight: 700; letter-spacing: -.06em; }
+.atelier-manifesto h2 span { color: var(--atelier-lime); }
+.manifesto-note { padding-top: 8px; display: flex; flex-direction: column; align-items: flex-start; }
+.manifesto-asterisk { display: block; color: var(--atelier-lilac); width: 96px; height: 96px; margin-bottom: 24px; transform: rotate(-18deg); }
+.manifesto-note p { font-size: 16px; line-height: 1.7; color: #d4d1da; max-width: 360px; margin-bottom: 24px; }
+.manifesto-note .salon-link { color: var(--atelier-lime); }
+.manifesto-note .salon-link:hover { color: #fff; }
+/* Appointment ticket: distinctive print language, ordinary usable controls. */
+.booking-ticket { display: grid; grid-template-columns: 1.6fr 1fr; padding-block: 64px; gap: 64px; }
+.ticket-copy h2 { max-width: 730px; }
+.ticket-copy > p:not(.eyebrow) { font-size: 16px; margin-top: 24px; max-width: 470px; color: var(--salon-muted); }
+.ticket-steps { display: flex; flex-wrap: wrap; gap: 12px 28px; padding-top: 24px; margin-top: 28px; border-top: 1px solid var(--salon-border); font: 12px/1.6 'Courier New', monospace; text-transform: uppercase; }
+.ticket-action { border: 1px solid #181819; padding: 32px; background: var(--atelier-lime); display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; }
+.ticket-action::before { content: ''; position: absolute; left: -1px; right: -1px; top: 20px; border-top: 1px dashed #181819; }
+.ticket-action p { font: 14px/1.5 'Courier New', monospace; margin-block: 20px 32px; }
+.ticket-action > span { font: 12px/1.5 'Courier New', monospace; text-align: left; margin-top: 20px; }
+.booking-banner { display: flex; align-items: center; justify-content: space-between; gap: 40px; border-block: 1px solid #181819; padding-block: 40px; margin-bottom: 64px; }
+.booking-banner .salon-button { flex-shrink: 0; }
+.booking-banner p:not(.eyebrow) { color: var(--salon-muted); margin-top: 16px; }
+.salon-footer { padding-top: 32px; border-top: 1px solid #181819; overflow: hidden; }
+.footer-grid { display: grid; grid-template-columns: 1fr 1fr auto; gap: 48px; align-items: start; }
+.footer-grid p { margin-top: 16px; font: 12px/1.6 'Courier New', monospace; color: var(--salon-muted); }
+.footer-grid nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; font-size: 14px; }
+.footer-grid nav a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.footer-wordmark { display: flex; align-items: center; justify-content: space-between; font-weight: 900; font-size: clamp(64px, 17.5vw, 252px); line-height: .9; letter-spacing: -.087em; padding-block: 48px 24px; color: #181819; }
+.footer-mark { width: .56em; height: .56em; flex-shrink: 0; color: var(--salon-accent); transform: rotate(-18deg); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 20px; border-top: 1px solid #181819; font: 12px/1.6 'Courier New', monospace; color: var(--salon-muted); }
+/* Existing public pages inherit the direction; private admin does not. */
+.salon-site main > div:not(.salon-home) > section:first-child:not(.booking-heading) { min-height: 300px; background: var(--atelier-lilac); padding-block: 64px; }
+.salon-site main > div:not(.salon-home) > section:first-child:not(.booking-heading) h1 { font-size: clamp(40px, 5vw, 72px); line-height: 1.05; }
+.salon-site main > div:not(.salon-home) > section:first-child:not(.booking-heading) .text-white { color: #181819; }
+.salon-site main > div:not(.salon-home) > section:first-child:not(.booking-heading) p { color: #34313d; }
+.salon-site main > div:not(.salon-home) > section:first-child:not(.booking-heading) > .absolute { display: none; }
+.salon-site main .bg-gradient-to-r.from-rose-500, .salon-site main .bg-gradient-to-br.from-rose-500 { background-image: none; background-color: #181819; }
+.salon-site main .bg-clip-text.text-transparent { background-image: none; color: var(--salon-accent); }
+.salon-site main .text-rose-600, .salon-site main .text-rose-500 { color: var(--salon-accent); }
+.salon-site main .shadow-2xl, .salon-site main .shadow-xl, .salon-site main .shadow-lg { box-shadow: none; }
+.salon-site main .rounded-3xl { border-radius: 0; border: 1px solid var(--salon-border); }
+.salon-site main .border-rose-500 { border-color: var(--salon-accent); }
+.booking-heading { padding-block: 48px 32px; }
+.booking-heading h1 { font-size: clamp(40px, 5vw, 72px); line-height: 1.02; margin-bottom: 24px; }
+.booking-heading h1 em { color: var(--salon-accent); }
+.booking-heading > p:last-child { color: var(--salon-muted); max-width: 560px; }
+.booking-layout { display: grid; grid-template-columns: minmax(0, 760px) minmax(0, 1fr); gap: 48px; align-items: start; padding-bottom: 64px; }
+.booking-card { background: #fff; border: 1px solid #181819; padding: 32px; }
+.booking-card form { margin: 0; }
+.booking-card h2.form-section-title { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 600; letter-spacing: -.035em; line-height: 1.4; margin-bottom: 24px; }
+.form-section-title span { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border: 1px solid #181819; font: 12px/1 'Courier New', monospace; }
+.form-divider { height: 1px; background: var(--salon-border); margin-block: 28px; }
+.booking-card input:not([type=hidden]), .booking-card select, .booking-card textarea { padding: 12px 14px; border: 1px solid #a09ba7; border-radius: 0; font-size: 16px; min-height: 48px; background: #fff; color: #181819; }
+.booking-card input::placeholder, .booking-card textarea::placeholder { color: #706b77; }
+.booking-card input:focus, .booking-card select:focus, .booking-card textarea:focus { border-color: var(--salon-accent); box-shadow: 0 0 0 2px #4431b520; }
+.booking-card label { color: #181819; }
+.booking-card form > div { margin-top: 24px; }
+.booking-card button[type=submit] { background: #181819; border-radius: 0; padding-block: 16px; margin-top: 28px; box-shadow: none; }
+.booking-card button[type=submit]:hover { background: var(--salon-accent); transform: none; }
+.booking-card button[type=submit]:disabled { background: #cbc7cf; color: #514b5c; opacity: 1; }
+.booking-card form > p:last-child { font-size: 12px; margin-top: 16px; }
+.booking-card p[role=alert] { margin-top: 16px; }
+.booking-card .calendar-box { border: 1px solid var(--salon-border); padding: 20px; border-radius: 0; }
+.booking-card .calendar-day { width: 44px; height: 44px; font-size: 14px; border-radius: 0; }
+.calendar-day[data-state=past] { color: #96919d; cursor: not-allowed; }
+.calendar-day[data-state=selected] { background: #181819; color: #fff; }
+.calendar-day[data-state=today] { border: 1px solid var(--salon-accent); color: var(--salon-accent); }
+.calendar-day[data-state=available] { color: #181819; }
+.calendar-day:not(:disabled):hover { background: var(--atelier-lilac); color: #181819; }
+.calendar-day[data-state=selected]:hover { background: var(--salon-accent); color: #fff; }
+.calendar-arrow { display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border: 1px solid var(--salon-border); cursor: pointer; }
+.calendar-arrow:hover { background: var(--atelier-lilac); }
+.calendar-month { font-family: 'Courier New', monospace; font-size: 16px; }
+.calendar-weekday { color: var(--salon-muted); font: 12px/1.4 'Courier New', monospace; }
+.booking-card .text-gold { color: var(--salon-accent); }
+.booking-card .text-graphite { color: #181819; }
+.booking-card .tab-control { border: 1px solid #181819; border-radius: 0; }
+.booking-card .tab-control button { min-height: 48px; border-width: 0; }
+.booking-card .time-grid button { min-height: 44px; border-width: 1px; border-radius: 0; }
+.booking-card .time-grid button[aria-pressed=true] { transform: none; }
+.booking-card .time-grid button:disabled { color: #8b8395; background: #f0eef3; }
+.booking-sidebar { position: sticky; top: 110px; border: 1px solid #181819; background: var(--atelier-lime); padding: 28px; }
+.booking-sidebar .eyebrow { border-bottom: 1px dashed #181819; padding-bottom: 20px; color: #181819; }
+.booking-sidebar h2 { font-size: 28px; line-height: 1; margin-bottom: 20px; }
+.booking-sidebar > p { font-size: 14px; color: #454635; }
+.booking-summary { padding-block: 24px; margin-block: 24px; border-block: 1px dashed #181819; display: grid; gap: 16px; font: 14px/1.6 'Courier New', monospace; overflow-wrap: anywhere; }
+.booking-summary span { display: flex; align-items: flex-start; gap: 12px; }
+.booking-summary svg { flex-shrink: 0; margin-top: 2px; }
+.booking-summary strong { font: bold 25px/1.2 'Courier New', monospace; }
+.booking-success-summary { background: #eae5f6; border: 1px solid #181819; border-radius: 0; }
+.booking-faq { padding-bottom: 64px; max-width: 820px; }
+.booking-faq h2 { font-size: 38px; margin-bottom: 32px; }
+.booking-faq details { border-top: 1px solid #181819; padding-block: 20px; }
+.booking-faq details:last-child { border-bottom: 1px solid #181819; }
+.booking-faq summary { cursor: pointer; font-size: 16px; font-weight: 500; padding-right: 16px; }
+.booking-faq details p { font-size: 14px; color: var(--salon-muted); padding-top: 16px; max-width: 650px; }
+@media (max-width: 1100px) {
+  .desktop-nav { gap: 18px; }
+  .desktop-nav a { font-size: 12px; }
+  .poster-composition { gap: 40px; }
+  .poster-copy h2 { font-size: 44px; }
+  .editorial-service { grid-template-columns: 32px minmax(0, 1.1fr) minmax(0, 1fr) 130px; gap: 16px; }
+  .booking-layout { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 32px; }
+}
+@media (max-width: 950px) {
+  .desktop-nav, .account-dropdown { display: none; }
+  .menu-toggle { display: inline-flex; }
+  .mobile-nav { display: flex; flex-direction: column; padding-block: 8px 24px; max-height: calc(100dvh - 80px); overflow-y: auto; }
+  .mobile-nav > a:not(.salon-button) { display: flex; justify-content: space-between; align-items: center; min-height: 48px; border-bottom: 1px solid var(--salon-border); font-size: 16px; }
+  .mobile-nav > .salon-button { margin-top: 20px; }
+  .booking-layout { grid-template-columns: minmax(0, 1fr); }
+  .booking-sidebar { position: static; }
+  .poster-copy h2 { font-size: 38px; }
+  .campaign-photo img { height: 400px; }
+  .shade-study { margin-top: 28px; }
+  .hero-description { font-size: 14px; }
+  .hero-actions { gap: 12px; }
+  .manifesto-grid { gap: 40px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid > .salon-button { justify-self: start; }
+}
+@media (max-width: 640px) {
+  .salon-shell { width: calc(100% - 40px); }
+  .header-inner { min-height: 68px; gap: 8px; }
+  .brand-mark > span { font-size: 22px; }
+  .brand-mark small { font-size: 9px; }
+  .header-booking { display: none; }
+  .mobile-nav { max-height: calc(100dvh - 68px); }
+  .atelier-hero { padding-block: 18px 24px; }
+  .poster-meta { font-size: 10px; }
+  .poster-meta > span:last-child { gap: 6px; }
+  .poster-masthead { gap: 8px; padding-block: 22px 20px; margin-bottom: 24px; }
+  .poster-masthead h1 { font-size: 18.1vw; }
+  .atelier-asterisk { width: 11.5vw; height: 11.5vw; }
+  .poster-composition { grid-template-columns: 1fr; gap: 28px; }
+  .poster-copy { padding-top: 0; }
+  .poster-copy .eyebrow { font-size: 12px; margin-bottom: 18px; }
+  .poster-copy h2 { font-size: clamp(32px, 9.5vw, 58px); letter-spacing: -.06em; }
+  .hero-description { font-size: 16px; margin-block: 20px 24px; }
+  .hero-actions { gap: 16px; width: 100%; }
+  .hero-actions .salon-button { min-width: 180px; padding-inline: 16px; }
+  .hero-actions .salon-link { font-size: 13px; }
+  .shade-study { display: none; }
+  .campaign-photo img { height: 360px; object-position: 50% 62%; }
+  .campaign-frame figcaption { font-size: 10px; }
+  .atelier-strip { gap: 16px; justify-content: center; padding-inline: 20px; font-size: 20px; }
+  .atelier-strip > :nth-last-child(-n+2) { display: none; }
+  .strip-star { width: 24px; height: 24px; }
+  .salon-section { padding-block: 48px; }
+  .section-heading { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .section-heading .eyebrow { margin-bottom: 16px; }
+  .salon-home h2:not(.poster-copy h2), .booking-banner h2 { font-size: 36px; }
+  .editorial-service { grid-template-columns: 26px minmax(0, 1fr); gap: 12px 14px; padding: 24px 0; }
+  .service-top { padding-top: 4px; }
+  .editorial-service h3 { font-size: 25px; }
+  .editorial-service > p { grid-column: 2; font-size: 14px; max-width: none; }
+  .service-bottom { grid-column: 2; flex-direction: row; justify-content: space-between; align-items: center; padding-top: 8px; gap: 12px; }
+  .service-bottom span:first-child { font-size: 16px; }
+  .service-bottom span:last-child { font-size: 13px; }
+  .catalog-placeholder { flex-direction: column; align-items: flex-start; gap: 20px; padding-block: 28px; }
+  .catalog-placeholder .salon-link { margin-left: 0; }
+  .catalog-placeholder h3 { margin-top: 0; }
+  .catalog-content { padding-bottom: 48px; }
+  .atelier-manifesto { padding-block: 48px; }
+  .manifesto-grid { grid-template-columns: 1fr; gap: 28px; }
+  .salon-home .atelier-manifesto h2 { font-size: 38px; }
+  .manifesto-note { padding-top: 0; }
+  .manifesto-asterisk { width: 60px; height: 60px; margin-bottom: 20px; }
+  .booking-ticket { grid-template-columns: 1fr; gap: 32px; padding-block: 48px; }
+  .ticket-steps { flex-direction: column; gap: 8px; }
+  .ticket-action { padding: 28px; }
+  .ticket-action p { margin-bottom: 24px; }
+  .booking-banner { flex-direction: column; align-items: flex-start; gap: 24px; margin-bottom: 48px; padding-block: 32px; }
+  .booking-banner .salon-button { width: 100%; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-grid nav { gap: 16px; }
+  .footer-wordmark { font-size: 18vw; padding-block: 36px 20px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .booking-heading { padding-block: 32px 28px; }
+  .booking-heading h1 { font-size: 40px; }
+  .booking-layout { padding-bottom: 48px; gap: 24px; }
+  .booking-card { padding: 20px; }
+  .booking-card .calendar-box { padding: 12px 4px; }
+  .booking-card .calendar-day { width: 38px; height: 44px; }
+  .calendar-month { font-size: 14px; }
+  .booking-sidebar { padding: 24px; }
+  .booking-faq { padding-bottom: 48px; }
+  .booking-faq h2 { font-size: 32px; }
+  .salon-login form { padding: 24px; }
+  .salon-login form > .flex.items-center.justify-between { flex-wrap: wrap; gap: 12px; }
+  .salon-login form > .flex.items-center.justify-between > a,
+  .salon-login form > .flex.items-center.justify-between > label { min-height: 44px; display: flex; align-items: center; }
+}
+@media (max-width: 360px) {
+  .salon-shell { width: calc(100% - 32px); }
+  .booking-card { padding: 16px; }
+  .booking-card .calendar-day { width: 32px; }
+  .hero-actions { align-items: flex-start; flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .salon-site *, .salon-site *::before, .salon-site *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .salon-site .reveal, .salon-site .lazy-img { opacity: 1; transform: none; }
+}
+/* Utility routes use the same visual language, not decorative promo cards. */
+.catalog-sign { width: 36px; height: 36px; flex-shrink: 0; color: var(--salon-accent); }
+.shop-empty-mark { width: 56px; height: 56px; margin: 0 auto 24px; color: var(--salon-accent); transform: rotate(-18deg); }
+.salon-login input:not([type=checkbox]) { border-width: 1px; border-color: #a09ba7; border-radius: 0; font-size: 16px; }
+.salon-login button[type=submit] { border-radius: 0; }
+.salon-login button[type=submit]:hover { transform: none; }
+.booking-card .font-serif { font-family: var(--font-inter), Arial, sans-serif; }

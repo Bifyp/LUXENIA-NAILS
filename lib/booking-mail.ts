@@ -1,14 +1,7 @@
-import nodemailer from "nodemailer";
+import { getTransporter } from './smtp';
+import { escapeHtml } from './html';
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT) || 587,
-  secure: Number(process.env.SMTP_PORT) === 465,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+const transporter = getTransporter();
 
 const GOLD = "#C6A667";
 const BG = "#fafaf7";
@@ -55,7 +48,7 @@ function detailRow(label: string, value: string): string {
         ${label}
       </td>
       <td style="padding:10px 0;border-bottom:1px solid ${BORDER};color:${TEXT};font-size:14px;font-weight:600;vertical-align:top;">
-        ${value}
+        ${escapeHtml(value)}
       </td>
     </tr>`;
 }
@@ -66,10 +59,10 @@ function baseTemplate(title: string, preheader: string, body: string): string {
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>${title}</title>
+  <title>${escapeHtml(title)}</title>
 </head>
 <body style="margin:0;padding:0;background:${BG};font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
-  <div style="display:none;max-height:0;overflow:hidden;color:${BG};">${preheader}</div>
+  <div style="display:none;max-height:0;overflow:hidden;color:${BG};">${escapeHtml(preheader)}</div>
   <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};padding:40px 20px;">
     <tr>
       <td align="center">

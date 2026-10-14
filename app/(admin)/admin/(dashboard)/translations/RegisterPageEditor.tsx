@@ -1,10 +1,11 @@
 'use client'
+import Link from "next/link";
 
 import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast } from '@/components/admin/editor-shared'
 
 export default function RegisterPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('RegisterPage')
-  const e = (key: string, tag: any = 'span', className = '', multiline = false) => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '', multiline = false) => (
     <EditableText value={get(key)} tKey={`RegisterPage.${key}`} tag={tag} className={className} onSave={handleSave} multiline={multiline} />
   )
   if (loading) return <EditorLoading />
@@ -92,7 +93,7 @@ export default function RegisterPageEditor() {
             </div>
             <p className="text-center text-gray-400 text-sm py-8 border border-dashed border-gray-200 rounded-xl max-w-6xl mx-auto">
               🔢 Елементи масиву (benefits.items) редагуються в розділі{' '}
-              <a href="/admin/translations" className="text-rose-500 underline">Таблиця переводів</a>{' '}
+              <Link href="/admin/translations" className="text-rose-500 underline">Таблиця переводів</Link>{' '}
               → секція RegisterPage → benefits.items
             </p>
           </div>

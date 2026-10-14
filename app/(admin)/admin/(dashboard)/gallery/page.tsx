@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
@@ -37,11 +38,7 @@ function Toast({ msg, ok }: { msg: string; ok: boolean }) {
 
 function UploadZone({ onUpload, page }: { onUpload: (files: FileList) => void; page: string }) {
   const [isDragActive, setIsDragActive] = useState(false)
-  const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault()
@@ -69,7 +66,7 @@ function UploadZone({ onUpload, page }: { onUpload: (files: FileList) => void; p
       }`}
     >
       <div className="text-4xl mb-2" suppressHydrationWarning>
-        {mounted ? '📸' : null}
+        📸
       </div>
       <p className="text-sm text-gray-600">Перетягніть фото або натисніть для завантаження</p>
       <input
@@ -349,9 +346,7 @@ export default function AdminGalleryPage() {
   const [deleteTarget, setDeleteTarget] = useState<Photo | null>(null)
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null)
   const [activePage, setActivePage] = useState('gallery')
-  const [mounted, setMounted] = useState(false)
 
-  useEffect(() => { setMounted(true) }, [])
 
   const showToast = useCallback((msg: string, ok: boolean) => {
     setToast({ msg, ok })
@@ -379,8 +374,8 @@ export default function AdminGalleryPage() {
 
   const handleFilesAdded = (files: FileList) => {
     const newItems: QueueItem[] = Array.from(files).map((file) => {
-      const uid = (typeof crypto !== 'undefined' && (crypto as any).randomUUID)
-        ? (crypto as any).randomUUID()
+      const uid = (typeof crypto !== 'undefined' && crypto.randomUUID)
+        ? crypto.randomUUID()
         : `${Date.now()}-${Math.random().toString(36).slice(2,9)}`
       return {
         id: uid,
@@ -513,7 +508,7 @@ export default function AdminGalleryPage() {
       })
 
       const text = await res.text()
-      let body: any
+      let body: unknown
       try { body = text ? JSON.parse(text) : {} } catch { body = { text } }
 
       if (res.ok) {
@@ -537,7 +532,7 @@ export default function AdminGalleryPage() {
         <div className="mb-6">
           <span className="text-rose-500 text-xs uppercase tracking-[0.3em] font-semibold mb-2 block">Luxenia</span>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent mb-2">Управління фото</h1>
-          <a href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</a>
+          <Link href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</Link>
         </div>
         <div className="flex gap-2 flex-wrap">
           {PAGES.map((pg) => (
@@ -550,7 +545,7 @@ export default function AdminGalleryPage() {
                   : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
               }`}
             >
-              {mounted ? `${pg.emoji} ${pg.label}` : pg.label}
+              {`${pg.emoji} ${pg.label}`}
             </button>
           ))}
         </div>

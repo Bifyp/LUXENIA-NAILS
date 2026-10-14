@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 import { useState, useEffect } from 'react'
 
@@ -71,12 +72,12 @@ export function EditorToolbar({ savingKey, pageTitle }: { savingKey: string | nu
         {savingKey && (
           <span className="text-indigo-200 text-xs animate-pulse">Перекладаємо RU/PL/EN...</span>
         )}
-        <a
+        <Link
           href="/admin/translations/preview"
           className="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded transition"
         >
           ← Всі сторінки
-        </a>
+        </Link>
       </div>
     </div>
   )
@@ -121,7 +122,6 @@ export function EditableText({
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
 
-  useEffect(() => { setCurrent(value) }, [value])
 
   const handleSave = async () => {
     if (current === value) { setEditing(false); return }
@@ -185,10 +185,10 @@ export function EditableText({
   
     <Tag
       className={`${className} relative group cursor-pointer hover:outline hover:outline-indigo-400/50 hover:outline-offset-1 rounded-sm transition-all`}
-      onClick={() => setEditing(true)}
+      onClick={() => { setCurrent(value); setEditing(true) }}
       title="Натисніть щоб редагувати"
     >
-      {italic ? <em>{current}</em> : current}
+      {italic ? <em>{value}</em> : value}
       {saved && (
         <span className="absolute -top-6 left-0 bg-emerald-500 text-white text-xs px-2 py-0.5 rounded shadow z-10">
           ✓

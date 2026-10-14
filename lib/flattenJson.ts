@@ -65,6 +65,7 @@ export function unflattenSection(entries: FlatEntry[]): Record<string, unknown> 
     }
 
     const parts = key.split('.')
+    if (parts.some((part) => ['__proto__', 'prototype', 'constructor'].includes(part))) throw new Error('Unsafe translation key')
     let current = result
     for (let i = 0; i < parts.length - 1; i++) {
       const part = parts[i]
@@ -86,6 +87,7 @@ export function buildJsonFromEntries(entries: FlatEntry[]): Record<string, unkno
   const bySection: Record<string, FlatEntry[]> = {}
 
   for (const entry of entries) {
+    if (['__proto__', 'prototype', 'constructor'].includes(entry.section)) throw new Error('Unsafe translation section')
     if (!bySection[entry.section]) bySection[entry.section] = []
     bySection[entry.section].push(entry)
   }

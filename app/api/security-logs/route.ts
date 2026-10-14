@@ -1,42 +1,13 @@
 // app/api/security-logs/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/auth"; // NextAuth v5 — auth() вместо getServerSession
+import { adminAccessError } from "@/lib/admin-access"; // NextAuth v5 — auth() вместо getServerSession
 
 // ── Лог-хранилище (in-memory) ─────────────────────────────────
-export interface SecurityLogEntry {
-  id: string;
-  timestamp: string;
-  level: "INFO" | "WARN" | "ERROR" | "SECURITY";
-  ip: string;
-  method: string;
-  path: string;
-  userAgent?: string;
-  userId?: string;
-  reason?: string;
-  statusCode?: number;
-  metadata?: Record<string, unknown>;
-}
-
-const logBuffer: SecurityLogEntry[] = [];
-const MAX_BUFFER = 1000;
-
-export function appendSecurityLog(entry: Omit<SecurityLogEntry, "id">): void {
-  const log: SecurityLogEntry = { id: crypto.randomUUID(), ...entry };
-
-  logBuffer.unshift(log);
-  if (logBuffer.length > MAX_BUFFER) logBuffer.pop();
-
-  const line = `[${log.level}] ${log.timestamp} ${log.method} ${log.path} | IP: ${log.ip}${log.reason ? ` | ${log.reason}` : ""}`;
-  log.level === "SECURITY" || log.level === "ERROR"
-    ? console.error(line)
-    : console.log(line);
-}
+import { logBuffer, getTopIps, appendSecurityLog } from '@/lib/security-logs';
 
 // ── Проверка: только ADMIN ─────────────────────────────────────
 async function requireAdmin() {
-  const session = await auth();
-  if (!session?.user) return false;
-  return (session.user as { role?: string }).role === "admin";
+  return (await adminAccessError()) === null;
 }
 
 // ── GET /api/security-logs ────────────────────────────────────
@@ -98,16 +69,4 @@ export async function DELETE() {
 
   logBuffer.length = 0;
   return NextResponse.json({ ok: true });
-}
-
-// ── Утилиты ───────────────────────────────────────────────────
-function getTopIps(n: number): Array<{ ip: string; count: number }> {
-  const counts: Record<string, number> = {};
-  for (const log of logBuffer) {
-    counts[log.ip] = (counts[log.ip] || 0) + 1;
-  }
-  return Object.entries(counts)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, n)
-    .map(([ip, count]) => ({ ip, count }));
 }

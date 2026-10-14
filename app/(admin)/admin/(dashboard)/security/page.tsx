@@ -40,7 +40,6 @@ export default function SecurityLogsPage() {
   const [autoRefresh, setAutoRefresh] = useState(false);
 
   const fetchLogs = useCallback(async () => {
-    setLoading(true);
     setError(null);
     try {
       const params = new URLSearchParams({
@@ -72,7 +71,20 @@ export default function SecurityLogsPage() {
     }
   }, [page, levelFilter]);
 
-  useEffect(() => { fetchLogs(); }, [fetchLogs]);
+  useEffect(() => {
+    const controller = new AbortController();
+    const params = new URLSearchParams({ limit: '50', page: String(page), ...(levelFilter ? { level: levelFilter } : {}) });
+    fetch(`/api/security-logs?${params}`, { signal: controller.signal })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Load failed');
+        const data = await res.json();
+        setLogs(data.logs ?? []); setStats(data.stats ?? null);
+        setTotalPages(data.pagination?.pages ?? 1); setError(null);
+      })
+      .catch(() => { if (!controller.signal.aborted) setError('Не вдалося завантажити логи'); })
+      .finally(() => { if (!controller.signal.aborted) setLoading(false); });
+    return () => controller.abort();
+  }, [page, levelFilter]);
 
   useEffect(() => {
     if (!autoRefresh) return;

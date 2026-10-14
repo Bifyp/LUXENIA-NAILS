@@ -1,3 +1,5 @@
+> **Updated deployment requirements:** [docs/PRODUCTION.md](docs/PRODUCTION.md) takes precedence over legacy setup/security instructions below. No built-in administrator password exists; do not use old examples.
+
 # Інструкція для користувача - Luxenia
 
 ## Вхід в адмін-панель

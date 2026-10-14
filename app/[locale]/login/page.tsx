@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useTranslations } from 'next-intl';
 import { signIn } from "next-auth/react";
 import { useState } from "react";
@@ -80,9 +81,9 @@ export default function LoginPage() {
                   <input type="checkbox" className="w-4 h-4 accent-rose-500 rounded" />
                   <span className="text-gray-600 text-sm">{t('form.rememberMe')}</span>
                 </label>
-                <a href="/forgot-password" className="text-rose-600 text-sm hover:text-rose-700 font-medium">
+                <Link href="/forgot-password" className="text-rose-600 text-sm hover:text-rose-700 font-medium">
                   {t('form.forgotPassword')}
-                </a>
+                </Link>
               </div>
 
               <button
@@ -94,9 +95,9 @@ export default function LoginPage() {
 
               <p className="text-center text-gray-500 text-sm mt-6">
                 {t('form.noAccount')}{" "}
-                <a href="/register" className="text-rose-600 hover:text-rose-700 font-semibold">
+                <Link href="/register" className="text-rose-600 hover:text-rose-700 font-semibold">
                   {t('form.registerLink')}
-                </a>
+                </Link>
               </p>
             </form>
 
@@ -119,7 +120,7 @@ export default function LoginPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {t.raw('benefits.items').map((benefit: any, idx: number) => (
+            {t.raw('benefits.items').map((benefit: { icon: string; title: string; desc: string }, idx: number) => (
               <div
                 key={idx}
                 className="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"

@@ -207,7 +207,7 @@ export default function AdminDashboardPage() {
                     <tr
                       key={b.id}
                       className="hover:bg-rose-50/30 transition-colors cursor-pointer"
-                      onClick={() => window.location.href = '/admin/bookings'}
+                      onClick={() => window.location.assign(new URL('/admin/bookings', window.location.origin).href)}
                     >
                       <td className="py-3.5 px-5 font-semibold text-gray-900">
                         {b.firstName} {b.lastName}

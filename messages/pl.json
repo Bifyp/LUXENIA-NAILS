@@ -426,7 +426,14 @@
     "sentDescription": "Jeśli taki email istnieje, wysłaliśmy link do odzyskania hasła.",
     "sentTitle": "Email wysłany",
     "submit": "Wyślij link",
-    "title": "Odzyskiwanie hasła"
+    "title": "Odzyskiwanie hasła",
+    "requestError": "Nie udało się wysłać żądania. Sprawdź dane (hasło: 8–72 bajty) lub spróbuj później.",
+    "verificationError": "Kod jest nieprawidłowy lub wygasł. W razie potrzeby poproś o nowy.",
+    "codeDescription": "Jeśli konto istnieje, otrzymasz sześciocyfrowy kod. Wpisz go poniżej w ciągu 10 minut.",
+    "codeLabel": "Kod weryfikacyjny",
+    "newPasswordLabel": "Nowe hasło (minimum 8 znaków)",
+    "resetButton": "Zresetuj hasło",
+    "resetDone": "Hasło zmienione. Możesz się zalogować."
   },
   "GalleryPage": {
     "categories": {
@@ -704,7 +711,9 @@
     "security": {
       "description": "Używamy nowoczesnych technologii szyfrowania do ochrony Twoich danych osobowych. Twoje informacje nigdy nie zostaną udostępnione osobom trzecim bez Twojej zgody.",
       "title": "Twoje dane są chronione"
-    }
+    },
+    "requestError": "Nie udało się wysłać żądania. Sprawdź dane (hasło: 8–72 bajty) lub spróbuj później.",
+    "verificationError": "Kod jest nieprawidłowy lub wygasł. W razie potrzeby poproś o nowy."
   },
   "ServicesPage": {
     "cta": {

@@ -4,7 +4,7 @@ import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast
 
 export default function ForgotPasswordPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('ForgotPasswordPage')
-  const e = (key: string, tag: any = 'span', className = '', multiline = false) => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '', multiline = false) => (
     <EditableText value={get(key)} tKey={`ForgotPasswordPage.${key}`} tag={tag} className={className} onSave={handleSave} multiline={multiline} />
   )
   if (loading) return <EditorLoading />

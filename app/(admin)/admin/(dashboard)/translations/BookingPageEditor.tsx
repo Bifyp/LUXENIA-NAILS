@@ -1,11 +1,12 @@
 'use client'
+import Link from "next/link";
 
 import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast } from '@/components/admin/editor-shared'
 
 export default function BookingPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('BookingPage')
 
-  const e = (key: string, tag: any = 'span', className = '', multiline = false) => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '', multiline = false) => (
     <EditableText value={get(key)} tKey={`BookingPage.${key}`} tag={tag} className={className} onSave={handleSave} multiline={multiline} />
   )
 
@@ -214,7 +215,7 @@ export default function BookingPageEditor() {
               </div>
               <p className="text-center text-gray-400 text-sm py-8 border border-dashed border-gray-200 rounded-xl">
                 🔢 Элементы массива (info.items) редактируются в разделе{' '}
-                <a href="/admin/translations" className="text-rose-500 underline">Таблица переводов</a>{' '}
+                <Link href="/admin/translations" className="text-rose-500 underline">Таблица переводов</Link>{' '}
                 → секция BookingPage → info.items
               </p>
             </div>
@@ -235,7 +236,7 @@ export default function BookingPageEditor() {
               </div>
               <p className="text-center text-gray-400 text-sm py-8 border border-dashed border-gray-200 rounded-xl">
                 🔢 Вопросы FAQ редактируются в разделе{' '}
-                <a href="/admin/translations" className="text-rose-500 underline">Таблица переводов</a>{' '}
+                <Link href="/admin/translations" className="text-rose-500 underline">Таблица переводов</Link>{' '}
                 → секция BookingPage → faq.items
               </p>
             </div>

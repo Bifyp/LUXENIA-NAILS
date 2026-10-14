@@ -400,7 +400,14 @@
     "sentDescription": "If this email exists, we have sent a recovery link.",
     "sentTitle": "Email Sent",
     "submit": "Send Link",
-    "title": "Password Recovery"
+    "title": "Password Recovery",
+    "requestError": "Request failed. Check your input (password: 8–72 bytes) or try again later.",
+    "verificationError": "Invalid or expired code. Request a new code if necessary.",
+    "codeDescription": "If an account exists, a six-digit code will be sent. Enter it below within 10 minutes.",
+    "codeLabel": "Verification code",
+    "newPasswordLabel": "New password (at least 8 characters)",
+    "resetButton": "Reset password",
+    "resetDone": "Password updated. You can now sign in."
   },
   "GalleryPage": {
     "categories": {
@@ -678,7 +685,9 @@
     "security": {
       "description": "We use modern encryption technologies to protect your personal data. Your information will never be shared with third parties without your consent.",
       "title": "Your Data is Protected"
-    }
+    },
+    "requestError": "Request failed. Check your input (password: 8–72 bytes) or try again later.",
+    "verificationError": "Invalid or expired code. Request a new code if necessary."
   },
   "ServicesPage": {
     "cta": {

@@ -1,0 +1,23 @@
+services:
+  app:
+    build: .
+    init: true
+    restart: unless-stopped
+    env_file: .env.production
+    environment:
+      DATABASE_URL: file:/var/lib/luxenia/app.db
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - luxenia-data:/var/lib/luxenia
+    read_only: true
+    tmpfs:
+      - /tmp:uid=1000,gid=1000,mode=1777
+      - /app/.next/cache:uid=1000,gid=1000,mode=0755
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    stop_grace_period: 30s
+volumes:
+  luxenia-data:

@@ -1,40 +1,22 @@
-// app/api/register/route.ts
-import { NextRequest } from "next/server";
-import { PrismaClient } from "@prisma/client";
-import { sendEmailCode } from "@/lib/mail";
-import { withRateLimit, LIMITS } from "@/lib/rate-limiter";
-
-const prisma = new PrismaClient();
-
+import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
+import { registerSchema } from '@/lib/validations';
+import { issueEmailCode } from '@/lib/email-codes';
+import { withRateLimit, LIMITS } from '@/lib/rate-limiter';
+import { createLogger } from '@/lib/logger';
+const logger = createLogger('registration');
 export async function POST(req: NextRequest) {
-  // 5 попыток регистрации за 15 минут с одного IP
   const limited = await withRateLimit(req, LIMITS.auth);
   if (limited) return limited;
-
-  const { email, password } = await req.json();
-
-  const existing = await prisma.user.findUnique({ where: { email } });
-  if (existing) {
-    return new Response(JSON.stringify({ error: "User already exists" }), { status: 400 });
-  }
-
-  const code = Math.floor(100000 + Math.random() * 900000).toString();
-
-  await prisma.emailCode.create({
-    data: {
-      email,
-      code,
-      expiresAt: new Date(Date.now() + 5 * 60 * 1000),
-    },
-  });
-
+  const input = registerSchema.safeParse(await req.json().catch(() => null));
+  if (!input.success) return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
   try {
-    await sendEmailCode(email, code);
-    console.log("✅ Письмо отправлено на", email);
+    const existing = await prisma.user.findUnique({ where: { email: input.data.email } });
+    if (!existing) await issueEmailCode(input.data.email, 'registration');
+    // Same response for existing addresses; no unverified registration bypass.
+    return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("❌ Ошибка отправки письма:", err);
-    return new Response(JSON.stringify({ error: "MAIL_FAILED", details: String(err) }), { status: 500 });
+    logger.error({ err }, 'Registration failed');
+    return NextResponse.json({ error: 'Request failed' }, { status: 500 });
   }
-
-  return new Response(JSON.stringify({ ok: true }));
 }

@@ -12,24 +12,27 @@ export default function ShopPageEditor() {
   })
   const [saving, setSaving] = useState(false)
 
-  useEffect(() => {
-    loadTranslations()
-  }, [lang])
 
-  async function loadTranslations() {
-    const res = await fetch(`/api/admin/translations?lang=${lang}&section=ShopPage`)
-    const json = await res.json()
-    if (json.translations) {
-      const obj: any = { hero: {}, empty: {}, filters: {}, product: {} }
-      json.translations.forEach((t: any) => {
-        const parts = t.key.split('.')
-        if (parts.length === 2) {
-          obj[parts[0]][parts[1]] = t.value
-        }
+
+  const [error, setError] = useState('')
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch(`/api/admin/translations?lang=${lang}`, { signal: controller.signal })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Load failed')
+        const json: { sections: Record<string, Record<string, string>> } = await res.json()
+        const fields = json.sections.ShopPage || {}
+        setData({
+          hero: { title: fields['hero.title'] || '', subtitle: fields['hero.subtitle'] || '', description: fields['hero.description'] || '' },
+          empty: { title: fields['empty.title'] || '', subtitle: fields['empty.subtitle'] || '' },
+          filters: { all: fields['filters.all'] || '' },
+          product: { order: fields['product.order'] || '', inStock: fields['product.inStock'] || '', outOfStock: fields['product.outOfStock'] || '', featured: fields['product.featured'] || '' },
+        })
+        setError('')
       })
-      setData(obj)
-    }
-  }
+      .catch(() => { if (!controller.signal.aborted) setError('Не вдалося завантажити переклади') })
+    return () => controller.abort()
+  }, [lang])
 
   async function handleSave() {
     setSaving(true)
@@ -46,18 +49,23 @@ export default function ShopPageEditor() {
       { key: 'product.featured', value: data.product.featured },
     ]
 
-    await fetch('/api/admin/translations/bulk', {
+    try {
+    const result = await fetch('/api/admin/translations/bulk', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ lang, section: 'ShopPage', translations }),
     })
 
-    setSaving(false)
+    if (!result.ok) throw new Error('Save failed')
+    setError('')
     alert('Збережено!')
+    } catch { setError('Не вдалося зберегти переклади') }
+    finally { setSaving(false) }
   }
 
   return (
     <div className="space-y-8">
+      {error && <p role="alert" className="text-red-600">{error}</p>}
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-gray-800">Магазин</h2>
         <select
@@ -174,7 +182,7 @@ export default function ShopPageEditor() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Кнопка "Замовити"</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Кнопка &quot;Замовити&quot;</label>
           <input
             type="text"
             value={data.product.order}

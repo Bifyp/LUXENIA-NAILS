@@ -1,11 +1,12 @@
 'use client'
+import Link from "next/link";
 
 import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast } from '@/components/admin/editor-shared'
 
 export default function ContactPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('ContactPage')
 
-  const e = (key: string, tag: any = 'span', className = '', multiline = false) => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '', multiline = false) => (
     <EditableText value={get(key)} tKey={`ContactPage.${key}`} tag={tag} className={className} onSave={handleSave} multiline={multiline} />
   )
 
@@ -30,14 +31,14 @@ export default function ContactPageEditor() {
                 {e('hero.title', 'h1', 'text-5xl md:text-7xl font-bold text-white')}
               </h1>
               <p className="text-xl text-white/90 mb-12 leading-relaxed">
-                Зв'яжіться з нами будь-яким зручним способом
+                Зв&apos;яжіться з нами будь-яким зручним способом
               </p>
 
               {/* Quick Contact Cards */}
               <div className="space-y-4">
                 <p className="text-white/70 text-sm mb-4">
                   🔢 Контактна інформація (contactInfo.items) редактується в{' '}
-                  <a href="/admin/translations" className="text-white underline">Таблиці переводів</a>
+                  <Link href="/admin/translations" className="text-white underline">Таблиці переводів</Link>
                 </p>
               </div>
             </div>
@@ -147,7 +148,7 @@ export default function ContactPageEditor() {
                     <h3 className="text-2xl font-bold text-gray-800 mb-6">{e('hours.weekdays.title', 'h3', 'text-2xl font-bold text-gray-800')}</h3>
                     <p className="text-gray-400 text-sm">
                       🔢 Розклад (weekdays.schedule) редактується в{' '}
-                      <a href="/admin/translations" className="text-rose-500 underline">Таблиці переводів</a>
+                      <Link href="/admin/translations" className="text-rose-500 underline">Таблиці переводів</Link>
                     </p>
                   </div>
                 </div>

@@ -1,6 +1,8 @@
+import { withRateLimit, LIMITS } from '@/lib/rate-limiter'
+import { adminAccessError } from '@/lib/admin-access';
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { v2 as cloudinary } from 'cloudinary'
+import { v2 as cloudinary, type UploadApiResponse } from 'cloudinary'
 
 // Надёжная загрузка конфигурации Cloudinary (серверные переменные)
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
@@ -17,6 +19,11 @@ if (cloudinaryUrl) {
 }
 
 export async function POST(req: NextRequest) {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
+  const limited = await withRateLimit(req, LIMITS.upload)
+  if (limited) return limited
+  if (Number(req.headers.get('content-length')) > 6 * 1024 * 1024) return NextResponse.json({ error: 'Upload too large' }, { status: 413 })
   try {
     const formData = await req.formData()
     const file = formData.get('file') as File | null
@@ -27,6 +34,10 @@ export async function POST(req: NextRequest) {
     if (!file) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 })
     }
+
+    if (!(file instanceof File) || file.size > 5 * 1024 * 1024) return NextResponse.json({ error: 'Image too large' }, { status: 413 })
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) return NextResponse.json({ error: 'Unsupported image type' }, { status: 415 })
+    if (!['gallery', 'home', 'about', 'about-studio', 'services', 'testimonials'].includes(page) || alt.length > 200 || category.length > 100) return NextResponse.json({ error: 'Invalid metadata' }, { status: 400 })
 
     // вычисляем следующий order
     const agg = await prisma.gallery.aggregate({
@@ -39,12 +50,13 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
 
-    const uploadResult: any = await new Promise((resolve, reject) => {
+    const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
-        { folder: 'gallery', resource_type: 'auto' },
+        { folder: 'gallery', resource_type: 'image', allowed_formats: ['jpg', 'jpeg', 'png', 'webp'] },
         (error, result) => {
           if (error) reject(error)
-          else resolve(result)
+          else if (result) resolve(result)
+          else reject(new Error("Empty upload result"))
         }
       )
       uploadStream.end(buffer)

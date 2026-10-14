@@ -1,10 +1,11 @@
 'use client'
+import Link from "next/link";
 
 import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast } from '@/components/admin/editor-shared'
 
 export default function LoginPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('LoginPage')
-  const e = (key: string, tag: any = 'span', className = '') => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '') => (
     <EditableText value={get(key)} tKey={`LoginPage.${key}`} tag={tag} className={className} onSave={handleSave} />
   )
   if (loading) return <EditorLoading />
@@ -112,7 +113,7 @@ export default function LoginPageEditor() {
 
             <p className="text-center text-gray-400 text-sm py-8 border border-dashed border-gray-200 rounded-xl max-w-5xl mx-auto">
               🔢 Елементи масиву (benefits.items) редагуються в розділі{' '}
-              <a href="/admin/translations" className="text-rose-500 underline">Таблиця переводів</a>{' '}
+              <Link href="/admin/translations" className="text-rose-500 underline">Таблиця переводів</Link>{' '}
               → секція LoginPage → benefits.items
             </p>
           </div>

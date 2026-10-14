@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 import { useState, useEffect, useCallback } from 'react'
 
@@ -268,7 +269,6 @@ export default function AdminServicesPage() {
   }
 
   const load = useCallback(async () => {
-    setLoading(true)
     try {
       const res = await fetch('/api/admin/services')
       const data = await res.json()
@@ -279,7 +279,19 @@ export default function AdminServicesPage() {
     setLoading(false)
   }, [])
 
-  useEffect(() => { load() }, [load])
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch('/api/admin/services', { signal: controller.signal })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Load failed')
+        const data = await res.json()
+        setServices(data.services || [])
+
+      })
+      .catch(() => { if (!controller.signal.aborted) setToast({ msg: '❌ Помилка завантаження', ok: false }) })
+      .finally(() => { if (!controller.signal.aborted) setLoading(false) })
+    return () => controller.abort()
+  }, [])
 
   const handleSave = async (form: FormData, id?: string) => {
     try {
@@ -364,12 +376,12 @@ export default function AdminServicesPage() {
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <a
+            <Link
               href="/admin"
               className="text-sm text-rose-500 hover:text-rose-600 transition-colors flex items-center gap-1 font-medium"
             >
               ← Адмін-панель
-            </a>
+            </Link>
             <button
               onClick={() => setModal(EMPTY_FORM)}
               className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-2xl text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all"

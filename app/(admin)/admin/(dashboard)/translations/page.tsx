@@ -1,3 +1,4 @@
+import Link from "next/link";
 import TranslationEditor from '@/components/admin/TranslationEditor'
 
 export default function TranslationsPage() {
@@ -11,15 +12,15 @@ export default function TranslationsPage() {
             <p className="text-gray-500 text-sm mt-1.5">Управління текстами сайту</p>
           </div>
           <div className="flex items-center gap-3">
-            <a href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</a>
-            <a
+            <Link href="/admin" className="text-sm text-rose-500 hover:text-rose-600 transition-colors font-medium">← Адмін-панель</Link>
+            <Link
               href="/admin/translations/preview"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-sm font-semibold rounded-2xl hover:shadow-lg hover:scale-105 transition-all"
             >
               👁 Відкрити сторінки
-            </a>
+            </Link>
           </div>
         </div>
       </header>

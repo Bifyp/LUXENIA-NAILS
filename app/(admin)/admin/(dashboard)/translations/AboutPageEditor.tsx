@@ -1,11 +1,12 @@
 'use client'
+import Link from "next/link";
 
 import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast } from '@/components/admin/editor-shared'
 
 export default function AboutPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('AboutPage')
 
-  const e = (key: string, tag: any = 'span', className = '', italic = false, multiline = false) => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '', italic = false, multiline = false) => (
     <EditableText value={get(key)} tKey={`AboutPage.${key}`} tag={tag} className={className} onSave={handleSave} italic={italic} multiline={multiline} />
   )
 
@@ -117,7 +118,7 @@ export default function AboutPageEditor() {
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">{e('master.certificatesTitle', 'h3', 'text-2xl font-bold text-gray-800')}</h3>
                 <p className="text-center text-gray-400 text-sm py-8 border border-dashed border-gray-200 rounded-xl">
                   🔢 Элементы массива (сертификаты) редактируются в разделе{' '}
-                  <a href="/admin/translations" className="text-rose-500 underline">Таблица переводов</a>{' '}
+                  <Link href="/admin/translations" className="text-rose-500 underline">Таблица переводов</Link>{' '}
                   → секция AboutPage → master.certificates
                 </p>
               </div>
@@ -139,7 +140,7 @@ export default function AboutPageEditor() {
 
             <p className="text-center text-gray-400 text-sm py-8 border border-dashed border-gray-200 rounded-xl max-w-6xl mx-auto">
               🔢 Элементы массива (ценности) редактируются в разделе{' '}
-              <a href="/admin/translations" className="text-rose-500 underline">Таблица переводов</a>{' '}
+              <Link href="/admin/translations" className="text-rose-500 underline">Таблица переводов</Link>{' '}
               → секция AboutPage → values.items
             </p>
           </div>
@@ -169,7 +170,7 @@ export default function AboutPageEditor() {
                   <div className="mb-8">
                     <p className="text-gray-400 text-sm py-4 border border-dashed border-white/20 rounded-xl px-4">
                       🔢 Элементы массива (особенности студии) редактируются в разделе{' '}
-                      <a href="/admin/translations" className="text-rose-400 underline">Таблица переводов</a>{' '}
+                      <Link href="/admin/translations" className="text-rose-400 underline">Таблица переводов</Link>{' '}
                       → секция AboutPage → studio.features
                     </p>
                   </div>

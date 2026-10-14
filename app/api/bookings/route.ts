@@ -1,3 +1,7 @@
+import { auth } from '@/auth';
+import { validBookingDay, availableBookingSlot } from '@/lib/booking-rules';
+import { withRateLimit, LIMITS } from '@/lib/rate-limiter';
+import { Prisma } from '@prisma/client';
 // app/api/bookings/route.ts
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
@@ -12,9 +16,9 @@ const bookingSchema = z.object({
   firstName: z.string().min(1).max(100),
   lastName: z.string().min(1).max(100),
   phone: z.string().min(7).max(20),
-  email: z.string().email(),
+  email: z.string().trim().email().max(254).toLowerCase(),
   serviceName: z.string().min(1).max(200),
-  date: z.string().refine((d) => !isNaN(Date.parse(d)), { message: "Invalid date" }),
+  date: z.string().refine(validBookingDay, { message: "Use a valid YYYY-MM-DD calendar date" }),
   time: z.string().regex(/^\d{2}:\d{2}$/, "Time must be HH:MM"),
   comment: z.string().max(1000).optional(),
 });
@@ -24,7 +28,7 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const date = searchParams.get("date");
 
-  if (!date || isNaN(Date.parse(date))) {
+  if (!date || !validBookingDay(date)) {
     return NextResponse.json({ error: "Valid date required" }, { status: 400 });
   }
 
@@ -45,6 +49,8 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  const limited = await withRateLimit(req, LIMITS.booking);
+  if (limited) return limited;
   // ✅ FIX: валидация входных данных
   let data: z.infer<typeof bookingSchema>;
   try {
@@ -57,6 +63,8 @@ export async function POST(req: Request) {
   }
 
   const { firstName, lastName, phone, email, serviceName, date, time, comment } = data;
+
+  if (!availableBookingSlot(date, time)) return NextResponse.json({ error: 'Invalid or past slot' }, { status: 400 });
 
   try {
     const existing = await prisma.booking.findFirst({
@@ -71,8 +79,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "slot_taken" }, { status: 409 });
     }
 
+    const session = await auth();
+    const account = session?.user?.id ? await prisma.user.findUnique({ where: { id: session.user.id }, select: { id: true, email: true, emailVerified: true } }) : null;
     const booking = await prisma.booking.create({
       data: {
+        userId: account?.emailVerified && account.email === email ? account.id : null,
         firstName, lastName, phone, email, serviceName,
         date: new Date(date), time, comment, status: "pending",
       },
@@ -97,8 +108,11 @@ export async function POST(req: Request) {
       // Не возвращаем ошибку — букинг создан успешно, письмо второстепенно
     }
 
-    return NextResponse.json({ success: true, booking });
+    return NextResponse.json({ success: true, booking: { id: booking.id, date: booking.date, time: booking.time, status: booking.status } }, { status: 201 });
   } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
+      return NextResponse.json({ error: 'slot_taken' }, { status: 409 });
+    }
     logger.error(err, "Failed to create booking");
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }

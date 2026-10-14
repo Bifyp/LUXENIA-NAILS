@@ -1,0 +1,20 @@
+import { afterAll, it, expect, vi } from 'vitest';
+import type { NextAuthConfig } from 'next-auth';
+import type { JWT } from 'next-auth/jwt';
+import { createHash } from 'node:crypto';
+const captured = vi.hoisted(() => ({ config: undefined as NextAuthConfig | undefined }));
+vi.mock('next-auth', () => ({ default: (config: NextAuthConfig) => { captured.config = config; return { handlers: {}, auth: async () => null, signIn: vi.fn(), signOut: vi.fn() }; } }));
+import '@/auth';
+import { prisma } from '@/lib/prisma';
+afterAll(() => prisma.$disconnect());
+it('invalidates old JWTs after password changes and refreshes role from the database', async () => {
+  const user = await prisma.user.create({ data: { email: 'jwt-test@example.com', password: 'hash-before', role: 'admin' } });
+  const token = { id: user.id, role: 'admin', passwordVersion: createHash('sha256').update('hash-before').digest('hex') };
+  const callback = captured.config?.callbacks?.jwt as (params: { token: JWT }) => Promise<JWT | null>;
+  expect((await callback({ token: { ...token } }))?.role).toBe('admin');
+  await prisma.user.update({ where: { id: user.id }, data: { role: 'user' } });
+  expect((await callback({ token: { ...token } }))?.role).toBe('user');
+  await prisma.user.update({ where: { id: user.id }, data: { password: 'hash-after' } });
+  expect(await callback({ token: { ...token } })).toBeNull();
+  await prisma.user.delete({ where: { id: user.id } });
+});

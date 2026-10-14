@@ -1,3 +1,4 @@
+import Link from "next/link";
 interface Props {
   params: { id: string };
 }
@@ -18,9 +19,9 @@ export default function ServicePage({ params }: Props) {
         материалы, противопоказания и рекомендации.
       </p>
 
-      <a href="/booking" className="btn-primary inline-block">
+      <Link href="/booking" className="btn-primary inline-block">
         Записаться
-      </a>
+      </Link>
     </div>
   );
 }

@@ -94,85 +94,6 @@ function TranslationField({
 
 // ─── Компонент секции ─────────────────────────────────────────────────────────
 
-function SectionBlock({
-  sectionName,
-  state,
-  onFieldChange,
-  onSave,
-  onReset,
-}: {
-  sectionName: string
-  state: SectionState
-  onFieldChange: (section: string, key: string, value: string) => void
-  onSave: (section: string) => void
-  onReset: (section: string) => void
-}) {
-  const { edited, isDirty, isSaving, savedKeys } = state
-  const keys = Object.keys(edited)
-
-  return (
-    <div className="overflow-hidden rounded-xl border border-gray-200 bg-gray-50 shadow-sm">
-      {/* Шапка секции */}
-      <div className="flex items-center justify-between border-b border-gray-200 bg-white px-5 py-4">
-        <div className="flex items-center gap-3">
-          <h3 className="text-base font-semibold text-gray-800">{sectionName}</h3>
-          <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs text-gray-500">
-            {keys.length} ключей
-          </span>
-          {isDirty && (
-            <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-700">
-              Есть изменения
-            </span>
-          )}
-        </div>
-
-        <div className="flex items-center gap-2">
-          {isDirty && (
-            <button
-              onClick={() => onReset(sectionName)}
-              disabled={isSaving}
-              className="rounded-lg px-3 py-1.5 text-sm text-gray-500 transition hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50"
-            >
-              Сбросить
-            </button>
-          )}
-          <button
-            onClick={() => onSave(sectionName)}
-            disabled={!isDirty || isSaving}
-            className="flex items-center gap-2 rounded-lg bg-rose-600 px-4 py-1.5 text-sm font-medium text-white transition hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {isSaving ? (
-              <>
-                <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                </svg>
-                Перевод...
-              </>
-            ) : (
-              'Сохранить и перевести'
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Поля */}
-      <div className="grid gap-3 p-5 sm:grid-cols-2">
-        {keys.map((key) => (
-          <TranslationField
-            key={key}
-            fieldKey={key}
-            value={edited[key]}
-            saved={savedKeys.has(key)}
-            onChange={(k, v) => onFieldChange(sectionName, k, v)}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-// ─── Основной компонент ───────────────────────────────────────────────────────
 
 export default function TranslationEditor() {
   const [state, setState] = useState<State>({})
@@ -186,8 +107,6 @@ export default function TranslationEditor() {
   // ── Загрузка данных ──
 
   const fetchTranslations = useCallback(async () => {
-    setLoading(true)
-    setFetchError(null)
     try {
       const res = await fetch('/api/admin/translations')
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -204,6 +123,7 @@ export default function TranslationEditor() {
           errors: {},
         }
       }
+      setFetchError(null)
       setState(newState)
       // По умолчанию открываем первые 3 секции
       setExpandedSections(new Set(Object.keys(newState).slice(0, 3)))
@@ -216,8 +136,21 @@ export default function TranslationEditor() {
   }, [])
 
   useEffect(() => {
-    fetchTranslations()
-  }, [fetchTranslations])
+    const controller = new AbortController()
+    fetch('/api/admin/translations', { signal: controller.signal })
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Load failed')
+        const data: { sections: SectionsData } = await res.json()
+        const next: State = {}
+        for (const [section, keys] of Object.entries(data.sections)) {
+          next[section] = { original: { ...keys }, edited: { ...keys }, isDirty: false, isSaving: false, savedKeys: new Set(), errors: {} }
+        }
+        setState(next); setExpandedSections(new Set(Object.keys(next).slice(0, 3))); setFetchError(null)
+      })
+      .catch(() => { if (!controller.signal.aborted) setFetchError('Не удалось загрузить переводы.') })
+      .finally(() => { if (!controller.signal.aborted) setLoading(false) })
+    return () => controller.abort()
+  }, [])
 
   // ── Тост-уведомления ──
 
@@ -345,7 +278,8 @@ export default function TranslationEditor() {
   const toggleSection = (section: string) => {
     setExpandedSections((prev) => {
       const next = new Set(prev)
-      next.has(section) ? next.delete(section) : next.add(section)
+      if (next.has(section)) next.delete(section)
+      else next.add(section)
       return next
     })
   }

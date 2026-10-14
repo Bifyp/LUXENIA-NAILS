@@ -1,10 +1,11 @@
 import createNextIntlPlugin from 'next-intl/plugin';
-import type { NextConfig } from "next";
 
 const withNextIntl = createNextIntlPlugin();
 
-const nextConfig: NextConfig = {
-  experimental: {},
+/** @type {import("next").NextConfig} */
+const nextConfig = {
+  poweredByHeader: false,
+  turbopack: { root: process.cwd() },
   images: {
     remotePatterns: [
       {
@@ -14,11 +15,5 @@ const nextConfig: NextConfig = {
     ],
   },
 };
-
-export const authConfig = {
-  trustHost: true,
-  // или
-  basePath: "/api/auth"
-}
 
 export default withNextIntl(nextConfig);

@@ -1,13 +1,16 @@
+import { POST as createBooking } from '@/app/api/bookings/route';
+import { adminAccessError } from '@/lib/admin-access';
 // app/api/admin/bookings/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { sendNewBookingEmails, formatBookingDate } from "@/lib/booking-mail";
 
 export async function GET(req: NextRequest) {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
   try {
     const { searchParams } = new URL(req.url)
     const status = searchParams.get('status')
-    const limit = Number(searchParams.get('limit')) || 100
+    const limit = Math.min(500, Math.max(1, Number(searchParams.get('limit')) || 100))
 
     const bookings = await prisma.booking.findMany({
       where: status && status !== 'all' ? { status } : undefined,
@@ -28,37 +31,8 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function POST(req: Request) {
-  const data = await req.json();
-  const { firstName, lastName, phone, email, serviceName, date, time, comment } = data;
-
-  const existing = await prisma.booking.findFirst({
-    where: {
-      date: new Date(date),
-      time,
-      status: { not: "cancelled" },
-    },
-  });
-
-  if (existing) {
-    return NextResponse.json({ error: "slot_taken" }, { status: 409 });
-  }
-
-  const booking = await prisma.booking.create({
-    data: {
-      firstName, lastName, phone, email, serviceName,
-      date: new Date(date), time, comment, status: "pending",
-    },
-  });
-
-  const service = await prisma.service.findFirst({ where: { title: serviceName } });
-
-  sendNewBookingEmails({
-    firstName, lastName, phone, email, serviceName,
-    servicePrice: service?.price ?? undefined,
-    date: formatBookingDate(booking.date),
-    time, comment: comment || undefined,
-  }).catch((err) => console.error("[booking-mail]", err));
-
-  return NextResponse.json({ success: true, booking });
+export async function POST(req: NextRequest) {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
+  return createBooking(req);
 }

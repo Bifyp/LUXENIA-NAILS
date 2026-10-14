@@ -1,10 +1,11 @@
 'use client'
+import Link from "next/link";
 
 import { useTranslationEditor, EditableText, EditorToolbar, EditorLoading, Toast } from '@/components/admin/editor-shared'
 
 export default function ServicesPageEditor() {
   const { get, loading, savingKey, toast, handleSave } = useTranslationEditor('ServicesPage')
-  const e = (key: string, tag: any = 'span', className = '', multiline = false) => (
+  const e = (key: string, tag: React.ComponentProps<typeof EditableText>['tag'] = 'span', className = '', multiline = false) => (
     <EditableText value={get(key)} tKey={`ServicesPage.${key}`} tag={tag} className={className} onSave={handleSave} multiline={multiline} />
   )
   if (loading) return <EditorLoading />
@@ -37,7 +38,7 @@ export default function ServicesPageEditor() {
 
         <div className="container pb-32 -mt-16 relative z-10 px-6">
           <p className="text-center text-gray-400 text-sm py-8 border border-dashed border-gray-200 rounded-xl max-w-4xl mx-auto bg-white">
-            💅 Послуги керуються через <a href="/admin/services" className="text-rose-500 underline">Адмін-панель → Послуги</a>
+            💅 Послуги керуються через <Link href="/admin/services" className="text-rose-500 underline">Адмін-панель → Послуги</Link>
           </p>
 
           <div className="mt-12 text-center">

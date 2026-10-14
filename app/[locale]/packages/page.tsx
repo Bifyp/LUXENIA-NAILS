@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
 
@@ -80,7 +81,7 @@ export default function PackagesPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {packages.map((pkg, idx) => (
+            {packages.map((pkg) => (
               <div
                 key={pkg.id}
                 className={`relative rounded-3xl overflow-hidden transition-all duration-500 ${
@@ -144,7 +145,7 @@ export default function PackagesPage() {
                     </ul>
                   )}
 
-                  <a
+                  <Link
                     href="/booking"
                     className={`inline-flex items-center justify-center gap-2 w-full px-8 py-4 rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg ${
                       pkg.popular
@@ -156,7 +157,7 @@ export default function PackagesPage() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}

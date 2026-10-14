@@ -1,148 +1,51 @@
-// lib/rate-limiter.ts
-// Redis sliding window rate limiter для route handlers
-// (middleware использует in-memory из-за edge runtime ограничений)
-
-import { createClient } from 'redis';
-import { NextRequest, NextResponse } from 'next/server';
-import { createLogger } from './logger';
+import { NextResponse } from 'next/server';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
-
-const log = createLogger('rate-limiter');
-
-// ── Redis singleton ───────────────────────────────────────────
-let redisClient: ReturnType<typeof createClient> | null = null;
-
-async function getRedis() {
-  if (!redisClient) {
-    redisClient = createClient({ url: process.env.REDIS_URL ?? 'redis://localhost:6379' });
-    redisClient.on('error', (err) => log.error({ err }, 'Redis error'));
-    await redisClient.connect();
-  }
-  return redisClient;
-}
-
-// ── Types ─────────────────────────────────────────────────────
-export interface RateLimitConfig {
-  windowMs: number;
-  max: number;
-  keyPrefix?: string;
-}
-
-export interface RateLimitResult {
-  allowed: boolean;
-  remaining: number;
-  resetAt: number;
-  total: number;
-}
-
-// ── In-memory fallback ────────────────────────────────────────
-const memStore = new Map<string, { count: number; resetAt: number }>();
-
-function checkMemoryLimit(
-  identifier: string,
-  config: RateLimitConfig,
-): RateLimitResult {
-  const now = Date.now();
-  const key = config.keyPrefix ? `${config.keyPrefix}:${identifier}` : identifier;
-  const entry = memStore.get(key);
-
-  if (!entry || now > entry.resetAt) {
-    memStore.set(key, { count: 1, resetAt: now + config.windowMs });
-    return { allowed: true, remaining: config.max - 1, resetAt: now + config.windowMs, total: 1 };
-  }
-
-  entry.count += 1;
-  if (entry.count > config.max) {
-    return { allowed: false, remaining: 0, resetAt: entry.resetAt, total: entry.count };
-  }
-
-  return { allowed: true, remaining: config.max - entry.count, resetAt: entry.resetAt, total: entry.count };
-}
-
-// ── Upstash Redis (если есть переменные) ──────────────────────
-let upstashLimiter: Ratelimit | null = null;
-
-if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
-  try {
-    const redis = new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN,
-    });
-    upstashLimiter = new Ratelimit({
-      redis,
-      limiter: Ratelimit.slidingWindow(100, '1 m'),
-    });
-    log.info('Upstash rate limiter initialized');
-  } catch (e) {
-    log.warn({ err: e }, 'Failed to initialize Upstash rate limiter, falling back to memory');
-  }
-} else {
-  log.info('UPSTASH_REDIS_REST_URL/TOKEN not set, using in-memory rate limiter');
-}
-
-// ── Main rate limit function ──────────────────────────────────
-export async function checkRateLimit(
-  identifier: string,
-  config: RateLimitConfig,
-): Promise<RateLimitResult> {
-  if (upstashLimiter) {
+import { createLogger } from './logger';
+const log = createLogger('rate-limit');
+export interface RateLimitConfig { windowMs: number; max: number; keyPrefix?: string }
+export interface RateLimitResult { allowed: boolean; remaining: number; resetAt: number; total: number }
+const memory = new Map<string, { count: number; resetAt: number }>();
+const limiters = new Map<string, Ratelimit>();
+const redis = process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN ? new Redis({ url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN }) : null;
+export async function checkRateLimit(identifier: string, config: RateLimitConfig): Promise<RateLimitResult> {
+  const key = `${config.keyPrefix || 'rl'}:${config.max}:${config.windowMs}:${identifier}`;
+  if (redis) {
+    const policy = `${config.keyPrefix}:${config.max}:${config.windowMs}`;
+    let limiter = limiters.get(policy);
+    if (!limiter) { limiter = new Ratelimit({ redis, prefix: `luxenia:${policy}`, limiter: Ratelimit.slidingWindow(config.max, `${config.windowMs} ms`) }); limiters.set(policy, limiter); }
     try {
-      const { success, remaining, reset } = await upstashLimiter.limit(identifier);
-      const resetAt = reset;
-      return {
-        allowed: success,
-        remaining: Math.max(0, remaining),
-        resetAt,
-        total: 0,
-      };
-    } catch (e) {
-      log.error({ err: e }, 'Upstash error, falling back to memory');
+      const result = await limiter.limit(identifier);
+      return { allowed: result.success, remaining: result.remaining, resetAt: result.reset, total: 0 };
+    } catch (err) {
+      log.error({ err }, 'Rate limit storage unavailable');
+      if (process.env.NODE_ENV === 'production') return { allowed: false, remaining: 0, resetAt: Date.now() + 60000, total: 0 };
     }
+  } else if (process.env.NODE_ENV === 'production') {
+    return { allowed: false, remaining: 0, resetAt: Date.now() + 60000, total: 0 };
   }
-
-  return checkMemoryLimit(identifier, config);
+  const now = Date.now();
+  for (const [k, v] of memory) if (v.resetAt <= now) memory.delete(k);
+  if (memory.size >= 10000 && !memory.has(key)) return { allowed: false, remaining: 0, resetAt: now + config.windowMs, total: 0 };
+  const entry = memory.get(key) || { count: 0, resetAt: now + config.windowMs };
+  entry.count++; memory.set(key, entry);
+  return { allowed: entry.count <= config.max, remaining: Math.max(0, config.max - entry.count), resetAt: entry.resetAt, total: entry.count };
 }
-
-// ── Хелпер для route handlers ─────────────────────────────────
-export async function withRateLimit(
-  request: NextRequest,
-  config: RateLimitConfig,
-): Promise<NextResponse | null> {
-  const ip =
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-    request.headers.get('x-real-ip') ??
-    'unknown';
-
-  const result = await checkRateLimit(ip, config);
-
-  if (!result.allowed) {
-    log.warn({ ip, path: request.nextUrl.pathname }, 'Rate limit exceeded');
-
-    return new NextResponse(JSON.stringify({ error: 'Too Many Requests' }), {
-      status: 429,
-      headers: {
-        'Content-Type': 'application/json',
-        'Retry-After': String(Math.ceil((result.resetAt - Date.now()) / 1000)),
-        'X-RateLimit-Limit': String(config.max),
-        'X-RateLimit-Remaining': '0',
-        'X-RateLimit-Reset': String(result.resetAt),
-      },
-    });
-  }
-
-  return null;
+// Enable only when the reverse proxy overwrites forwarded headers and direct access is blocked.
+export function clientIp(request: Request) {
+  return process.env.TRUST_PROXY === '1' ? request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || request.headers.get('x-real-ip') || 'unknown' : 'untrusted';
 }
-
-// ── Готовые конфиги ───────────────────────────────────────────
+export async function withRateLimit(request: Request, config: RateLimitConfig): Promise<NextResponse | null> {
+  const result = await checkRateLimit(clientIp(request), config);
+  if (result.allowed) return null;
+  return NextResponse.json({ error: 'Too Many Requests' }, { status: 429, headers: { 'Retry-After': String(Math.max(1, Math.ceil((result.resetAt - Date.now()) / 1000))) } });
+}
 export const LIMITS = {
-  auth:          { max: 5,   windowMs: 15 * 60 * 1000, keyPrefix: 'rl:auth'   } satisfies RateLimitConfig,
-  passwordReset: { max: 3,   windowMs: 60 * 60 * 1000, keyPrefix: 'rl:pwd'    } satisfies RateLimitConfig,
-  verifyCode:    { max: 100,  windowMs: 15 * 60 * 1000, keyPrefix: 'rl:verify' } satisfies RateLimitConfig,
-  api:           { max: 100, windowMs: 60 * 1000,       keyPrefix: 'rl:api'    } satisfies RateLimitConfig,
-  upload:        { max: 10,  windowMs: 60 * 1000,       keyPrefix: 'rl:upload' } satisfies RateLimitConfig,
-};
-
-export function getRateLimiter() {
-  return upstashLimiter;
-}
+  auth: { max: 5, windowMs: 900000, keyPrefix: 'auth' },
+  passwordReset: { max: 3, windowMs: 3600000, keyPrefix: 'pwd' },
+  verifyCode: { max: 5, windowMs: 900000, keyPrefix: 'verify' },
+  api: { max: 100, windowMs: 60000, keyPrefix: 'api' },
+  booking: { max: 10, windowMs: 3600000, keyPrefix: 'booking' },
+  upload: { max: 10, windowMs: 60000, keyPrefix: 'upload' },
+} satisfies Record<string, RateLimitConfig>;
+export function getRateLimiter() { return limiters; }

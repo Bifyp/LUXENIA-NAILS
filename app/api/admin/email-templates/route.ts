@@ -1,7 +1,11 @@
+import { editableEmailTemplateSchema } from '@/lib/content-validations'
+import { adminAccessError } from '@/lib/admin-access';
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
 export async function GET() {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
   try {
     const templates = await prisma.emailTemplate.findMany({
       orderBy: [{ type: 'asc' }, { lang: 'asc' }],
@@ -14,19 +18,12 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const accessError = await adminAccessError();
+  if (accessError) return accessError;
   try {
-    const body = await request.json()
-    const { type, lang, subject, body: emailBody, enabled } = body
-
-    const template = await prisma.emailTemplate.create({
-      data: {
-        type,
-        lang,
-        subject,
-        body: emailBody,
-        enabled: enabled ?? true,
-      },
-    })
+    const parsed = editableEmailTemplateSchema.safeParse(await request.json().catch(() => null))
+    if (!parsed.success) return NextResponse.json({ error: 'Invalid template' }, { status: 400 })
+    const template = await prisma.emailTemplate.create({ data: parsed.data })
 
     return NextResponse.json({ success: true, template })
   } catch (error) {

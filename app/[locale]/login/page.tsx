@@ -111,29 +111,6 @@ export default function LoginPage() {
         </div>
       </section>
 
-      {/* ПРЕИМУЩЕСТВА РЕГИСТРАЦИИ */}
-      <section className="py-32 bg-gradient-to-b from-white to-gray-50">
-        <div className="container px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              {t('benefits.title')}
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {t.raw('benefits.items').map((benefit: { icon: string; title: string; desc: string }, idx: number) => (
-              <div
-                key={idx}
-                className="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-              >
-                <div className="text-5xl mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-bold mb-3 text-gray-800">{benefit.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{benefit.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
     </div>
   );

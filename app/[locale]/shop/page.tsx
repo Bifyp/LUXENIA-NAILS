@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import AtelierMark from '@/components/AtelierMark';
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
 
@@ -102,7 +103,7 @@ export default function ShopPage() {
           </div>
         ) : filteredProducts.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-3xl shadow-2xl max-w-2xl mx-auto">
-            <div className="text-6xl mb-6">🛍️</div>
+            <AtelierMark className="shop-empty-mark" />
             <h3 className="text-3xl font-bold text-gray-800 mb-4">
               {t('empty.title')}
             </h3>

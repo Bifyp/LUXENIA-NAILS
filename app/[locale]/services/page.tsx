@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import AtelierMark from '@/components/AtelierMark';
 
 type Service = { id: string; title: string; desc: string; price: string | null };
 export default function ServicesPage() {
@@ -33,7 +34,7 @@ export default function ServicesPage() {
           <h3>{service.title}</h3><p>{service.desc}</p>
           <div className="service-bottom"><span>{service.price ? `${service.price} PLN` : t('book')}</span><span>{t('book')}<ArrowUpRight size={15} aria-hidden="true" /></span></div>
         </Link>)}</div> :
-        <div className="catalog-placeholder" role="status"><Sparkles size={28} /><h3>{t('catalogTitle')}</h3><p>{t(state === 'error' ? 'catalogError' : 'noServices')}</p><Link className="salon-link" href={`/${locale}/contact`}>{t('bookingHelpLink')}<ArrowUpRight size={18} /></Link></div>}
+        <div className="catalog-placeholder" role="status"><AtelierMark className="catalog-sign" /><h3>{t('catalogTitle')}</h3><p>{t(state === 'error' ? 'catalogError' : 'noServices')}</p><Link className="salon-link" href={`/${locale}/contact`}>{t('bookingHelpLink')}<ArrowUpRight size={18} /></Link></div>}
     </div>
     <section className="booking-banner salon-shell"><div><p className="eyebrow">{t('ctaEyebrow')}</p><h2>{t('ctaTitle')}</h2><p>{t('ctaDescription')}</p></div><Link className="salon-button" href={`/${locale}/booking`}>{t('book')}<ArrowUpRight size={20} /></Link></section>
   </div>;

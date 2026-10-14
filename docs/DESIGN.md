@@ -10,6 +10,7 @@ The original warm-ivory / serif / spa-style proposal was rejected as too generic
 - The service catalog is a structured price list, not repeated rounded marketing cards. Service title, description, price and booking action have their own columns; on mobile they reorganise without losing information.
 - A compact, print-inspired booking ticket replaces the usual three marketing-card process section. The actual booking form stays familiar and usable, with a lime review panel and readable square calendar controls.
 - The copy is concise, about nails and personal style, and available in Polish, English, Russian and Ukrainian. It does not add fabricated reviews, ratings, certifications or customer counts.
+- Utility pages are quieter: login no longer advertises unimplemented bonus/discount benefits; the catalog/shop empty states use the custom mark rather than stock decorative emoji.
 - The public theme is scoped to `.salon-site`; the private admin theme, access controls and API contracts remain unchanged. No npm dependencies or lockfile changes are introduced.
 
 ## Actual content and functionality

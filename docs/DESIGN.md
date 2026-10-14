@@ -1,36 +1,44 @@
-# Luxenia editorial UI
+# LUXENIA / independent nail atelier
 
-## Scope
+## Art direction — second iteration
 
-- Redesigned home, service catalog, booking page, shared navigation and footer.
-- Warm ivory canvas, muted terracotta accent, Cormorant display type and Inter controls. Existing font dependencies are reused; no new npm packages or lockfile changes.
-- Public theme is scoped under `.salon-site`; the admin interface and backend access controls are not restyled.
-- Home and service cards read the live admin-managed service catalog. Cards pass a service ID to booking for preselection. No sample services, prices, ratings or client counts are inserted into the database.
-- Booking keeps the existing API contract. Adds a review sidebar, labelled fields, autocomplete, readable calendar controls, package tabs, unavailable-slot states and collapsible FAQs. Aborts stale slot requests and disables submission until the current availability request completes. A 409 marks the conflicting slot unavailable, clears the selection and asks for another time.
-- New UI copy uses `BrandUI` in all four locales: Polish, English, Russian and Ukrainian. Other existing content and admin translations are preserved.
-- Mobile menu is an inline disclosure, not a modal. Closed links are unmounted, the trigger exposes its state, Escape closes it and restores trigger focus. Routes and locale changes close it automatically.
-- Login links retain the selected language; mobile recovery and remember controls have enough space.
+The original warm-ivory / serif / spa-style proposal was rejected as too generic. This iteration changes the composition and identity, not just the colours.
 
-## Editorial visual
+- The home page is a typographic campaign poster: oversized Inter wordmark, a lilac photographic field, deep-ink type, purple accents and sharp citrus appointment tickets.
+- A custom vector signature is made from **four pointed nail silhouettes**. It is used consistently in the masthead, header, manifesto and footer. It is not an emoji or generated pseudo-logo.
+- A flash-lit oxblood manicure replaces the soft nude/linen campaign visual. The image is locally embedded and used as illustrative brand inspiration, not a real client's result or a picture of the salon.
+- The service catalog is a structured price list, not repeated rounded marketing cards. Service title, description, price and booking action have their own columns; on mobile they reorganise without losing information.
+- A compact, print-inspired booking ticket replaces the usual three marketing-card process section. The actual booking form stays familiar and usable, with a lime review panel and readable square calendar controls.
+- The copy is concise, about nails and personal style, and available in Polish, English, Russian and Ukrainian. It does not add fabricated reviews, ratings, certifications or customer counts.
+- The public theme is scoped to `.salon-site`; the private admin theme, access controls and API contracts remain unchanged. No npm dependencies or lockfile changes are introduced.
 
-`public/brand/editorial-manicure.svg` contains one locally embedded compressed WebP photograph generated for the brand mood. It is **illustrative imagery**, not a photograph of the salon, its staff or a real client's result. Its caption and alt text describe inspiration, not a portfolio. The SVG has no JavaScript, event handlers, external resource URLs or user text.
+## Actual content and functionality
 
-The asset is self-contained so previews do not rely on a third-party image host. Replace it with approved original photography when available. Actual gallery/studio photos remain separately managed in the existing admin.
+- Home and catalog read the admin-managed service data. Cards/list rows pass the service ID to booking for preselection. No sample services or prices are inserted into the database.
+- Empty catalog and network errors have explicit states.
+- Booking retains labelled contact fields, autocomplete, service/package tabs, availability checks, price review and collapsible FAQ.
+- Old availability requests are aborted. Submission is disabled while current availability is loading. A 409 marks the conflicting time unavailable and clears the selection.
+- Mobile navigation is an inline disclosure. Closed links are unmounted; Escape closes the menu and restores focus. Locale changes preserve the route and query string.
+- Keyboard focus, 44px interactive calendar controls and reduced-motion support are retained.
+- Existing business text, policies and DB translation overrides still need review on the target environment.
+
+## Visual asset provenance
+
+`public/brand/editorial-manicure.svg` contains a compressed WebP campaign photograph generated for the mood of the brand. It is **illustrative**, not documentary, and the caption/alt text describe inspiration. It contains no scripts, event handlers or external resources. Replace it with approved original campaign photography when available. Real gallery and salon photos remain separately managed in the admin.
+
+`components/AtelierMark.tsx` is a code-native brand mark, designed as four nail-shaped strokes. It uses `currentColor` and has no external image dependency.
 
 ## Validation
 
-- Clean `npm ci`: passed. It still reports the previously documented five high-severity development-tool dependency advisories; these are not install failures. No `npm audit fix --force` or dependency downgrades were applied.
-- `npm run lint`: zero warnings/errors.
-- `npm run typecheck`: passed.
-- `npm test`: 28 tests passed, including five new translation/image-contract regressions.
-- Production build: passed.
-- `npm audit --omit=dev --audit-level=high`: zero vulnerabilities.
-- Local Chromium against the production build: `/pl`, `/ru/booking`, `/en/services`, `/uk/login`, `/pl/shop` returned 200 at 1440×900 and 390×900, without uncaught page errors or horizontal overflow.
-- Browser interaction checks: mobile menu, Escape, locale switching, service-ID preselection, labelled contact fields, date/time selection, package selection, price review, FAQ expansion, conflict feedback and success view passed.
-- Catalog and submission interaction tests use intercepted **browser-only fixtures**; they do not write customer records or send real email. Empty-catalog screenshots use the unmodified clean local database.
-- Visual inspection covers desktop/mobile home, catalog and booking, mobile navigation, selected service/time, selected package, conflict and success states, plus login/shop compatibility.
-- Core contrast pairs: accent on white 6.19:1; secondary text on ivory 5.39:1; primary text on ivory 13.77:1. Keyboard focus and reduced-motion styles are included. This is not a claim of a full accessibility certification.
+- Strict lint, typecheck and production build: passed.
+- 28 tests passed, including all four `BrandUI` locales and the self-contained visual asset.
+- The same dependencies were already verified with clean `npm ci`. Five previously documented development-tool advisories remain; the runtime audit had zero vulnerabilities. No forced dependency changes.
+- Local production Chromium checks passed at 1440×900 and 390×900: home, booking, catalog, login and shop; filled/empty catalog; menu/Escape; locale switch; service-ID preselection; date/time; package/price review; FAQ; 409 and success.
+- An additional 16 home checks (four locales at 320, 390, 768 and 1440px) passed, with no horizontal overflow or masthead/mark overlap.
+- Browser-only catalog/submission fixtures do not write real appointments or send email.
+- Visual review is required after every composition change, especially long Polish/Russian headings, masthead fit, mobile price rows, photo crop and the booking ticket.
+- CI on the PR is the authoritative result for the latest committed revision, including the Docker build, migration, non-root start and health smoke test.
 
-## Before public launch
+## Launch boundaries
 
-This is a UI update, not a completed deployment or a substitute for the launch checklist in `PRODUCTION.md`. Populate and review the actual catalog, upload approved salon/portfolio photographs, verify the existing contact details/social links and business policies, and configure real deployment integrations. Existing unrelated page copy is not newly verified by this change. Database translation overrides can supersede bundled text and should be reviewed on the target environment.
+This is a UI revision, not a deployment. Follow `PRODUCTION.md` for real hosting/secrets, catalog, business contact/social links, policies, SMTP and other integration validation. This revision does not certify the accuracy of unrelated existing page content or make the generated image a portfolio photograph.

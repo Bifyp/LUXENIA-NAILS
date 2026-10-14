@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
+import AtelierMark from '@/components/AtelierMark';
 import { ArrowUpRight, Menu, X, ChevronDown, UserRound } from 'lucide-react';
 
 export default function Header() {
@@ -58,7 +59,7 @@ export default function Header() {
     <header className="salon-header" ref={headerRef}>
       <div className="salon-shell header-inner">
         <Link className="brand-mark" href={`/${locale}`} aria-label="Luxenia Nails">
-          <span>LUXENIA<span className="brand-dot">.</span></span>
+          <span>LUXENIA<AtelierMark className="brand-dot" /></span>
           <small>NAIL STUDIO</small>
         </Link>
         <nav className="desktop-nav" aria-label={b('navigation')}>

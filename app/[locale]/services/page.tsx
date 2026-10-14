@@ -23,7 +23,7 @@ export default function ServicesPage() {
   return <div className="salon-catalog">
     <section className="salon-shell booking-heading">
       <p className="eyebrow">{t('servicesEyebrow')}</p>
-      <h1>{t('viewServices')}</h1>
+      <h1>{t('servicesTitleShort')}</h1>
       <p>{t('chooseService')}</p>
     </section>
     <div className="salon-shell catalog-content">

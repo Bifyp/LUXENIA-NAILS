@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 export default function LoginPage() {
   const t = useTranslations('LoginPage');
+  const locale = useLocale();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,7 +16,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="overflow-hidden">
+    <div className="salon-login overflow-hidden">
 
       {/* HERO */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-rose-500 via-pink-500 to-rose-600">
@@ -81,7 +82,7 @@ export default function LoginPage() {
                   <input type="checkbox" className="w-4 h-4 accent-rose-500 rounded" />
                   <span className="text-gray-600 text-sm">{t('form.rememberMe')}</span>
                 </label>
-                <Link href="/forgot-password" className="text-rose-600 text-sm hover:text-rose-700 font-medium">
+                <Link href={`/${locale}/forgot-password`} className="text-rose-600 text-sm hover:text-rose-700 font-medium">
                   {t('form.forgotPassword')}
                 </Link>
               </div>
@@ -95,7 +96,7 @@ export default function LoginPage() {
 
               <p className="text-center text-gray-500 text-sm mt-6">
                 {t('form.noAccount')}{" "}
-                <Link href="/register" className="text-rose-600 hover:text-rose-700 font-semibold">
+                <Link href={`/${locale}/register`} className="text-rose-600 hover:text-rose-700 font-semibold">
                   {t('form.registerLink')}
                 </Link>
               </p>
